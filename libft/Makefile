@@ -76,18 +76,18 @@ OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
-	rm -rf $(OBJS_DIR)
+	@rm -f $(OBJS)
+	@rm -rf $(OBJS_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
