@@ -109,8 +109,8 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C $(MINILIB_DIR) fclean
-
+	@$(MAKE) -C $(MINILIB_DIR) clean
+	
 re: fclean all
 
 .PHONY: all clean fclean re header
