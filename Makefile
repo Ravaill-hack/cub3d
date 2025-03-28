@@ -14,10 +14,9 @@ LIBFT_HEADER_DIR = $(LIBFT_DIR)/includes
 LIBFT_SRCS_DIR = ./srcs
 
 MINILIB_DIR = ./minilibx
-MINILIB_HEADER_DIR = $(MINILIB_DIR)
 
 INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR)
-LIBRARIES = -L$(LIBFT_DIR) -lft -L$(MINILIB_HEADER_DIR) -lmlx -lXext -lX11 -lm
+LIBRARIES = -L$(LIBFT_DIR) -lft -L$(MINILIB_DIR) -lmlx -lXext -lX11 -lm
 
 SRCS_FILES = \
 	free.c \
@@ -27,7 +26,7 @@ SRCS_FILES = \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
-all: header $(LIBFT) $(NAME)
+all: header $(LIBFT) $(MINILIB) $(NAME)
 
 header:
 	@echo ""
