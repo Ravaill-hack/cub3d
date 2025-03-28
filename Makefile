@@ -13,8 +13,11 @@ LIBFT_DIR = ./libft
 LIBFT_HEADER_DIR = $(LIBFT_DIR)/includes
 LIBFT_SRCS_DIR = ./srcs
 
-INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR) 
-LIBRARIES = -L$(LIBFT_DIR) -lft
+MINILIB_DIR = ./minilibx
+MINILIB_HEADER_DIR = $(MINILIB_DIR)
+
+INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR)
+LIBRARIES = -L$(LIBFT_DIR) -lft -L$(MINILIB_HEADER_DIR) -lmlx -lXext -lX11 -lm
 
 SRCS_FILES = \
 	free.c \
@@ -86,6 +89,9 @@ header:
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
+$(MINILIB):
+	@$(MAKE) -C $(MINILIB_DIR)
+
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBRARIES) -o $(NAME) -lncurses -lreadline
 
@@ -97,10 +103,12 @@ clean:
 	@rm -f $(OBJS)
 	@rm -rf $(OBJS_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(MINILIB_DIR) clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(MINILIB_DIR) fclean
 
 re: fclean all
 
