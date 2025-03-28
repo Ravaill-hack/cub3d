@@ -2,6 +2,8 @@ NAME = cub3d
 
 LIBFT = libft.a
 
+MINILIB = libmlx.a
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
@@ -15,7 +17,7 @@ LIBFT_SRCS_DIR = ./srcs
 
 MINILIB_DIR = ./minilibx
 
-INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR)
+INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR) -I$(MINILIB_DIR)
 LIBRARIES = -L$(LIBFT_DIR) -lft -L$(MINILIB_DIR) -lmlx -lXext -lX11 -lm
 
 SRCS_FILES = \
