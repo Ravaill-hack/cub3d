@@ -2,6 +2,8 @@ NAME = cub3d
 
 LIBFT = libft.a
 
+MINILIB = libmlx.a
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
@@ -107,7 +109,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C $(MINILIB_DIR) fclean
+	@$(MAKE) -C $(MINILIB_DIR) clean
 
 re: fclean all
 
