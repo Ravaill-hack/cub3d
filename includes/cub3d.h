@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/03/28 17:07:32 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:41:04 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,22 @@ typedef struct s_var
 	t_win			win;
 	t_textures		txtr;
 }	t_var;
+
+/*
+Initialization (init.c)
+*/
+int			ft_init_var(t_var *var, char *title);
+t_textures	*ft_init_textures(t_var *var);
+/*
+Error (error.c)
+*/
+int			ft_err(char *str);
+/*
+Free (free.c)
+*/
+
+/*
+Utils (utils.c)
+*/
 
 #endif
