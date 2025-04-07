@@ -26,6 +26,7 @@ SRCS_FILES = \
 	main.c \
 	utils.c \
 	error.c \
+	parsing.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 

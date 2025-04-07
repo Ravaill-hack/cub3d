@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/02 11:41:04 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:45:00 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,19 @@ typedef struct s_textures
 	unsigned int	CE_col;
 }	t_textures;
 
+typedef struct s_map
+{
+	int				size_x;
+	int				size_y;
+	char			*title;
+	t_pix			*tab;
+}	t_map;
+
 typedef struct s_win
 {
 	struct s_var	*var;
 	void			*win_ptr;
-	char			*title;
+	char			*path;
 	int				width;
 	int				height;
 }	t_win;
@@ -76,6 +84,7 @@ typedef struct s_var
 	int				status;
 	t_win			win;
 	t_textures		txtr;
+	t_map			*map;
 }	t_var;
 
 /*
@@ -87,10 +96,15 @@ t_textures	*ft_init_textures(t_var *var);
 Error (error.c)
 */
 int			ft_err(char *str);
+void		*ft_err_null(char *str);
 /*
 Free (free.c)
 */
 
+/*
+Map parsing (parsing.c)
+*/
+t_map		*ft_parse_map(t_var *var);
 /*
 Utils (utils.c)
 */
