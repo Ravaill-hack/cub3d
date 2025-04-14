@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 10:54:30 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:12:41 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,17 @@ Free (free.c)
 */
 
 /*
-Map parsing (parsing.c)
+Global parsing (parsing.c)
 */
-t_map		*ft_parse_map(t_var *var);
+void		*ft_parse_map(t_var *var);
+/*
+Color parsing (parsing_colors.c)
+*/
+int			ft_convert_color(char *str);
+void		*ft_parse_colors(t_var *var, int fd, char *line);
+/*
+Parsing utils (parsing_utils.c)
+*/
 /*
 Utils (utils.c)
 */
