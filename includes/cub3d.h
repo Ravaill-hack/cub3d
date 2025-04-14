@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/03 14:45:00 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:52:45 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ typedef struct s_map
 	int				size_x;
 	int				size_y;
 	char			*title;
-	t_pix			*tab;
+	t_pix			*tab1;
+	char			**tab;
 }	t_map;
 
 typedef struct s_win
