@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 09:52:45 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:54:30 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,43 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "../minilibx/mlx.h"
+
+/*
+Error messages
+*/
+
+/*
+Initialization errors
+*/
+# define ERR_INIT_MLXPTR "Error\nFailed to init mlx_ptr\n"
+# define ERR_INIT_WINPTR "Error\nFailed to init win_ptr\n"
+# define ERR_INIT_PATH "Error\nError while duplicating path\n"
+/*
+File errors
+*/
+# define ERR_FILE_EXISTENCE "Error\nError file does not exist\n"
+# define ERR_FILE_EMPTY "Error\nError file is empty\n"
+/*
+Texture errors
+*/
+# define ERR_TEXTR_MISSING_DATA "Error\nTexture data are missing"
+# define ERR_TEXTR_SYNTAX "Error\nInvalid texture syntax\n"
+/*
+Color errors
+*/
+# define ERR_COLORS_MISSING_DATA "Error\nColors data are missing"
+# define ERR_COLORS_SYNTAX "Error\nInvalid color syntax\n"
+/*
+Map errors
+*/
+# define ERR_MAP_OPEN "Error\nError while opening map file\n"
+# define ERR_MAP_ALLOC "Error\nMap memory allocation failed\n"
+# define ERR_MAP_READ "Error\nError while reading map file\n"
+# define ERR_MAP_EXISTENCE "Error\nNo map in this file"
+# define ERR_MAP_SIZE "Error\nInvalid map size\n"
+# define ERR_MAP_PLAYERS "Error\nThere must be only one player\n"
+# define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
+
 
 typedef struct s_pix
 {
@@ -68,6 +105,7 @@ typedef struct s_map
 	char			*title;
 	t_pix			*tab1;
 	char			**tab;
+	int				player;
 }	t_map;
 
 typedef struct s_win

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/03 14:25:03 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:54:37 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ int	ft_init_var(t_var *var, char *title)
 {
 	var->mlx_ptr = mlx_init();
 	if (!var->mlx_ptr)
-		return (ft_err("Failed to init mlx_ptr\n"));
+		return (ft_err(ERR_INIT_MLXPTR));
 	mlx_get_screen_size(var->mlx_ptr, &(var->win.width), &(var->win.height));
 	var->win.path = ft_strdup(title);
 	if (!var->win.path)
-		return (ft_err("Error while duplicating path\n"));
+		return (ft_err(ERR_INIT_PATH));
 	var->win.win_ptr = mlx_new_window(var->mlx_ptr, var->win.width,
 		var->win.height, var->win.path);
 	if (!var->win.win_ptr)
-		return (ft_err("Failed to init win_ptr\n"));
+		return (ft_err(ERR_INIT_WINPTR));
 	return (0);
 }

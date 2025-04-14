@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:13:04 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/10 13:47:55 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:51:22 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ int	ft_convert_color(char *str)
 	while (str[i] && str[i] != ',')
 		i++;
 	if (str[i] == '\0')
-		return (ft_err("Error:\nMap file: invalid syntax for colors"));
+		return (ft_err(ERR_COLORS_SYNTAX));
 	str[i] = '\0';
 	res = ft_atoi(str) * 1000000;
 	str += i + 1;
 	while (str[i] && str[i] != ',')
 		i++;
 	if (str[i] == '\0')
-		return (ft_err("Error:\nMap file: invalid syntax for colors"));
+		return (ft_err(ERR_COLORS_SYNTAX));
 	str[i] = '\0';
 	res = res + ft_atoi(str) * 1000;
 	str += i + 1;
 	if (*str)
 		res = res + ft_atoi(str);
 	else
-		return (ft_err("Error:\nMap file: invalid syntax for colors"));
+		return (ft_err(ERR_COLORS_SYNTAX));
 	return (res);
 }
 
@@ -78,7 +78,7 @@ void	*ft_parse_textures(t_var *var, int fd, char *line)
 	i = 0;
 	line = ft_free_line_go_to_next_line(fd, line);
 	if (!line)
-		return (ft_err_null("Error\nEmpty file"));
+		return (ft_err_null(ERR_FILE_EMPTY));
 	while (i < 4)
 	{
 		if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
@@ -90,7 +90,7 @@ void	*ft_parse_textures(t_var *var, int fd, char *line)
 		else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
 			var->txtr.EA_img.path = ft_strdup(&line[3]);
 		else
-			return (ft_err_null("Error\nInvalid texture syntax\n"));
+			return (ft_err_null(ERR_TEXTR_SYNTAX));
 		if (i + 1 == 4)
 		{
 			break;
@@ -109,7 +109,7 @@ void	*ft_parse_colors(t_var *var, int fd, char *line)
 	i = 0;
 	line = ft_free_line_go_to_next_line(fd, line);
 	if (!line)
-		return (ft_err_null("Error\nColors data are missing"));
+		return (ft_err_null(ERR_COLORS_MISSING_DATA));
 	while (i < 2)
 	{
 		if (line[0] == 'F' && line[1] == ' ')
@@ -117,7 +117,7 @@ void	*ft_parse_colors(t_var *var, int fd, char *line)
 		else if (line[0] == 'C' && line[1] == ' ')
 			var->txtr.CE_col = ft_convert_color(&line[2]);
 		else
-			return (ft_err_null("Error\nInvalid color syntax\n"));
+			return (ft_err_null(ERR_COLORS_SYNTAX));
 		if (var->txtr.FL_col == -1 || var->txtr.CE_col == -1)
 			return (NULL);
 		free(line);
@@ -141,16 +141,16 @@ void	*ft_append_map_line(t_var *var, char *line, int y)
 	{
 		if (line[x] != '\0')
 		{
-			if (line[x] == ' ')
-				var->map->tab[y][x] = -1;
-			else if (line[x] == '1')
-				var->map->tab[y][x] = 1;
-			else if (line[x] == 'N')
-				var->map->tab[y][x] = 2;
-			else if (line[x] == '0')
-				var->map->tab[y][x] = 0;
+			if (line[x] == '0' || line[x] == '1' || line[x] == 'N' || line[x] == ' ')
+			{
+				if (line[x] == 'N' && var->map->player == 1)
+					return (ft_err_null(ERR_MAP_PLAYERS));
+				if (line[x] == 'N')
+					var->map->player = 1;
+				var->map->tab[y][x] = line[x];
+			}
 			else
-				return (ft_err_null("Error\nInvalid character in the map\n"));
+				return (ft_err_null(ERR_MAP_SYNTAX));
 		}
 		else
 			var->map->tab[y][x] = -1;
@@ -212,17 +212,17 @@ void	*ft_store_map(t_var *var, int fd, char *line)
 	var->map->size_x = ft_map_size_x(var);
 	var->map->size_y = ft_map_size_y(var);
 	if (ft_is_valid_map_size(var->map->size_x, var->map->size_y) == 0)
-		return (ft_err_null("Error\nInvalid map size\n"));
+		return (ft_err_null(ERR_MAP_SIZE));
 	if (!ft_allocate_int_tab(var))
-		return (ft_err_null("Error\nMap memory allocation failed\n"));
+		return (ft_err_null(ERR_MAP_ALLOC));
 	line = ft_go_to_next_line(fd);
 	if (!line)
-		return (ft_err_null("Error\nNo map in this file"));
+		return (ft_err_null(ERR_MAP_EXISTENCE));
 	while (line)
 	{
 		tmp = ft_append_map_line(var, line, i);
 		if (!tmp)
-			return (ft_err_null("Error\nError while reading map file\n"));
+			return (ft_err_null(ERR_MAP_READ));
 		free(line);
 		line = ft_free_line_go_to_next_line(fd, line);
 		i++;
@@ -243,12 +243,13 @@ t_map	*ft_parse_map(t_var *var)
 	line = NULL;
 	map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!map)
-		return (ft_err_null("Error\nMap memory allocation failed\n"));
+		return (ft_err_null(ERR_MAP_ALLOC));
 	tmp = NULL;
 	map->title = ft_extract_title(var->win.path);
+	map->player = 0;
 	fd = open(var->win.path, O_RDONLY);
 	if (fd == -1)
-		return (ft_err_null("Error\nError while opening map file\n"));	
+		return (ft_err_null(ERR_MAP_OPEN));	
 	tmp = ft_parse_textures(var, fd, line);
 	if (!tmp)
 		return (NULL);
