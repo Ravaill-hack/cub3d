@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 11:12:41 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:10:33 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ File errors
 Texture errors
 */
 # define ERR_TEXTR_MISSING_DATA "Error\nTexture data are missing"
+# define ERR_TEXTR_NO_MISSING "Error\nNorth texture is missing\n"
+# define ERR_TEXTR_SO_MISSING "Error\nSouth texture is missing\n"
+# define ERR_TEXTR_WE_MISSING "Error\nWest texture is missing\n"
+# define ERR_TEXTR_EA_MISSING "Error\nEast texture is missing\n"
 # define ERR_TEXTR_SYNTAX "Error\nInvalid texture syntax\n"
 /*
 Color errors
@@ -59,14 +63,14 @@ Map errors
 # define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
 
 
-typedef struct s_pix
-{
-	struct s_var	*var;
-	int				x;
-	int				y;
-	int				z;
-	unsigned int	col;
-}	t_pix;
+// typedef struct s_pix
+// {
+// 	struct s_var	*var;
+// 	int				x;
+// 	int				y;
+// 	int				z;
+// 	unsigned int	col;
+// }	t_pix;
 
 // typedef struct s_line
 // {
@@ -103,7 +107,7 @@ typedef struct s_map
 	int				size_x;
 	int				size_y;
 	char			*title;
-	t_pix			*tab1;
+	// t_pix			*tab1;
 	char			**tab;
 	int				player;
 }	t_map;
@@ -141,17 +145,37 @@ Free (free.c)
 */
 
 /*
-Global parsing (parsing.c)
+Parsing (parsing.c)
 */
-void		*ft_parse_map(t_var *var);
+void		*ft_parse(t_var *var);
+/*
+Map parsing (parsing_map.c)
+*/
+void		*ft_append_map_line(t_var *var, char *line, int y);
+void		*ft_allocate_map_tab(t_var *var);
+void		*ft_parse_map(t_var *var, int fd, char *line);
 /*
 Color parsing (parsing_colors.c)
 */
 int			ft_convert_color(char *str);
 void		*ft_parse_colors(t_var *var, int fd, char *line);
 /*
+Parsing textures (parsing_textures.c)
+*/
+int			ft_check_textures(t_var *var);
+void		*ft_parse_textures(t_var *var, int fd, char *line, int i);
+/*
 Parsing utils (parsing_utils.c)
 */
+char		*ft_free_line_go_to_next_line(int fd, char *line);
+char		*ft_go_to_map_first_line(int fd, char *tmp);
+int			ft_map_size_x(t_var *var);
+int			ft_map_size_y(t_var *var);
+int			ft_is_valid_map_size(t_var *var);
+/*
+Map checker (map_checker.c)
+*/
+int			ft_is_valid_map(t_map *map, t_var *var);
 /*
 Utils (utils.c)
 */
