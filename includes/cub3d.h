@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 14:28:25 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:05:15 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@
 # include "../minilibx/mlx.h"
 
 /*
-Error messages
-*/
+ERROR MESSAGES :
 
-/*
 Initialization errors
 */
 # define ERR_INIT_MLXPTR "Error\nFailed to init mlx_ptr\n"
