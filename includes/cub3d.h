@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 14:10:33 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:28:25 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,9 @@ Error (error.c)
 int			ft_err(char *str);
 void		*ft_err_null(char *str);
 /*
-Free (free.c)
-*/
-
-/*
 Parsing (parsing.c)
 */
+char		*ft_extract_title(char *path);
 void		*ft_parse(t_var *var);
 /*
 Map parsing (parsing_map.c)
@@ -167,7 +164,7 @@ void		*ft_parse_textures(t_var *var, int fd, char *line, int i);
 /*
 Parsing utils (parsing_utils.c)
 */
-char		*ft_free_line_go_to_next_line(int fd, char *line);
+
 char		*ft_go_to_map_first_line(int fd, char *tmp);
 int			ft_map_size_x(t_var *var);
 int			ft_map_size_y(t_var *var);
@@ -178,6 +175,11 @@ Map checker (map_checker.c)
 int			ft_is_valid_map(t_map *map, t_var *var);
 /*
 Utils (utils.c)
+*/
+char		*ft_free_line_go_to_next_line(int fd, char *line);
+char		ft_first_char(char *str);
+/*
+Free (free.c)
 */
 
 #endif
