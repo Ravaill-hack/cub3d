@@ -6,11 +6,18 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:46:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 14:09:56 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:50:03 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	ft_is_invalid_texture(t_var *var)
+{
+	(void)var;
+	// A COMPLETER, NOTAMMENT RENVOYER LE MESSAGE ERREUR APPROPRIE
+	return (0);
+}
 
 int	ft_check_textures(t_var *var)
 {
@@ -43,11 +50,14 @@ void	*ft_parse_textures(t_var *var, int fd, char *line, int i)
 		else
 			return (ft_err_null(ERR_TEXTR_SYNTAX));
 		if (i + 1 == 4)
-			return (free(line), (void *)var);
+		{
+			free(line);
+			break;
+		}
 		line = ft_free_line_go_to_next_line(fd, line);
 		i++;
 	}
-	if (ft_is_invalid_texture(var))
+	if (ft_check_textures(var) || ft_is_invalid_texture(var) || !ft_init_textures(var))
 		return (NULL);
 	return ((void *)var);
 }

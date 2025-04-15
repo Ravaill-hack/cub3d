@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 15:05:15 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:55:01 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ typedef struct s_textures
 	t_img			SO_img;
 	t_img			WE_img;
 	t_img			EA_img;
-	unsigned int	FL_col;
-	unsigned int	CE_col;
+	int				FL_col;
+	int				CE_col;
 }	t_textures;
 
 typedef struct s_map
@@ -158,6 +158,7 @@ void		*ft_parse_colors(t_var *var, int fd, char *line);
 Parsing textures (parsing_textures.c)
 */
 int			ft_check_textures(t_var *var);
+int			ft_is_invalid_texture(t_var *var);
 void		*ft_parse_textures(t_var *var, int fd, char *line, int i);
 /*
 Parsing utils (parsing_utils.c)
@@ -176,6 +177,7 @@ Utils (utils.c)
 */
 char		*ft_free_line_go_to_next_line(int fd, char *line);
 char		ft_first_char(char *str);
+int			ft_line_is_empty(char *line);
 /*
 Free (free.c)
 */

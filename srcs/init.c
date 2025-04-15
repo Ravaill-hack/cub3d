@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 10:54:37 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:47:22 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_textures	*ft_init_textures(t_var *var)
 		&(var->txtr.EA_img.height));
 	if (!var->txtr.SO_img.data_addr || !var->txtr.NO_img.data_addr
 		|| !var->txtr.WE_img.data_addr || !var->txtr.EA_img.data_addr)
-		return (NULL);
+		return (ft_err_null("Error\nIncorrect path for textures\n"));
 	return (&var->txtr);
 }
 

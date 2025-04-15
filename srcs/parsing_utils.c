@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:12:51 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 14:26:44 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:31:13 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@ int	ft_map_size_x(t_var *var)
 {
 	int		fd;
 	char	*tmp;
-	int		len_max;
+	size_t	len_max;
 
 	len_max = 0;
 	fd = open(var->win.path, O_RDONLY);
+	tmp = NULL;
 	tmp = ft_go_to_map_first_line(fd, tmp);
 	if (!tmp)
 		return (-1);
 	while (tmp && ft_line_is_empty(tmp) == 0)
 	{
 		if (ft_strlen(tmp) > len_max)
-			len_max = ft_strlen(tmp);
+			len_max = ft_strlen(tmp) - 1;
 		free(tmp);
 		tmp = get_next_line(fd);
 	}
@@ -52,6 +53,7 @@ int	ft_map_size_y(t_var *var)
 
 	count = 0;
 	fd = open(var->win.path, O_RDONLY);
+	tmp = NULL;
 	tmp = ft_go_to_map_first_line(fd, tmp);
 	if (!tmp)
 		return (-1);

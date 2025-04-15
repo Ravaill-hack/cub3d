@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:09:02 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/14 11:10:31 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:17:37 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ int	ft_convert_color(char *str)
 	str[i] = '\0';
 	res = ft_atoi(str) * 1000000;
 	str += i + 1;
+	i = 0;
 	while (str[i] && str[i] != ',')
 		i++;
 	if (str[i] == '\0')
 		return (ft_err(ERR_COLORS_SYNTAX));
 	str[i] = '\0';
 	res = res + ft_atoi(str) * 1000;
+	i = 0;
 	str += i + 1;
 	if (*str)
 		res = res + ft_atoi(str);
