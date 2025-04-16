@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 10:05:45 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:19:30 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	*ft_append_map_line(t_var *var, char *ln, int y)
 			{
 				if (ln[x] == 'N' && var->map->player == 1)
 					return (ft_err_null(ERR_MAP_PLAYERS));
-				// et free les lignes precedentes a rajouter
 				if (ln[x] == 'N')
 					var->map->player = 1;
 				var->map->tab[y][x] = ln[x];
@@ -52,8 +51,12 @@ void	*ft_allocate_map_tab(t_var *va)
 	{
 		va->map->tab[i] = (char *)ft_calloc(va->map->size_x + 1, sizeof(char));
 		if (!va->map->tab[i])
+		{
+			while (i-- >= 0)
+				free(va->map->tab[i]);
+			free(va->map->tab);
 			return (ft_err_null(ERR_MAP_ALLOC));
-			//free les lignes precedentes a rajouter
+		}
 		i++;
 	}
 	va->map->tab[i] = NULL;
@@ -66,7 +69,9 @@ void	*ft_parse_map(t_var *var, int fd, char *line)
 	int		i;
 
 	i = 0;
-	if (!ft_is_valid_map_size(var) || !ft_allocate_map_tab(var))
+	if (!ft_is_valid_map_size(var))
+		return (NULL);
+	if (!ft_allocate_map_tab(var))
 		return (NULL);
 	line = ft_free_line_go_to_next_line(fd, line);
 	if (!line)
@@ -75,12 +80,20 @@ void	*ft_parse_map(t_var *var, int fd, char *line)
 	{
 		tmp = ft_append_map_line(var, line, i);
 		if (!tmp)
+		{
+			while (i-- >= 0)
+				free(var->map->tab[i]);
+			free(var->map->tab);
 			return (ft_err_null(ERR_MAP_READ));
+		}
 		line = ft_free_line_go_to_next_line(fd, line);
 		i++;
 	}
 	free(line);
-	if (ft_is_valid_map(var->map, var) == 0)
+	if (!ft_is_valid_map(var->map, var))
+	{
+		ft_free_map_tab(var->map->tab);
 		return (NULL); //renvoyer le message d'erreur dans t_map_is_valid
+	}
 	return ((void *)var);
 }

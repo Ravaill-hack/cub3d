@@ -3,11 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:02 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 09:41:01 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:17:56 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_free_map_tab(char **map_tab)
+{
+	int	i;
+
+	i = 0;
+	while (map_tab[i])
+	{
+		free(map_tab[i]);
+		i++;
+	}
+	free(map_tab);
+}

@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 14:30:18 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:23:25 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void		*ft_parse_colors(t_var *var, int fd, char *line);
 Parsing textures (parsing_textures.c)
 */
 int			ft_check_txtr(t_var *var);
-int			ft_invalid_txtr(t_var *var);
+int			ft_valid_txtr(t_var *var);
 void		*ft_parse_textures(t_var *var, int fd, char *line, int i);
 /*
 Parsing utils (parsing_utils.c)
@@ -193,6 +193,7 @@ char		*ft_special_strdup(char *str);
 /*
 Free (free.c)
 */
+void		ft_free_map_tab(char **map_tab);
 /*
 Debug (debug.c)
 */
