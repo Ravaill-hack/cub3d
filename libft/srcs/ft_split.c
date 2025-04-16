@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:02:33 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/11 08:17:55 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:33:24 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**ft_split(char const *s, char c)
 		word_end = ft_get_word_end(s, c);
 		splitted_strs[i] = ft_extract_word(s, word_end);
 		if (!splitted_strs[i])
-			return (ft_free_strs_until(splitted_strs, i));
+			return (ft_free_strs_until(&splitted_strs, i));
 		s = word_end;
 		i++;
 	}

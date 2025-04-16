@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 09:56:16 by juduchar          #+#    #+#             */
-/*   Updated: 2025/03/15 15:31:43 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:31:21 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 #include "libft.h"
 
 // free an array of strings until n (not included)
-char	**ft_free_strs_until(char **strs, int n)
+char	**ft_free_strs_until(char ***strs, int n)
 {
 	int	i;
 
 	i = 0;
-	if (!strs)
+	if (!strs || !(*strs))
 		return (NULL);
 	if (n == -1)
 	{
-		while (strs[i])
+		while ((*strs)[i])
 		{
-			ft_check_and_free((void **)(&(strs[i])));
+			ft_check_and_free((void **)(&(*strs[i])));
 			i++;
 		}
 	}
@@ -33,11 +33,11 @@ char	**ft_free_strs_until(char **strs, int n)
 	{
 		while (i < n)
 		{
-			ft_check_and_free((void **)(&(strs[i])));
+			ft_check_and_free((void **)(&(*strs[i])));
 			i++;
 		}
 	}
-	if (strs)
-		free(strs);
+	if (*strs)
+		return ((*strs) = NULL, free(*strs), NULL);
 	return (NULL);
 }

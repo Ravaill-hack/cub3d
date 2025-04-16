@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 10:50:39 by julien            #+#    #+#             */
-/*   Updated: 2025/03/02 12:40:20 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/16 14:33:58 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**ft_strsdup(char *const *strs)
 	{
 		dup[i] = ft_strdup(strs[i]);
 		if (dup[i] == NULL)
-			return (ft_free_strs_until(dup, i));
+			return (ft_free_strs_until(&dup, i));
 		i++;
 	}
 	dup[i] = NULL;

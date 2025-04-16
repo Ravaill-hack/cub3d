@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:13:04 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 12:47:48 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:50:27 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_extract_title(char *path)
 		i1 ++;
 	}
 	if (i1 < 4 || strcmp(&path[i1 - 4], ".cub") == 0)
-		return (ft_err_null("Error\nInvalid file extension for map file"));
+		return (ft_err_null(ERR_MAP_FILE));
 	if (path[i2 + 1] && path[i2] == '/')
 		return (ft_strdup(&path[i2 + 1]));
 	return (NULL);

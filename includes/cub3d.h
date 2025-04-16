@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 12:48:36 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:09:23 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ Color errors
 /*
 Map errors
 */
+# define ERR_MAP_FILE "Error\nInvalid map file\n"
 # define ERR_MAP_OPEN "Error\nCould not open map file\n"
 # define ERR_MAP_ALLOC "Error\nMap memory allocation failed\n"
 # define ERR_MAP_READ "Error\nError while reading map file\n"
@@ -83,8 +84,8 @@ typedef struct s_colors
 
 typedef struct s_img
 {
-	struct s_var	*var;
-	void			*img_ptr;
+	struct s_var	*var; //peut etre pas necessaire
+	void			*img_ptr; //on s'en sert pas j'ail l'impression
 	char			*data_addr;
 	char			*path;
 	int				bit_per_pix;
@@ -96,7 +97,7 @@ typedef struct s_img
 
 typedef struct s_textures
 {
-	struct s_var	*var;
+	struct s_var	*var; //peut etre pas necessaire
 	t_img			no_img;
 	t_img			so_img;
 	t_img			we_img;
@@ -110,14 +111,14 @@ typedef struct s_map
 	int				size_x;
 	int				size_y;
 	char			*title;
-	// t_pix			*tab1;
+	// t_pix		*tab1; a supprimer
 	char			**tab;
 	int				player;
 }	t_map;
 
 typedef struct s_win
 {
-	struct s_var	*var;
+	struct s_var	*var; //peut etre pas necessaire
 	void			*win_ptr;
 	char			*path;
 	int				width;
@@ -127,7 +128,7 @@ typedef struct s_win
 typedef struct s_var
 {
 	void			*mlx_ptr;
-	int				status;
+	int				status; //a supprimer
 	t_win			win;
 	t_textures		txtr;
 	t_map			*map;
@@ -187,6 +188,10 @@ char		*ft_special_strdup(char *str);
 /*
 Free (free.c)
 */
+int			ft_free_win(t_var *var);
+int			ft_free_txtr(t_var *var);
+int			ft_free_map(t_var *var);
+int			ft_free_all(t_var *var);
 /*
 Debug (debug.c)
 */

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 10:05:45 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:34:48 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	*ft_append_map_line(t_var *var, char *ln, int y)
 			if (ln[x] == '0' || ln[x] == '1' || ln[x] == 'N' || ln[x] == ' ')
 			{
 				if (ln[x] == 'N' && var->map->player == 1)
-					return (ft_err_null(ERR_MAP_PLAYERS));
-				// et free les lignes precedentes a rajouter
+					return (ft_free_strs_until(&(var->map->tab), y),
+						ft_err_null(ERR_MAP_PLAYERS));
 				if (ln[x] == 'N')
 					var->map->player = 1;
 				var->map->tab[y][x] = ln[x];
