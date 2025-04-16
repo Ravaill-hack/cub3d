@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_textures.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:46:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 14:55:39 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:05:26 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
 int	ft_valid_txtr(t_var *var)
 {
 	(void)var;
 	// A COMPLETER, NOTAMMENT RENVOYER LE MESSAGE ERREUR APPROPRIE
 	
 	return (1);
-}*/
+}
 
 int	ft_check_txtr(t_var *var)
 {
@@ -58,11 +57,7 @@ void	*ft_parse_textures(t_var *var, int fd, char *line, int i)
 		}
 		line = ft_free_line_go_to_next_line(fd, line);
 	}
-	if (!ft_check_txtr(var))
-		return (NULL);
-	//if (!ft_valid_txtr(var))
-	//	return (NULL);
-	if (!ft_init_txtr(var))
+	if (!(ft_check_txtr(var) && ft_valid_txtr(var) && ft_init_txtr(var)))
 		return (NULL);
 	return ((void *)var);
 }

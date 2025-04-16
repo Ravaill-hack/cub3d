@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 14:29:40 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:12:03 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ int	ft_init_var(t_var *var, char *title)
 	var->txtr.so_img.path = NULL;
 	var->txtr.we_img.path = NULL;
 	var->txtr.ea_img.path = NULL;
+	var->txtr.fl_col = 0;
+	var->txtr.ce_col = 0;
 	return (1);
 }
