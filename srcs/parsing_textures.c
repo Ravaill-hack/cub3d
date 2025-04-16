@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_textures.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:46:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 10:27:34 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:55:39 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_invalid_txtr(t_var *var)
+/*
+int	ft_valid_txtr(t_var *var)
 {
 	(void)var;
 	// A COMPLETER, NOTAMMENT RENVOYER LE MESSAGE ERREUR APPROPRIE
-	return (0);
-}
+	
+	return (1);
+}*/
 
 int	ft_check_txtr(t_var *var)
 {
@@ -29,7 +31,7 @@ int	ft_check_txtr(t_var *var)
 		return (ft_err(ERR_TEXTR_WE_MISSING));
 	if (!var->txtr.ea_img.path)
 		return (ft_err(ERR_TEXTR_EA_MISSING));
-	return (0);
+	return (1);
 }
 
 void	*ft_parse_textures(t_var *var, int fd, char *line, int i)
@@ -56,7 +58,11 @@ void	*ft_parse_textures(t_var *var, int fd, char *line, int i)
 		}
 		line = ft_free_line_go_to_next_line(fd, line);
 	}
-	if (ft_check_txtr(var) || ft_invalid_txtr(var) || !ft_init_txtr(var))
+	if (!ft_check_txtr(var))
+		return (NULL);
+	//if (!ft_valid_txtr(var))
+	//	return (NULL);
+	if (!ft_init_txtr(var))
 		return (NULL);
 	return ((void *)var);
 }

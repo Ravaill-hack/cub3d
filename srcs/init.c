@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 10:55:51 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:29:40 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,19 @@ t_textures	*ft_init_txtr(t_var *var)
 			&(var->txtr.ea_img.height));
 	if (!var->txtr.so_img.data_addr || !var->txtr.no_img.data_addr
 		|| !var->txtr.we_img.data_addr || !var->txtr.ea_img.data_addr)
-		return (ft_err_null("Error\nIncorrect path for textures\n"));
+		return (ft_err_null(ERR_TEXTR_PATH));
 	return (&var->txtr);
 }
 
+int	ft_init_window(t_var *var)
+{
+	var->win.win_ptr = mlx_new_window(var->mlx_ptr, var->win.width,
+		var->win.height, var->win.path);
+	if (!var->win.win_ptr)
+		return (ft_err(ERR_INIT_WINPTR));
+	return (1);
+}
+		
 int	ft_init_var(t_var *var, char *title)
 {
 	var->mlx_ptr = mlx_init();
@@ -41,13 +50,9 @@ int	ft_init_var(t_var *var, char *title)
 	var->win.path = ft_special_strdup(title);
 	if (!var->win.path)
 		return (ft_err(ERR_INIT_PATH));
-	var->win.win_ptr = mlx_new_window(var->mlx_ptr, var->win.width,
-			var->win.height, var->win.path);
-	if (!var->win.win_ptr)
-		return (ft_err(ERR_INIT_WINPTR));
 	var->txtr.no_img.path = NULL;
 	var->txtr.so_img.path = NULL;
 	var->txtr.we_img.path = NULL;
 	var->txtr.ea_img.path = NULL;
-	return (0);
+	return (1);
 }

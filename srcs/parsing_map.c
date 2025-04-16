@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 14:39:28 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:58:30 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ void	*ft_parse_map(t_var *var, int fd, char *line)
 	int		i;
 
 	i = 0;
-	if (!ft_is_valid_map_size(var) || !ft_allocate_map_tab(var))
+	if (!ft_is_valid_map_size(var))
+		return (NULL);
+	if (!ft_allocate_map_tab(var))
 		return (NULL);
 	line = ft_free_line_go_to_next_line(fd, line);
 	if (!line)
@@ -89,7 +91,10 @@ void	*ft_parse_map(t_var *var, int fd, char *line)
 		i++;
 	}
 	free(line);
-	if (ft_is_valid_map(var->map, var) == 0)
+	if (!ft_is_valid_map(var->map, var))
+	{
+		ft_free_map_tab(var->map->tab);
 		return (NULL); //renvoyer le message d'erreur dans t_map_is_valid
+	}
 	return ((void *)var);
 }
