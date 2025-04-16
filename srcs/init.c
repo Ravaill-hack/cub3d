@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 17:12:03 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:56:04 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,17 @@ int	ft_init_window(t_var *var)
 int	ft_init_var(t_var *var, char *title)
 {
 	var->mlx_ptr = mlx_init();
+	var->win.win_ptr = NULL;
 	if (!var->mlx_ptr)
 		return (ft_err(ERR_INIT_MLXPTR));
 	mlx_get_screen_size(var->mlx_ptr, &(var->win.width), &(var->win.height));
 	var->win.path = ft_special_strdup(title);
 	if (!var->win.path)
 		return (ft_err(ERR_INIT_PATH));
+	var->txtr.no_img.data_addr = NULL;
+	var->txtr.so_img.data_addr = NULL;
+	var->txtr.we_img.data_addr = NULL;
+	var->txtr.ea_img.data_addr = NULL;
 	var->txtr.no_img.path = NULL;
 	var->txtr.so_img.path = NULL;
 	var->txtr.we_img.path = NULL;

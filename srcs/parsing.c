@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:13:04 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 16:59:17 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:10:21 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,8 @@ void	*ft_parse(t_var *var)
 	fd = open(var->win.path, O_RDONLY);
 	if (fd == -1)
 		return (ft_err_null(ERR_MAP_OPEN));
-	if (!ft_parse_textures(var, fd, line, i))
-		return (NULL);
-	if (!ft_parse_colors(var, fd, line))
-		return (NULL);
-	if (!ft_parse_map(var, fd, line))
+	if (!(ft_parse_textures(var, fd, line, i) && ft_parse_colors(var, fd, line)
+		&& ft_parse_map(var, fd, line)))
 		return (NULL);
 	return ((void *)var);
 }

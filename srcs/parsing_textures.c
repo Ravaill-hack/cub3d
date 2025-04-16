@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:46:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 17:05:26 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:16:10 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ void	*ft_parse_textures(t_var *var, int fd, char *line, int i)
 		else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
 			var->txtr.ea_img.path = ft_special_strdup(&line[3]);
 		else
-			return (ft_err_null(ERR_TEXTR_SYNTAX));
+			return (free(line), ft_err_null(ERR_TEXTR_SYNTAX));
 		if (i == 4)
 		{
-			free(line);
+			printf ("line = %s\n", line);
 			break ;
 		}
 		line = ft_free_line_go_to_next_line(fd, line);
 	}
 	if (!(ft_check_txtr(var) && ft_valid_txtr(var) && ft_init_txtr(var)))
-		return (NULL);
+		return (free(line), NULL);
 	return ((void *)var);
 }

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 17:19:49 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:08:49 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 void	*ft_append_map_line(t_var *var, char *ln, int y)
 {
 	int	x;
-	// int	end_saw;
+	int	saw_end;
 
 	x = 0;
-	// end_saw = 0;
+	saw_end = 0;
 	while (x < var->map->size_x)
 	{
-		// if (ln[x] == '\0' || ln[x] == '\n')
-		// 	end_saw = 1;
-		ft_putnbr_fd(x, 1);
-		ft_putchar_fd('\n', 1);
-		if (ln[x] != '\0' && ln[x] != '\n' /*&& end_saw == 0*/)
+		if (saw_end == 0 && (ln[x] == '\n' || ln[x] == '\0'))
+			saw_end = 1;
+		if (saw_end == 0 && ln[x] != '\0' && ln[x] != '\n')
 		{
 			if (ln[x] == '0' || ln[x] == '1' || ln[x] == 'N' || ln[x] == ' ')
 			{
@@ -43,6 +41,7 @@ void	*ft_append_map_line(t_var *var, char *ln, int y)
 			var->map->tab[y][x] = ' ';
 		x++;
 	}
+	var->map->tab[y][x] = '\0';
 	return ((void *)var);
 }
 
