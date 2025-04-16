@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 10:06:58 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:28:12 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ Utils (utils.c)
 char		*ft_free_line_go_to_next_line(int fd, char *line);
 char		ft_first_char(char *str);
 int			ft_line_is_empty(char *line);
+char		*ft_special_strdup(char *str);
 /*
 Free (free.c)
 */

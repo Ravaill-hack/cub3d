@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:41 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/15 10:48:12 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:30:07 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ char	ft_first_char(char *str)
 	while (*str == ' ')
 		str++;
 	return (*str);
+}
+
+char	*ft_special_strdup(char *str)
+{
+	char	*res;
+
+	res = ft_strdup(str);
+	if (ft_strlen(res) >= 1 && res[ft_strlen(res) - 1] == '\n')
+		res[ft_strlen(res) - 1] = '\0';
+	return (res);
 }

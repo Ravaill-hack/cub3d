@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:46:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 10:07:32 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:27:34 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	*ft_parse_textures(t_var *var, int fd, char *line, int i)
 	while (i++ < 4)
 	{
 		if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
-			var->txtr.no_img.path = ft_strdup(&line[3]);
+			var->txtr.no_img.path = ft_special_strdup(&line[3]);
 		else if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
-			var->txtr.so_img.path = ft_strdup(&line[3]);
+			var->txtr.so_img.path = ft_special_strdup(&line[3]);
 		else if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
-			var->txtr.we_img.path = ft_strdup(&line[3]);
+			var->txtr.we_img.path = ft_special_strdup(&line[3]);
 		else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
-			var->txtr.ea_img.path = ft_strdup(&line[3]);
+			var->txtr.ea_img.path = ft_special_strdup(&line[3]);
 		else
 			return (ft_err_null(ERR_TEXTR_SYNTAX));
 		if (i == 4)
