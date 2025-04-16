@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 10:38:13 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:48:36 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ Color errors
 /*
 Map errors
 */
-# define ERR_MAP_OPEN "Error\nError while opening map file\n"
+# define ERR_MAP_OPEN "Error\nCould not open map file\n"
 # define ERR_MAP_ALLOC "Error\nMap memory allocation failed\n"
 # define ERR_MAP_READ "Error\nError while reading map file\n"
 # define ERR_MAP_EXISTENCE "Error\nNo map in this file"
