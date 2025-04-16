@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 10:30:46 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:55:51 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,9 @@ int	ft_init_var(t_var *var, char *title)
 			var->win.height, var->win.path);
 	if (!var->win.win_ptr)
 		return (ft_err(ERR_INIT_WINPTR));
+	var->txtr.no_img.path = NULL;
+	var->txtr.so_img.path = NULL;
+	var->txtr.we_img.path = NULL;
+	var->txtr.ea_img.path = NULL;
 	return (0);
 }
