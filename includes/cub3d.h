@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 10:28:12 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:38:13 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,5 +187,9 @@ char		*ft_special_strdup(char *str);
 /*
 Free (free.c)
 */
+/*
+Debug (debug.c)
+*/
+int			ft_print_parsed_data(t_var *var);
 
 #endif

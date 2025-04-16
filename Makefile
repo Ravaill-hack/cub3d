@@ -32,6 +32,7 @@ SRCS_FILES = \
 	parsing_utils.c \
 	parsing_textures.c \
 	map_checker.c \
+	debug.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
