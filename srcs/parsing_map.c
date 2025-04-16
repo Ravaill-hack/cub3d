@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 14:34:48 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:39:28 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,17 @@ void	*ft_allocate_map_tab(t_var *va)
 	{
 		va->map->tab[i] = (char *)ft_calloc(va->map->size_x + 1, sizeof(char));
 		if (!va->map->tab[i])
-			return (ft_err_null(ERR_MAP_ALLOC));
-			//free les lignes precedentes a rajouter
+		{
+			i--;
+			while (i >= 0)
+			{
+				free(va->map->tab[i]);
+				va->map->tab[i] = NULL;
+				i--;
+			}
+			return (free(va->map->tab), va->map->tab = NULL,
+					ft_err_null(ERR_MAP_ALLOC));
+		}
 		i++;
 	}
 	va->map->tab[i] = NULL;
