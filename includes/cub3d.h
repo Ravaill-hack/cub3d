@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 12:48:36 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:30:18 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include "libft.h"
 # include "get_next_line.h"
-# include "../minilibx/mlx.h"
+# include "mlx.h"
 
 /*
 ERROR MESSAGES :
@@ -34,20 +34,23 @@ Initialization errors
 File errors
 */
 # define ERR_FILE_EXISTENCE "Error\nError file does not exist\n"
+# define ERR_FILE_EXTENSION "Error\nInvalid file extension for map file\n"
 # define ERR_FILE_EMPTY "Error\nError file is empty\n"
 /*
 Texture errors
 */
-# define ERR_TEXTR_MISSING_DATA "Error\nTexture data are missing"
+# define ERR_TEXTR_PATH "Error\nIncorrect path for textures\n"
+# define ERR_TEXTR_MISSING_DATA "Error\nTexture data are missing\n"
 # define ERR_TEXTR_NO_MISSING "Error\nNorth texture is missing\n"
 # define ERR_TEXTR_SO_MISSING "Error\nSouth texture is missing\n"
 # define ERR_TEXTR_WE_MISSING "Error\nWest texture is missing\n"
 # define ERR_TEXTR_EA_MISSING "Error\nEast texture is missing\n"
 # define ERR_TEXTR_SYNTAX "Error\nInvalid texture syntax\n"
+
 /*
 Color errors
 */
-# define ERR_COLORS_MISSING_DATA "Error\nColors data are missing"
+# define ERR_COLORS_MISSING_DATA "Error\nColors data are missing\n"
 # define ERR_COLORS_SYNTAX "Error\nInvalid color syntax\n"
 /*
 Map errors
@@ -59,6 +62,8 @@ Map errors
 # define ERR_MAP_SIZE "Error\nInvalid map size\n"
 # define ERR_MAP_PLAYERS "Error\nThere must be only one player\n"
 # define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
+
+
 
 // typedef struct s_pix
 // {
@@ -138,6 +143,7 @@ Initialization (init.c)
 */
 int			ft_init_var(t_var *var, char *title);
 t_textures	*ft_init_txtr(t_var *var);
+int			ft_init_window(t_var *var);
 /*
 Error (error.c)
 */

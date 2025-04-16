@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:13:04 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 12:47:48 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:31:32 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ char	*ft_extract_title(char *path)
 	{
 		if (path[i1] == '/')
 			i2 = i1;
-		i1 ++;
+		i1++;
 	}
-	if (i1 < 4 || strcmp(&path[i1 - 4], ".cub") == 0)
-		return (ft_err_null("Error\nInvalid file extension for map file"));
+	if (i1 < 4 || strcmp(&path[i1 - 4], ".cub") != 0)
+		return (ft_err_null(ERR_FILE_EXTENSION));
 	if (path[i2 + 1] && path[i2] == '/')
 		return (ft_strdup(&path[i2 + 1]));
-	return (NULL);
+	return (ft_strdup(path));
 }
 
 void	*ft_parse(t_var *var)
