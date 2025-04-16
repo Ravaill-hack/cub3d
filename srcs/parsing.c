@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:13:04 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/15 11:39:50 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:09:40 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	*ft_parse(t_var *var)
 		return (ft_err_null(ERR_MAP_ALLOC));
 	var->map->title = ft_extract_title(var->win.path);
 	var->map->player = 0;
-	var->txtr.NO_img.path = NULL;
-	var->txtr.SO_img.path = NULL;
-	var->txtr.WE_img.path = NULL;
-	var->txtr.EA_img.path = NULL;
+	var->txtr.no_img.path = NULL;
+	var->txtr.so_img.path = NULL;
+	var->txtr.we_img.path = NULL;
+	var->txtr.ea_img.path = NULL;
 	fd = open(var->win.path, O_RDONLY);
 	if (fd == -1)
-		return (ft_err_null(ERR_MAP_OPEN));	
+		return (ft_err_null(ERR_MAP_OPEN));
 	if (!ft_parse_textures(var, fd, line, i)
 		|| !ft_parse_colors(var, fd, line) || !ft_parse_map(var, fd, line))
 		return (NULL);

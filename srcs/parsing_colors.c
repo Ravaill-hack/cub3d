@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:09:02 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/15 11:17:37 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:09:16 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,31 @@
 
 int	ft_convert_color(char *str)
 {
-	int	res;
-	int	i;
+	t_colors	col;
 
-	i = 0;
-	res = 0;
-	while (str[i] && str[i] != ',')
-		i++;
-	if (str[i] == '\0')
+	col.i = 0;
+	col.col_int = 0;
+	while (str[col.i] && str[col.i] != ',')
+		col.i++;
+	if (str[col.i] == '\0')
 		return (ft_err(ERR_COLORS_SYNTAX));
-	str[i] = '\0';
-	res = ft_atoi(str) * 1000000;
-	str += i + 1;
-	i = 0;
-	while (str[i] && str[i] != ',')
-		i++;
-	if (str[i] == '\0')
+	str[col.i] = '\0';
+	col.col_int = ft_atoi(str) * 1000000;
+	str += col.i + 1;
+	col.i = 0;
+	while (str[col.i] && str[col.i] != ',')
+		col.i++;
+	if (str[col.i] == '\0')
 		return (ft_err(ERR_COLORS_SYNTAX));
-	str[i] = '\0';
-	res = res + ft_atoi(str) * 1000;
-	i = 0;
-	str += i + 1;
+	str[col.i] = '\0';
+	col.col_int = col.col_int + ft_atoi(str) * 1000;
+	col.i = 0;
+	str += col.i + 1;
 	if (*str)
-		res = res + ft_atoi(str);
+		col.col_int = col.col_int + ft_atoi(str);
 	else
 		return (ft_err(ERR_COLORS_SYNTAX));
-	return (res);
+	return (col.col_int);
 }
 
 void	*ft_parse_colors(t_var *var, int fd, char *line)
@@ -53,17 +52,17 @@ void	*ft_parse_colors(t_var *var, int fd, char *line)
 	while (i < 2)
 	{
 		if (line[0] == 'F' && line[1] == ' ')
-			var->txtr.FL_col = ft_convert_color(&line[2]);
+			var->txtr.fl_col = ft_convert_color(&line[2]);
 		else if (line[0] == 'C' && line[1] == ' ')
-			var->txtr.CE_col = ft_convert_color(&line[2]);
+			var->txtr.ce_col = ft_convert_color(&line[2]);
 		else
 			return (ft_err_null(ERR_COLORS_SYNTAX));
-		if (var->txtr.FL_col == -1 || var->txtr.CE_col == -1)
+		if (var->txtr.fl_col == -1 || var->txtr.ce_col == -1)
 			return (NULL);
 		if (i + 1 == 2)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		line = ft_free_line_go_to_next_line(fd, line);
 		i++;

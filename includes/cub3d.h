@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/15 10:55:01 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:06:58 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ Map errors
 # define ERR_MAP_PLAYERS "Error\nThere must be only one player\n"
 # define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
 
-
 // typedef struct s_pix
 // {
 // 	struct s_var	*var;
@@ -75,6 +74,12 @@ Map errors
 // 	t_pix			pix_1;
 // 	t_pix			pix_2;
 // }	t_line;
+
+typedef struct s_colors
+{
+	int				col_int;
+	int				i;
+}	t_colors;
 
 typedef struct s_img
 {
@@ -92,12 +97,12 @@ typedef struct s_img
 typedef struct s_textures
 {
 	struct s_var	*var;
-	t_img			NO_img;
-	t_img			SO_img;
-	t_img			WE_img;
-	t_img			EA_img;
-	int				FL_col;
-	int				CE_col;
+	t_img			no_img;
+	t_img			so_img;
+	t_img			we_img;
+	t_img			ea_img;
+	int				fl_col;
+	int				ce_col;
 }	t_textures;
 
 typedef struct s_map
@@ -132,7 +137,7 @@ typedef struct s_var
 Initialization (init.c)
 */
 int			ft_init_var(t_var *var, char *title);
-t_textures	*ft_init_textures(t_var *var);
+t_textures	*ft_init_txtr(t_var *var);
 /*
 Error (error.c)
 */
@@ -146,8 +151,8 @@ void		*ft_parse(t_var *var);
 /*
 Map parsing (parsing_map.c)
 */
-void		*ft_append_map_line(t_var *var, char *line, int y);
-void		*ft_allocate_map_tab(t_var *var);
+void		*ft_append_map_line(t_var *var, char *ln, int y);
+void		*ft_allocate_map_tab(t_var *va);
 void		*ft_parse_map(t_var *var, int fd, char *line);
 /*
 Color parsing (parsing_colors.c)
@@ -157,8 +162,8 @@ void		*ft_parse_colors(t_var *var, int fd, char *line);
 /*
 Parsing textures (parsing_textures.c)
 */
-int			ft_check_textures(t_var *var);
-int			ft_is_invalid_texture(t_var *var);
+int			ft_check_txtr(t_var *var);
+int			ft_invalid_txtr(t_var *var);
 void		*ft_parse_textures(t_var *var, int fd, char *line, int i);
 /*
 Parsing utils (parsing_utils.c)

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:12:51 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/15 11:31:13 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:47:52 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,3 @@ int	ft_is_valid_map_size(t_var *var)
 	}
 	return (1);
 }
-
