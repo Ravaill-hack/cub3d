@@ -6,17 +6,41 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:46:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 18:16:10 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:50:48 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	ft_is_xpm(char *str)
+{
+	if (!str)
+	{
+		ft_putstr_fd("Error\nInvalid texture file\n", 2);
+		return (0);
+	}
+	if (ft_strlen(str) <= 4)
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(" is not a .xpm file\n", 2);
+		return (0);
+	}
+	if (ft_strcmp(&str[ft_strlen(str) - 4], ".xpm") == 0)
+		return (1);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(" is not a .xpm file\n", 2);
+	return (0);
+}
+
 int	ft_valid_txtr(t_var *var)
 {
-	(void)var;
-	// A COMPLETER, NOTAMMENT RENVOYER LE MESSAGE ERREUR APPROPRIE
-	
+	if (ft_is_xpm(var->txtr.no_img.path) == 0
+		|| ft_is_xpm(var->txtr.so_img.path) == 0
+		|| ft_is_xpm(var->txtr.we_img.path) == 0
+		|| ft_is_xpm(var->txtr.ea_img.path) == 0)
+		return (0);
 	return (1);
 }
 

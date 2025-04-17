@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 12:41:05 by julien            #+#    #+#             */
-/*   Updated: 2025/04/16 14:31:37 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:02:29 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ size_t	ft_strslcpy(char ***dst, char *const *src, size_t size);
 char	**ft_strsjoinstr(char **strs, char *str);
 char	*ft_strjoin_n(int count, ...);
 void	*ft_check_and_free(void **ptr);
+int		ft_strcmp(const char *s1, const char *s2);
 #endif

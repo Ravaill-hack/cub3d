@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 16:52:44 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:57:15 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ Map errors
 # define ERR_MAP_SIZE "Error\nInvalid map size\n"
 # define ERR_MAP_PLAYERS "Error\nThere must be only one player\n"
 # define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
-
-
 
 // typedef struct s_pix
 // {
@@ -169,6 +167,7 @@ void		*ft_parse_colors(t_var *var, int fd, char *line);
 /*
 Parsing textures (parsing_textures.c)
 */
+int			ft_is_xpm(char *str);
 int			ft_check_txtr(t_var *var);
 int			ft_valid_txtr(t_var *var);
 void		*ft_parse_textures(t_var *var, int fd, char *line, int i);
