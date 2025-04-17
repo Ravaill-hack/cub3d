@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:46:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/17 11:06:04 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:59:07 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ void	*ft_parse_textures(t_var *var, int fd, char *line, int i)
 		else
 			return (free(line), ft_err_null(ERR_TEXTR_SYNTAX));
 		if (i == 4)
-		{
-			printf ("line = %s\n", line);
 			break ;
-		}
 		line = ft_free_line_go_to_next_line(fd, line);
 	}
 	if (!(ft_check_txtr(var) && ft_valid_txtr(var) && ft_init_txtr(var)))
