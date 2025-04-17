@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 17:10:21 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:47:31 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ int	ft_close_n_free(void *v)
 	exit(0);
 }
 
+int	ft_handle_hook(int keyc, t_var *var)
+{
+	if (keyc == 65307)
+		ft_close_n_free(var);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_var	var;
@@ -30,6 +37,7 @@ int	main(int argc, char **argv)
 		return (ft_free_all(&var));
 	ft_print_parsed_data(&var);
 	mlx_hook(var.win.win_ptr, 17, 0, ft_close_n_free, (void *)(&var));
+	mlx_key_hook(var.win.win_ptr, ft_handle_hook, (void *)(&var));
 	mlx_loop(var.mlx_ptr);
 	ft_free_all(&var);
 	return (0);

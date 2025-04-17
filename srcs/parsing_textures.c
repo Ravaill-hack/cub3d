@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:46:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/17 10:50:48 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:06:04 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ void	*ft_parse_textures(t_var *var, int fd, char *line, int i)
 	}
 	if (!(ft_check_txtr(var) && ft_valid_txtr(var) && ft_init_txtr(var)))
 		return (free(line), NULL);
-	return ((void *)var);
+	return (free(line), (void *)var);
 }
