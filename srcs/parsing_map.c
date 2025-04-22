@@ -6,11 +6,31 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/17 14:10:14 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 09:44:21 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		ft_find_angle(char c, t_var *var)
+{
+	if (c == 'E')
+		var->play.angle = 0;
+	else if (c == 'N')
+		var->play.angle = 90;
+	else if (c == 'W')
+		var->play.angle = 180;
+	else if (c == 'S')
+		var->play.angle = 270;
+	return (0);
+}
+
+int		ft_find_orientation(t_var *var)
+{
+	var->play.or_x = cos((double)(var->play.angle) * 2.0 * M_PI / 360.0);
+	var->play.or_y = sin((double)(var->play.angle) * 2.0 * M_PI / 360.0);
+	return (0);
+}
 
 void	*ft_append_map_line(t_var *var, char *ln, int y)
 {
@@ -25,13 +45,17 @@ void	*ft_append_map_line(t_var *var, char *ln, int y)
 			saw_end = 1;
 		if (saw_end == 0 && ln[x] != '\0' && ln[x] != '\n')
 		{
-			if (ln[x] == '0' || ln[x] == '1' || ln[x] == 'N' || ln[x] == ' ')
+			if (ln[x] == '0' || ln[x] == '1' || ln[x] == 'N' || ln[x] == 'S' || ln[x] == 'W' || ln[x] == 'E' || ln[x] == ' ')
 			{
-				if (ln[x] == 'N' && var->map->player == 1)
+				if ((ln[x] == 'N' || ln[x] == 'S' || ln[x] == 'W' || ln[x] == 'E') && var->map->player == 1)
 					return (ft_free_strs_until(&(var->map->tab), y),
 						ft_err_null(ERR_MAP_PLAYERS));
-				if (ln[x] == 'N')
+				if (ln[x] == 'N' || ln[x] == 'S' || ln[x] == 'W' || ln[x] == 'E')
+				{
 					var->map->player = 1;
+					ft_find_angle(ln[x], var);
+					ft_find_orientation(var);
+				}
 				var->map->tab[y][x] = ln[x];
 			}
 			else

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/17 10:57:15 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 09:55:17 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdio.h>
+# include <math.h>
 # include "libft.h"
 # include "get_next_line.h"
 # include "mlx.h"
@@ -85,6 +86,17 @@ typedef struct s_colors
 	int				i;
 }	t_colors;
 
+typedef	struct s_player
+{
+	double			or_x;
+	double			or_y;
+	int				angle;
+	double			forw;
+	double			bckw;
+	double			pos_x;
+	double			pos_y;
+}	t_player;
+
 typedef struct s_img
 {
 	struct s_var	*var; //peut etre pas necessaire
@@ -135,6 +147,7 @@ typedef struct s_var
 	t_win			win;
 	t_textures		txtr;
 	t_map			*map;
+	t_player		play;
 }	t_var;
 
 /*
