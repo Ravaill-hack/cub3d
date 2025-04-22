@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 20:29:34 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:58:30 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ typedef struct s_var
 	t_img			screen;
 	t_img			mini_map;
 	t_input			input;
+	int				need_redraw;
 }	t_var;
 
 /*
