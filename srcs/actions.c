@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 20:41:58 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 21:07:12 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ int	ft_move(t_var *var, int keyc)
 		var->play.pos_x = x0;
 		var->play.pos_y = y0;
 	}
+	else
+		var->need_redraw = 1;
 	return (0);
 }

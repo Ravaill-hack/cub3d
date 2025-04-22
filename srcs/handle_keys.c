@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:11:30 by julien            #+#    #+#             */
-/*   Updated: 2025/04/22 21:02:37 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 21:06:12 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,9 @@ int	ft_handle_keyrelease(int keycode, t_var *var)
 int	ft_repeat_key_events(t_var *var)
 {
 	if (var->input.key_w)
-	{
 		ft_move(var, KEY_W);
-		var->need_redraw = 1;
-	}
 	if (var->input.key_s)
-	{
 		ft_move(var, KEY_S);
-		var->need_redraw = 1;
-	}
 	if (var->input.key_a)
 	{
 		ft_rotate(var, KEY_A);
@@ -62,13 +56,13 @@ int	ft_repeat_key_events(t_var *var)
 		ft_rotate(var, KEY_D);
 		var->need_redraw = 1;
 	}
-	printf("pos x = %f, pos_y = %f, or_x = %f, or_y = %f\n",
-		var->play.pos_x, var->play.pos_y, var->play.or_x, var->play.or_y);
-	printf("angle = %d\n", var->play.angle);
-	printf("or_x = %f\n", var->play.or_x);
-	printf("or_y = %f\n", var->play.or_y);
 	if (var->need_redraw)
 	{
+		printf("pos x = %f, pos_y = %f, or_x = %f, or_y = %f\n",
+			var->play.pos_x, var->play.pos_y, var->play.or_x, var->play.or_y);
+		printf("angle = %d\n", var->play.angle);
+		printf("or_x = %f\n", var->play.or_x);
+		printf("or_y = %f\n", var->play.or_y);
 		ft_update_image(var, &(var->mini_map));
 		var->need_redraw = 0;
 	}
