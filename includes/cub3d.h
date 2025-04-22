@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 14:18:09 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:29:30 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ typedef	struct s_player
 	double			or_y;
 	int				angle;
 	double			forw;
-	double			bckw;
 	double			pos_x;
 	double			pos_y;
 }	t_player;
@@ -154,6 +153,7 @@ typedef struct s_var
 	void			*mlx_ptr;
 	int				status; //a supprimer
 	int				zoom_mnm;
+	double			step;
 	t_win			win;
 	t_textures		txtr;
 	t_map			*map;
@@ -169,6 +169,11 @@ Initialization (init.c)
 int			ft_init_var(t_var *var, char *title);
 t_textures	*ft_init_txtr(t_var *var);
 int			ft_init_window(t_var *var);
+/*
+Img init (img_init.c)
+*/
+t_img		*ft_init_img(t_var *var, t_img *img);
+int			ft_draw_minimap(t_var *var);
 /*
 Error (error.c)
 */
@@ -200,7 +205,6 @@ void		*ft_parse_textures(t_var *var, int fd, char *line, int i);
 /*
 Parsing utils (parsing_utils.c)
 */
-
 char		*ft_go_to_map_first_line(int fd, char *tmp);
 int			ft_map_size_x(t_var *var);
 int			ft_map_size_y(t_var *var);
@@ -210,12 +214,16 @@ Map checker (map_checker.c)
 */
 int			ft_is_valid_map(t_map *map, t_var *var);
 /*
-Utils (utils.c)
+Drawing (drawing.c)
 */
-char		*ft_free_line_go_to_next_line(int fd, char *line);
-char		ft_first_char(char *str);
-int			ft_line_is_empty(char *line);
-char		*ft_special_strdup(char *str);
+void		ft_draw_point(t_var *var, int x, int y, int col, t_img *img);
+void		ft_draw_line(t_var *var, t_img *img, t_pix p1, t_pix p2, int col);
+void		ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img);
+void		ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col);
+/*
+Events (events.c)
+*/
+int			ft_handle_hook(int keyc, t_var *var);
 /*
 Actions (actions.c)
 */
@@ -229,6 +237,15 @@ int			ft_free_win(t_var *var);
 int			ft_free_txtr(t_var *var);
 int			ft_free_map(t_var *var);
 int			ft_free_all(t_var *var);
+/*
+Utils (utils.c)
+*/
+char		*ft_free_line_go_to_next_line(int fd, char *line);
+char		ft_first_char(char *str);
+int			ft_line_is_empty(char *line);
+char		*ft_special_strdup(char *str);
+int			ft_is_wall(int x, int y, t_map *map);
+double		ft_deg_to_rad(int angle_deg);
 /*
 Debug (debug.c)
 */

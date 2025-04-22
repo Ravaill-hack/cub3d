@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 14:42:53 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:29:51 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int	ft_init_var(t_var *var, char *title)
 	var->txtr.fl_col = 0;
 	var->txtr.ce_col = 0;
 	var->zoom_mnm = 100;
+	var->step = 0.2;
 	return (1);
 }

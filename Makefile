@@ -23,6 +23,7 @@ LIBRARIES = -L$(LIBFT_DIR) -lft -L$(MINILIB_DIR) -lmlx -lXext -lX11 -lm
 SRCS_FILES = \
 	free.c \
 	init.c \
+	img_init.c \
 	main.c \
 	utils.c \
 	error.c \
@@ -33,6 +34,8 @@ SRCS_FILES = \
 	parsing_textures.c \
 	map_checker.c \
 	actions.c \
+	events.c \
+	drawing.c \
 	debug.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
