@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 16:29:30 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:57:01 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,9 @@ int			ft_line_is_empty(char *line);
 char		*ft_special_strdup(char *str);
 int			ft_is_wall(int x, int y, t_map *map);
 double		ft_deg_to_rad(int angle_deg);
+int			ft_min(int x1, int x2);
+int			ft_max(int x1, int x2);
+double 		ft_distance(t_pix p1, t_pix p2);
 /*
 Debug (debug.c)
 */

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 16:30:10 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:12:03 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,37 @@ int	ft_rotate(t_var *var, int keyc)
 	return (0);
 }
 
+int	ft_check_wall(double x, double y, t_map *map)
+{
+	if (ft_is_wall(x, y, map) == 1
+		|| ft_is_wall(x + (1 / 4), y, map) == 1
+		|| ft_is_wall(x - (1 / 4), y, map) == 1
+		|| ft_is_wall(x, y + (1 / 4), map) == 1
+		|| ft_is_wall(x, y - (1 / 4), map) == 1)
+		return (1);
+	return (0);
+}
+
 int	ft_move(t_var *var, int keyc)
 {
+	double	x0;
+	double	y0;
+
+	x0 = var->play.pos_x;
+	y0 = var->play.pos_y;
 	if (keyc == 119)
 		var->play.forw = var->step;
 	else if (keyc == 115)
 		var->play.forw = -var->step;
 	else
 		return (1);
-	var->play.pos_x = var->play.pos_x + var->play.or_x * var->play.forw;
-	var->play.pos_y = var->play.pos_y + var->play.or_y * var->play.forw;
+	var->play.pos_x = x0 + var->play.or_x * var->play.forw;
+	var->play.pos_y = y0 + var->play.or_y * var->play.forw;
+	if (ft_check_wall(var->play.pos_x, var->play.pos_y, var->map) == 1)
+	{
+		printf("is wall\n");
+		var->play.pos_x = x0;
+		var->play.pos_y = y0;
+	}
 	return (0);
 }

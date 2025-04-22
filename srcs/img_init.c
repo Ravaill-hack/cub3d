@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:44:20 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 16:42:26 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:56:38 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,6 @@ t_img	*ft_init_img(t_var *var, t_img *img)
 	img->endian = 0;
 	img->data_addr = mlx_get_data_addr(img->img_ptr, &img->bit_per_pix, &img->line_len, &img->endian);
 	return (img);
-}
-
-int	ft_min(int x1, int x2)
-{
-	if (x1 <= x2)
-		return (x1);
-	return (x2);
-}
-
-int	ft_max(int x1, int x2)
-{
-	if (x1 > x2)
-		return (x1);
-	return (x2);
-}
-
-double ft_distance(t_pix p1, t_pix p2)
-{
-	double	dist;
-	int	delta_x;
-	int	delta_y;
-
-	delta_x = ft_max(p1.x, p2.x) - ft_min(p1.x, p2.x);
-	delta_y = ft_max(p1.y, p2.y) - ft_min(p1.y, p2.y);
-	dist = sqrtf(pow((double)delta_y, 2.0) + pow((double)delta_x, 2.0));
-	return (dist);
 }
 
 int	ft_is_close_to_player(t_var *var, int x, int y)
