@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 20:00:57 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 22:24:16 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv)
 	t_var	var;
 	int		img_x;
 	int		img_y;
+	t_line	line;
 
 	(void)argc;
 	if (!(ft_init_var(&var, argv[1]) && ft_parse(&var) && ft_init_window(&var)))
@@ -58,6 +59,13 @@ int	main(int argc, char **argv)
 	mlx_hook(var.win.win_ptr, DestroyNotify, StructureNotifyMask,
 		ft_close_n_free, (void *)&var);
 	mlx_loop_hook(var.mlx_ptr, ft_repeat_key_events, (void *)&var);
+	// TEST DRAW LINE
+	line.pixel_1.x = 0;
+	line.pixel_1.y = 0;
+	line.pixel_2.x = 750;
+	line.pixel_2.y = 1000;
+	ft_draw_line_bres(&var, line);
+	// END TEST DRAW LINE
 	mlx_loop(var.mlx_ptr);
 	ft_free_all(&var);
 	return (0);

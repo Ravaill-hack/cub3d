@@ -41,6 +41,7 @@ SRCS_FILES = \
 	find_angle_and_rotation.c \
 	draw_minimap.c \
 	handle_keys.c \
+	draw_line_bres.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 

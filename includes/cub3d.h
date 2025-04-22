@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 21:31:40 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 22:23:53 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,6 @@ typedef struct s_pix
 // 	int				z;
  	unsigned int	col;
 }	t_pix;
-
-// typedef struct s_line
-// {
-// 	t_pix			pix_1;
-// 	t_pix			pix_2;
-// }	t_line;
 
 typedef struct s_colors
 {
@@ -162,6 +156,30 @@ typedef struct s_input
 	int	key_s;
 	int	key_d;
 }	t_input;
+
+typedef struct s_pixel
+{
+	int				x;
+	int				y;
+	int				z;
+	unsigned int	color;
+}	t_pixel;
+
+typedef struct s_line
+{
+	t_pixel	pixel_1;
+	t_pixel	pixel_2;
+}		t_line;
+
+typedef struct s_bresenham
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+}	t_bresenham;
 
 typedef struct s_var
 {
@@ -295,5 +313,13 @@ double		ft_distance(t_pix p1, t_pix p2);
 Debug (debug.c)
 */
 int			ft_print_parsed_data(t_var *var);
+/*
+Drawing lines (draw_line_bres.c)
+*/
+void		ft_set_bres_sx_sy(t_bresenham *bres, t_line line);
+void		ft_update_bres(t_bresenham *bres, t_pixel *pixel);
+void		ft_mlx_pixel_put(t_var *var,
+				t_pixel pixel, unsigned int color);
+void		ft_draw_line_bres(t_var *var, t_line line);
 
 #endif
