@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 20:58:30 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 21:31:40 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_player
 	double			or_x;
 	double			or_y;
 	int				angle;
-	double			forw;
+	//double		forw;
 	double			pos_x;
 	double			pos_y;
 }	t_player;
