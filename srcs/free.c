@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:02 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 17:55:03 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:33:26 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_free_map(t_var *var)
 		if (var->map->tab)
 			var->map->tab = ft_free_strs(var->map->tab);
 		ft_check_and_free((void **)(&var->map->title));
-		ft_check_and_free((void **)(&var->map)); 
+		ft_check_and_free((void **)(&var->map));
 	}
 	return (1);
 }

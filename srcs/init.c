@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 16:29:51 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:39:41 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,32 @@ t_textures	*ft_init_txtr(t_var *var)
 int	ft_init_window(t_var *var)
 {
 	var->win.win_ptr = mlx_new_window(var->mlx_ptr, var->win.width,
-		var->win.height, var->win.path);
+			var->win.height, var->win.path);
 	if (!var->win.win_ptr)
 		return (ft_err(ERR_INIT_WINPTR));
 	return (1);
 }
-		
+
+void	ft_init_txtr_var(t_textures *txtr)
+{
+	txtr->no_img.data_addr = NULL;
+	txtr->so_img.data_addr = NULL;
+	txtr->we_img.data_addr = NULL;
+	txtr->ea_img.data_addr = NULL;
+	txtr->no_img.path = NULL;
+	txtr->so_img.path = NULL;
+	txtr->we_img.path = NULL;
+	txtr->ea_img.path = NULL;
+	txtr->fl_col = 0;
+	txtr->ce_col = 0;
+}
+
 int	ft_init_var(t_var *var, char *title)
 {
 	var->mlx_ptr = mlx_init();
-	var->win.win_ptr = NULL;
 	if (!var->mlx_ptr)
 		return (ft_err(ERR_INIT_MLXPTR));
+	var->win.win_ptr = NULL;
 	mlx_get_screen_size(var->mlx_ptr, &(var->win.width), &(var->win.height));
 	var->win.height *= 0.9;
 	var->win.width *= 0.9;
@@ -59,16 +73,7 @@ int	ft_init_var(t_var *var, char *title)
 	var->plane.x = 0;
 	var->plane.y = 0;
 	var->plane.h_wall = 10;
-	var->txtr.no_img.data_addr = NULL;
-	var->txtr.so_img.data_addr = NULL;
-	var->txtr.we_img.data_addr = NULL;
-	var->txtr.ea_img.data_addr = NULL;
-	var->txtr.no_img.path = NULL;
-	var->txtr.so_img.path = NULL;
-	var->txtr.we_img.path = NULL;
-	var->txtr.ea_img.path = NULL;
-	var->txtr.fl_col = 0;
-	var->txtr.ce_col = 0;
+	ft_init_txtr_var(&var->txtr);
 	var->zoom_mnm = 100;
 	var->step = 0.2;
 	return (1);

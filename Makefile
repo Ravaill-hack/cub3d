@@ -23,9 +23,10 @@ LIBRARIES = -L$(LIBFT_DIR) -lft -L$(MINILIB_DIR) -lmlx -lXext -lX11 -lm
 SRCS_FILES = \
 	free.c \
 	init.c \
-	img_init.c \
+	init_img.c \
 	main.c \
 	utils.c \
+	utils_2.c \
 	error.c \
 	parsing.c \
 	parsing_colors.c \
@@ -37,6 +38,8 @@ SRCS_FILES = \
 	events.c \
 	drawing.c \
 	debug.c \
+	find_angle_and_rotation.c \
+	draw_minimap.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 

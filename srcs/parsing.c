@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:13:04 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/17 14:23:50 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:32:45 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*ft_parse(t_var *var)
 	if (fd == -1)
 		return (ft_err_null(ERR_MAP_OPEN));
 	if (!(ft_parse_textures(var, fd, line, i) && ft_parse_colors(var, fd, line)
-		&& ft_parse_map(var, fd, line)))
+			&& ft_parse_map(var, fd, line)))
 		return (NULL);
 	return ((void *)var);
 }

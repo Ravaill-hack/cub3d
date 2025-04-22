@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:45:08 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 16:12:12 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:47:27 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_draw_line(t_var *var, t_img *img, t_pix p1, t_pix p2, int col)
 		{
 			ft_draw_point(var, x, y, col, img);
 			x++;
-		}	
+		}
 	}
 	else
 		printf("erreur\n");
@@ -71,6 +71,19 @@ void	ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img)
 	}
 }
 
+void	ft_init_points(t_pix *p0, t_pix *p1, t_pix *p2, t_pix *p3,
+		t_var *var, int x, int y)
+{
+	p0->x = x * var->zoom_mnm;
+	p0->y = y * var->zoom_mnm;
+	p1->x = p0->x + var->zoom_mnm;
+	p1->y = p0->y;
+	p2->x = p0->x;
+	p2->y = p0->y + var->zoom_mnm;
+	p3->x = p0->x + var->zoom_mnm;
+	p3->y = p0->y + var->zoom_mnm;
+}
+
 void	ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col)
 {
 	t_pix	p0;
@@ -78,28 +91,20 @@ void	ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col)
 	t_pix	p2;
 	t_pix	p3;
 
-	p0.x = x * var->zoom_mnm;
-	p0.y = y * var->zoom_mnm;
-	p1.x = p0.x + var->zoom_mnm;
-	p1.y = p0.y;
-	p2.x = p0.x;
-	p2.y = p0.y + var->zoom_mnm;
-	p3.x = p0.x + var->zoom_mnm;
-	p3.y = p0.y + var->zoom_mnm;
+	ft_init_points(&p0, &p1, &p2, &p3, var, x, y);
 	if (ft_is_wall(x, y, var->map) == 1)
 	{
 		if (p1.x <= var->map->size_x * var->zoom_mnm)
 		{
 			ft_draw_line(var, img, p0, p1, col);
 			if (p2.y <= var->map->size_y * var->zoom_mnm)
-				ft_draw_line(var, img, p2, p3, col);	
+				ft_draw_line(var, img, p2, p3, col);
 		}
 		if (p2.y <= var->map->size_y * var->zoom_mnm)
 		{
 			ft_draw_line(var, img, p0, p2, col);
 			if (p3.x <= var->map->size_x * var->zoom_mnm)
-				ft_draw_line(var, img, p1, p3, col);	
+				ft_draw_line(var, img, p1, p3, col);
 		}
 	}
 }
-
