@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 09:55:17 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:18:09 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,13 @@ Map errors
 # define ERR_MAP_PLAYERS "Error\nThere must be only one player\n"
 # define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
 
-// typedef struct s_pix
-// {
-// 	struct s_var	*var;
-// 	int				x;
-// 	int				y;
+typedef struct s_pix
+{
+ 	int				x;
+ 	int				y;
 // 	int				z;
-// 	unsigned int	col;
-// }	t_pix;
+ 	unsigned int	col;
+}	t_pix;
 
 // typedef struct s_line
 // {
@@ -85,6 +84,16 @@ typedef struct s_colors
 	int				col_int;
 	int				i;
 }	t_colors;
+
+typedef	struct s_plane
+{
+	int				fov_deg;
+	double			fov_rad;
+	double			x;
+	double			y;
+	double			len;
+	int				h_wall;
+}	t_plane;
 
 typedef	struct s_player
 {
@@ -100,7 +109,7 @@ typedef	struct s_player
 typedef struct s_img
 {
 	struct s_var	*var; //peut etre pas necessaire
-	void			*img_ptr; //on s'en sert pas j'ail l'impression
+	void			*img_ptr;
 	char			*data_addr;
 	char			*path;
 	int				bit_per_pix;
@@ -144,10 +153,14 @@ typedef struct s_var
 {
 	void			*mlx_ptr;
 	int				status; //a supprimer
+	int				zoom_mnm;
 	t_win			win;
 	t_textures		txtr;
 	t_map			*map;
 	t_player		play;
+	t_plane			plane;
+	t_img			screen;
+	t_img			mini_map;
 }	t_var;
 
 /*
@@ -203,6 +216,12 @@ char		*ft_free_line_go_to_next_line(int fd, char *line);
 char		ft_first_char(char *str);
 int			ft_line_is_empty(char *line);
 char		*ft_special_strdup(char *str);
+/*
+Actions (actions.c)
+*/
+int			ft_close_n_free(void *v);
+int			ft_rotate(t_var *var, int keyc);
+int			ft_move(t_var *var, int keyc);
 /*
 Free (free.c)
 */

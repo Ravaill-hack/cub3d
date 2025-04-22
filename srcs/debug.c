@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:35:14 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 09:47:00 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:47:41 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int	ft_print_parsed_data(t_var *var)
 	printf("Player or_x : %f\n", var->play.or_x);
 	printf("Player or_y : %f\n", var->play.or_y);
 	mlx_put_image_to_window(var->mlx_ptr, var->win.win_ptr,
-			var->txtr.no_img.data_addr, 100, 100);
+			var->txtr.no_img.img_ptr, 100, 100);
 	mlx_put_image_to_window(var->mlx_ptr, var->win.win_ptr,
-			var->txtr.ea_img.data_addr, 200, 100);
+			var->txtr.ea_img.img_ptr, 200, 100);
 	mlx_put_image_to_window(var->mlx_ptr, var->win.win_ptr,
-			var->txtr.we_img.data_addr, 100, 200);
+			var->txtr.we_img.img_ptr, 100, 200);
 	mlx_put_image_to_window(var->mlx_ptr, var->win.win_ptr,
-			var->txtr.so_img.data_addr, 200, 200);
+			var->txtr.so_img.img_ptr, 200, 200);
 	return (0);
 }

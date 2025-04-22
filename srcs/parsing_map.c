@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 09:44:21 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:43:53 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	*ft_append_map_line(t_var *var, char *ln, int y)
 					var->map->player = 1;
 					ft_find_angle(ln[x], var);
 					ft_find_orientation(var);
+					var->play.pos_x = x;
+					var->play.pos_y = y;
 				}
 				var->map->tab[y][x] = ln[x];
 			}
