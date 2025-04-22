@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 18:35:26 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:00:57 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,22 @@ int	main(int argc, char **argv)
 	int		img_y;
 
 	(void)argc;
-	img_x = var.win.width - (var.map->size_x + 2) * var.zoom_mnm;
-	img_y = var.win.height - (var.map->size_y + 2) * var.zoom_mnm;
 	if (!(ft_init_var(&var, argv[1]) && ft_parse(&var) && ft_init_window(&var)))
 		return (ft_free_all(&var));
 	ft_init_img(&var, &(var.mini_map));
 	ft_draw_minimap(&var);
+	img_x = var.win.width - (var.map->size_x + 2) * var.zoom_mnm;
+	img_y = var.win.height - (var.map->size_y + 2) * var.zoom_mnm;
 	mlx_put_image_to_window(var.mlx_ptr, var.win.win_ptr,
 		var.mini_map.img_ptr, img_x, img_y);
 	//ft_print_parsed_data(&var);
-	//mlx_hook(var.win.win_ptr, 17, 0, ft_close_n_free, (void *)(&var));
 	mlx_hook(var.win.win_ptr, KeyPress, KeyPressMask,
 		ft_handle_keypress, (void *)(&var));
 	mlx_hook(var.win.win_ptr, KeyRelease, KeyReleaseMask,
 		ft_handle_keyrelease, (void *)(&var));
 	mlx_hook(var.win.win_ptr, DestroyNotify, StructureNotifyMask,
 		ft_close_n_free, (void *)&var);
-	mlx_loop(var.mlx_ptr, ft_repeat_key_events, (void *)&var);
-	//mlx_key_hook(var.win.win_ptr, ft_handle_hook, (void *)(&var));
+	mlx_loop_hook(var.mlx_ptr, ft_repeat_key_events, (void *)&var);
 	mlx_loop(var.mlx_ptr);
 	ft_free_all(&var);
 	return (0);

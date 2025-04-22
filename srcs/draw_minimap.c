@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/22 18:33:13 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 19:58:06 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_is_close_to_player(t_var *var, int x, int y)
 	return (0);
 }
 
-void	ft_draw_nodes(t_var *var, t_img *img)
+void	ft_draw_nodes(t_var *var)
 {
 	int		x;
 	int		y;
@@ -44,7 +44,7 @@ void	ft_draw_nodes(t_var *var, t_img *img)
 	}
 }
 
-void	ft_draw_player(t_var *var, t_img *img)
+void	ft_draw_player(t_var *var)
 {
 	int		x;
 	int		y;
@@ -65,11 +65,7 @@ void	ft_draw_player(t_var *var, t_img *img)
 
 int	ft_draw_minimap(t_var *var)
 {
-	int		x;
-	int		y;
-	int		col;
-
-	ft_draw_nodes(var, &var->mini_map);
-	ft_draw_player(var, &var->mini_map);
+	ft_draw_nodes(var);
+	ft_draw_player(var);
 	return (0);
 }

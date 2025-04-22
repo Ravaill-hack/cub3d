@@ -35,11 +35,12 @@ SRCS_FILES = \
 	parsing_textures.c \
 	map_checker.c \
 	actions.c \
-	events.c \
+	update_image.c \
 	drawing.c \
 	debug.c \
 	find_angle_and_rotation.c \
 	draw_minimap.c \
+	handle_keys.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 

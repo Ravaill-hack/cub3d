@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 17:12:03 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/22 20:41:58 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,16 @@ int	ft_close_n_free(void *v)
 
 int	ft_rotate(t_var *var, int keyc)
 {
-	if (keyc == 97)
+	if (keyc == KEY_A)
+	{
+		printf("key A\n");
 		var->play.angle = (var->play.angle - 5) % 360;
-	else if (keyc == 100)
+	}
+	else if (keyc == KEY_D)
+	{
+		printf("key D\n");
 		var->play.angle = (var->play.angle + 5) % 360;
+	}
 	else
 		return (1);
 	var->play.or_x = cos((double)(var->play.angle) * 2.0 * M_PI / 360.0);
@@ -52,17 +58,23 @@ int	ft_move(t_var *var, int keyc)
 
 	x0 = var->play.pos_x;
 	y0 = var->play.pos_y;
-	if (keyc == 119)
+	if (keyc == KEY_W)
+	{
+		//printf("key W\n");
 		var->play.forw = var->step;
-	else if (keyc == 115)
+	}
+	else if (keyc == KEY_S)
+	{
+		//printf("key S\n");
 		var->play.forw = -var->step;
+	}
 	else
 		return (1);
 	var->play.pos_x = x0 + var->play.or_x * var->play.forw;
 	var->play.pos_y = y0 + var->play.or_y * var->play.forw;
 	if (ft_check_wall(var->play.pos_x, var->play.pos_y, var->map) == 1)
 	{
-		printf("is wall\n");
+		//printf("is wall\n");
 		var->play.pos_x = x0;
 		var->play.pos_y = y0;
 	}

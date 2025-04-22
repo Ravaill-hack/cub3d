@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 19:31:10 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:29:34 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 # include "get_next_line.h"
 # include "mlx.h"
 # include <X11/X.h>
+
+# define KEY_W 		119
+# define KEY_A 		97
+# define KEY_S 		115
+# define KEY_D		100
+# define KEY_ESC	65307
 
 /*
 ERROR MESSAGES :
@@ -149,6 +155,14 @@ typedef struct s_win
 	int				height;
 }	t_win;
 
+typedef struct s_input
+{
+	int	key_w;
+	int	key_a;
+	int	key_s;
+	int	key_d;
+}	t_input;
+
 typedef struct s_var
 {
 	void			*mlx_ptr;
@@ -162,6 +176,7 @@ typedef struct s_var
 	t_plane			plane;
 	t_img			screen;
 	t_img			mini_map;
+	t_input			input;
 }	t_var;
 
 /*
@@ -228,8 +243,8 @@ void		ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col);
 Mni map (draw_mini_map.c)
 */
 int			ft_is_close_to_player(t_var *var, int x, int y);
-void		ft_draw_nodes(t_var *var, t_img *img);
-void		ft_draw_player(t_var *var, t_img *img);
+void		ft_draw_nodes(t_var *var);
+void		ft_draw_player(t_var *var);
 int			ft_draw_minimap(t_var *var);
 /*
 Angle and rotation (find_angle_and_rotation.c)
@@ -237,10 +252,15 @@ Angle and rotation (find_angle_and_rotation.c)
 int			ft_find_angle(char c, t_var *var);
 int			ft_find_orientation(t_var *var);
 /*
-Events (events.c)
+Update image (update_image.c)
 */
 int			ft_update_image(t_var *var, t_img *img);
-int			ft_handle_hook(int keyc, t_var *var);
+/*
+Handle keys (handle_keys.c)
+*/
+int			ft_handle_keypress(int keycode, t_var *var);
+int			ft_handle_keyrelease(int keycode, t_var *var);
+int			ft_repeat_key_events(t_var *var);
 /*
 Actions (actions.c)
 */

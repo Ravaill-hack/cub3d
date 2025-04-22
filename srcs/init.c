@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 18:39:41 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:29:24 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,9 @@ int	ft_init_var(t_var *var, char *title)
 	ft_init_txtr_var(&var->txtr);
 	var->zoom_mnm = 100;
 	var->step = 0.2;
+	var->input.key_w = 0;
+	var->input.key_a = 0;
+	var->input.key_s = 0;
+	var->input.key_d = 0;
 	return (1);
 }
