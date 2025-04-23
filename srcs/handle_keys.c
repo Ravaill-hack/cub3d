@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:11:30 by julien            #+#    #+#             */
-/*   Updated: 2025/04/23 11:04:07 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:03:14 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ int	ft_repeat_key_events(t_var *var)
 {
 	if (var->input.key_w)
 		ft_move(var, KEY_W);
-	if (var->input.key_s)
+
+	else if (var->input.key_s)
 		ft_move(var, KEY_S);
 	if (var->input.key_a)
 	{
 		ft_rotate(var, KEY_A);
 		var->need_redraw = 1;
 	}
-	if (var->input.key_d)
+	else if (var->input.key_d)
 	{
 		ft_rotate(var, KEY_D);
 		var->need_redraw = 1;

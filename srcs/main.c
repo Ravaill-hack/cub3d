@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 11:05:04 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:46:28 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	main(int argc, char **argv)
 	int		img_x;
 	int		img_y;
 
-	(void)argc;
+	if (argc != 2)
+		return (ft_err("Error\nOne argument is expected\n"));
 	if (!(ft_init_var(&var, argv[1]) && ft_parse(&var) && ft_init_window(&var)))
 		return (ft_free_all(&var));
 	ft_init_img(&var, &(var.mini_map));

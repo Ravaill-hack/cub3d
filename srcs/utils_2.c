@@ -3,18 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:35:57 by julien            #+#    #+#             */
-/*   Updated: 2025/04/22 18:53:39 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/23 13:37:53 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	ft_intercept_wall(int x, int y, t_map *map, int angle)
+{
+	if (y < 0 || x < 0 || x >= map->size_x || y >= map->size_y)
+		return (1);
+	if (angle == 45)
+	{
+		if (ft_is_wall(x - 1, y, map) && ft_is_wall(x, y + 1, map))
+			return(1);
+	}
+	else if (angle == 135)
+	{
+		if (ft_is_wall(x + 1, y, map) && ft_is_wall(x, y + 1, map))
+			return(1);
+	}
+	else if (angle == 225)
+	{
+		if (ft_is_wall(x, y - 1, map) && ft_is_wall(x + 1, y, map))
+			return(1);
+	}
+	else if (angle == 315)
+	{
+		if (ft_is_wall(x - 1, y, map) && ft_is_wall(x, y - 1, map))
+			return(1);
+	}
+	if (ft_is_wall(x, y, map) == 1)
+		return (1);
+	return (0);
+}
+
 int	ft_is_wall(int x, int y, t_map *map)
 {
-	if (x < map->size_x && y < map->size_y && map->tab[y][x] == '1')
+	if (y < 0 || x < 0 || (x < map->size_x && y < map->size_y && map->tab[y][x] == '1'))
 		return (1);
 	return (0);
 }

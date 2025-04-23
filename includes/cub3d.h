@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 11:44:20 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:22:22 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,7 +286,7 @@ Actions (actions.c)
 int			ft_close_n_free(void *v);
 int			ft_rotate(t_var *var, int keyc);
 int			ft_check_wall(double x, double y, t_map *map);
-int			ft_strict_check_wall(double x, double y, t_map *map);
+int			ft_strict_check_wall(double x, double y, t_map *map, int angle);
 int			ft_move(t_var *var, int keyc);
 /*
 Free (free.c)
@@ -310,6 +310,7 @@ double		ft_deg_to_rad(int angle_deg);
 int			ft_min(int x1, int x2);
 int			ft_max(int x1, int x2);
 double		ft_distance(t_pix p1, t_pix p2);
+int			ft_intercept_wall(int x, int y, t_map *map, int angle);
 /*
 Debug (debug.c)
 */

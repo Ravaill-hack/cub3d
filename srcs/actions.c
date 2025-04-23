@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 10:45:31 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:22:10 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_rotate(t_var *var, int keyc)
 	if (keyc == KEY_A)
 	{
 		printf("key A\n");
-		var->play.angle = (var->play.angle - 5) % 360;
+		var->play.angle = (var->play.angle + 355) % 360;
 	}
 	else if (keyc == KEY_D)
 	{
@@ -56,9 +56,9 @@ int	ft_check_wall(double x, double y, t_map *map)
 	return (0);
 }
 
-int	ft_strict_check_wall(double x, double y, t_map *map)
+int	ft_strict_check_wall(double x, double y, t_map *map, int angle)
 {
-	if (ft_is_wall(x, y, map) == 1)
+	if (ft_intercept_wall(x, y, map, angle) == 1)
 		return (1);
 	return (0);
 }

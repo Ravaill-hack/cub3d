@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/23 11:38:12 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:40:40 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_draw_player(t_var *var)
 	}
 }
 
-t_pix	ft_find_end(t_var *var, double or_x, double or_y)
+t_pix	ft_find_end(t_var *var, double or_x, double or_y, int angle)
 {
 	t_pix	point;
 	double	x;
@@ -71,7 +71,7 @@ t_pix	ft_find_end(t_var *var, double or_x, double or_y)
 
 	x = var->play.pos_x * var->zoom_mnm;
 	y = var->play.pos_y * var->zoom_mnm;
-	while (!ft_strict_check_wall(x / var->zoom_mnm, y / var->zoom_mnm, var->map))
+	while (!ft_strict_check_wall(x / var->zoom_mnm, y / var->zoom_mnm, var->map, angle))
 	{
 		x += or_x;
 		y += or_y;	
@@ -99,7 +99,7 @@ t_pix	ft_find_end(t_var *var, double or_x, double or_y)
 // 	return (point);
 // }
 
-void	ft_draw_vector(t_var *var, double or_x, double or_y)
+void	ft_draw_vector(t_var *var, double or_x, double or_y, int angle)
 {
 	t_pix	play;
 	t_pix	end_v;
@@ -109,7 +109,7 @@ void	ft_draw_vector(t_var *var, double or_x, double or_y)
 	play.y = var->play.pos_y * var->zoom_mnm;
 	// end_v.x = play.x + (int)round(var->play.or_x * var->zoom_mnm);
 	// end_v.y = play.y + (int)round(var->play.or_y * var->zoom_mnm);
-	end_v = ft_find_end(var, or_x, or_y);
+	end_v = ft_find_end(var, or_x, or_y, angle);
 	line.pixel_1 = play;
 	line.pixel_2 = end_v;
 	ft_draw_line_bres(var, line);
@@ -117,15 +117,17 @@ void	ft_draw_vector(t_var *var, double or_x, double or_y)
 
 void	ft_draw_cone(t_var *var)
 {
-	double	angle_start;
-	double	angle_end;
+	int	angle_start;
+	int	angle_end;
 
-	angle_start = (double)((int)(var->play.angle - 40.0) % 360);
-	angle_end = (double)((int)(var->play.angle + 40.0) % 360);
+	angle_start = ((int)(var->play.angle + 360) - 40) % 360;
+	angle_end = ((int)(var->play.angle) + 40) % 360;
 	while (angle_start != angle_end)
 	{
-	 	ft_draw_vector(var, cos(ft_deg_to_rad(angle_start)), sin(ft_deg_to_rad(angle_start)));
-	 	angle_start += 5;
+		printf("angle end : %d\n", angle_end);
+		printf("angle start : %d\n", angle_start);
+	 	ft_draw_vector(var, cos(ft_deg_to_rad(angle_start)), sin(ft_deg_to_rad(angle_start)), angle_start);
+	 	angle_start = (angle_start + 1) % 360;
 	}
 }
 
