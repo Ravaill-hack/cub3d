@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:13:04 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 13:44:42 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:50:01 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,22 @@ char	*ft_extract_title(char *path)
 	return (ft_strdup(path));
 }
 
+void	ft_go_to_end_fd(int fd)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	tmp = get_next_line(fd);
+	while (tmp)
+	{
+		free(tmp);
+		tmp = get_next_line(fd);
+	}
+	if (tmp)
+		free(tmp);
+	close (fd);
+}
+
 void	*ft_parse(t_var *var)
 {
 	char	*line;
@@ -52,6 +68,10 @@ void	*ft_parse(t_var *var)
 		return (ft_err_null(ERR_MAP_OPEN));
 	if (!(ft_parse_textures(var, fd, line, i) && ft_parse_colors(var, fd, line)
 			&& ft_parse_map(var, fd, line)))
+	{
+		ft_go_to_end_fd(fd);
 		return (NULL);
+	}
+	close(fd);
 	return ((void *)var);
 }

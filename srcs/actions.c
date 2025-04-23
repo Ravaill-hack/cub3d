@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 13:22:10 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:08:20 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,9 @@ int	ft_close_n_free(void *v)
 int	ft_rotate(t_var *var, int keyc)
 {
 	if (keyc == KEY_A)
-	{
-		printf("key A\n");
 		var->play.angle = (var->play.angle + 355) % 360;
-	}
 	else if (keyc == KEY_D)
-	{
-		printf("key D\n");
 		var->play.angle = (var->play.angle + 5) % 360;
-	}
 	else
 		return (1);
 	var->play.or_x = cos((double)(var->play.angle) * 2.0 * M_PI / 360.0);

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 10:15:01 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:04:52 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	ft_init_window(t_var *var)
 
 void	ft_init_txtr_var(t_textures *txtr)
 {
-	txtr->no_img.data_addr = NULL;
-	txtr->so_img.data_addr = NULL;
-	txtr->we_img.data_addr = NULL;
-	txtr->ea_img.data_addr = NULL;
+	txtr->no_img.img_ptr = NULL;
+	txtr->so_img.img_ptr = NULL;
+	txtr->we_img.img_ptr = NULL;
+	txtr->ea_img.img_ptr = NULL;
 	txtr->no_img.path = NULL;
 	txtr->so_img.path = NULL;
 	txtr->we_img.path = NULL;
@@ -80,5 +80,7 @@ int	ft_init_var(t_var *var, char *title)
 	var->input.key_a = 0;
 	var->input.key_s = 0;
 	var->input.key_d = 0;
+	var->need_redraw = 0;
+	var->mini_map.img_ptr = NULL;
 	return (1);
 }

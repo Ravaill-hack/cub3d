@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/23 13:40:40 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:53:44 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,6 @@ void	ft_draw_cone(t_var *var)
 	angle_end = ((int)(var->play.angle) + 40) % 360;
 	while (angle_start != angle_end)
 	{
-		printf("angle end : %d\n", angle_end);
-		printf("angle start : %d\n", angle_start);
 	 	ft_draw_vector(var, cos(ft_deg_to_rad(angle_start)), sin(ft_deg_to_rad(angle_start)), angle_start);
 	 	angle_start = (angle_start + 1) % 360;
 	}

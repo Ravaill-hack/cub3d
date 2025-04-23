@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:45:26 by julien            #+#    #+#             */
-/*   Updated: 2025/04/23 11:56:04 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:09:18 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_draw_horizontal(t_var *var, t_line line, int col, t_img *img)
 
 	x_min = ft_min(line.pixel_1.x, line.pixel_2.x);
 	x_max = ft_max(line.pixel_1.x, line.pixel_2.x);
-	ft_putstr_fd("horizontal\n", 1);
 	while(x_min <= x_max)
 	{
 		ft_draw_point(var, x_min, line.pixel_1.y, col, img);
@@ -60,7 +59,6 @@ void	ft_draw_vertical(t_var *var, t_line line, int col, t_img *img)
 
 	y_min = ft_min(line.pixel_1.y, line.pixel_2.y);
 	y_max = ft_max(line.pixel_1.y, line.pixel_2.y);
-	ft_putstr_fd("vertical\n", 1);
 	while(y_min <= y_max)
 	{
 		ft_draw_point(var, line.pixel_1.x, y_min, col, img);
