@@ -5,7 +5,7 @@ LIBFT = libft.a
 MINILIB = libmlx.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -O3
 
 HEADER_DIR = includes
 SRCS_DIR = srcs

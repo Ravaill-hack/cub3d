@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 22:23:53 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/23 11:44:20 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_pix
 {
  	int				x;
  	int				y;
-// 	int				z;
+ 	int				z;
  	unsigned int	col;
 }	t_pix;
 
@@ -157,18 +157,18 @@ typedef struct s_input
 	int	key_d;
 }	t_input;
 
-typedef struct s_pixel
-{
-	int				x;
-	int				y;
-	int				z;
-	unsigned int	color;
-}	t_pixel;
+// typedef struct s_pixel
+// {
+// 	int				x;
+// 	int				y;
+// 	int				z;
+// 	unsigned int	color;
+// }	t_pixel;
 
 typedef struct s_line
 {
-	t_pixel	pixel_1;
-	t_pixel	pixel_2;
+	t_pix	pixel_1;
+	t_pix	pixel_2;
 }		t_line;
 
 typedef struct s_bresenham
@@ -253,7 +253,7 @@ int			ft_is_valid_map(t_map *map, t_var *var);
 Drawing (drawing.c)
 */
 void		ft_draw_point(t_var *var, int x, int y, int col, t_img *img);
-void		ft_draw_line(t_var *var, t_img *img, t_pix p1, t_pix p2, int col);
+void		ft_draw_line_map(t_var *var, t_img *img, t_pix p1, t_pix p2, int col);
 void		ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img);
 void		ft_init_points(t_pix *p0, t_pix *p1, t_pix *p2, t_pix *p3,
 				t_var *var, int x, int y);
@@ -286,6 +286,7 @@ Actions (actions.c)
 int			ft_close_n_free(void *v);
 int			ft_rotate(t_var *var, int keyc);
 int			ft_check_wall(double x, double y, t_map *map);
+int			ft_strict_check_wall(double x, double y, t_map *map);
 int			ft_move(t_var *var, int keyc);
 /*
 Free (free.c)
@@ -317,9 +318,9 @@ int			ft_print_parsed_data(t_var *var);
 Drawing lines (draw_line_bres.c)
 */
 void		ft_set_bres_sx_sy(t_bresenham *bres, t_line line);
-void		ft_update_bres(t_bresenham *bres, t_pixel *pixel);
-void		ft_mlx_pixel_put(t_var *var,
-				t_pixel pixel, unsigned int color);
+void		ft_update_bres(t_bresenham *bres, t_pix *pixel);
+// void		ft_mlx_pixel_put(t_var *var,
+// 				t_pix pixel, unsigned int color);
 void		ft_draw_line_bres(t_var *var, t_line line);
 
 #endif

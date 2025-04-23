@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:45:08 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 18:47:27 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/23 10:25:48 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	ft_draw_point(t_var *var, int x, int y, int col, t_img *img)
 	*(int *)ptr = col;
 }
 
-void	ft_draw_line(t_var *var, t_img *img, t_pix p1, t_pix p2, int col)
+void	ft_draw_line_map(t_var *var, t_img *img, t_pix p1, t_pix p2, int col)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	x = p1.x;
 	y = p1.y;
@@ -46,7 +46,7 @@ void	ft_draw_line(t_var *var, t_img *img, t_pix p1, t_pix p2, int col)
 		}
 	}
 	else
-		printf("erreur\n");
+		printf("Error while drawinng minimap\n");
 }
 
 void	ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img)
@@ -96,15 +96,15 @@ void	ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col)
 	{
 		if (p1.x <= var->map->size_x * var->zoom_mnm)
 		{
-			ft_draw_line(var, img, p0, p1, col);
+			ft_draw_line_map(var, img, p0, p1, col);
 			if (p2.y <= var->map->size_y * var->zoom_mnm)
-				ft_draw_line(var, img, p2, p3, col);
+				ft_draw_line_map(var, img, p2, p3, col);
 		}
 		if (p2.y <= var->map->size_y * var->zoom_mnm)
 		{
-			ft_draw_line(var, img, p0, p2, col);
+			ft_draw_line_map(var, img, p0, p2, col);
 			if (p3.x <= var->map->size_x * var->zoom_mnm)
-				ft_draw_line(var, img, p1, p3, col);
+				ft_draw_line_map(var, img, p1, p3, col);
 		}
 	}
 }

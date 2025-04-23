@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/22 19:58:06 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/23 11:38:12 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,76 @@ void	ft_draw_player(t_var *var)
 	}
 }
 
+t_pix	ft_find_end(t_var *var, double or_x, double or_y)
+{
+	t_pix	point;
+	double	x;
+	double	y;
+
+	x = var->play.pos_x * var->zoom_mnm;
+	y = var->play.pos_y * var->zoom_mnm;
+	while (!ft_strict_check_wall(x / var->zoom_mnm, y / var->zoom_mnm, var->map))
+	{
+		x += or_x;
+		y += or_y;	
+	}
+	point.x = (int)round(x);
+	point.y = (int)round(y);
+	return (point);
+}
+
+// t_pix	ft_find_end(t_var *var, double or_x, double or_y)
+// {
+// 	t_pix	point;
+// 	double	x;
+// 	double	y;
+
+// 	x = var->play.pos_x;
+// 	y = var->play.pos_y;
+// 	while (!ft_strict_check_wall(x , y, var->map))
+// 	{
+// 		x += or_x;
+// 		y += or_y;	
+// 	}
+// 	point.x = (int)round(x * var->zoom_mnm);
+// 	point.y = (int)round(y * var->zoom_mnm);
+// 	return (point);
+// }
+
+void	ft_draw_vector(t_var *var, double or_x, double or_y)
+{
+	t_pix	play;
+	t_pix	end_v;
+	t_line	line;
+
+	play.x = var->play.pos_x * var->zoom_mnm;
+	play.y = var->play.pos_y * var->zoom_mnm;
+	// end_v.x = play.x + (int)round(var->play.or_x * var->zoom_mnm);
+	// end_v.y = play.y + (int)round(var->play.or_y * var->zoom_mnm);
+	end_v = ft_find_end(var, or_x, or_y);
+	line.pixel_1 = play;
+	line.pixel_2 = end_v;
+	ft_draw_line_bres(var, line);
+}
+
+void	ft_draw_cone(t_var *var)
+{
+	double	angle_start;
+	double	angle_end;
+
+	angle_start = (double)((int)(var->play.angle - 40.0) % 360);
+	angle_end = (double)((int)(var->play.angle + 40.0) % 360);
+	while (angle_start != angle_end)
+	{
+	 	ft_draw_vector(var, cos(ft_deg_to_rad(angle_start)), sin(ft_deg_to_rad(angle_start)));
+	 	angle_start += 5;
+	}
+}
+
 int	ft_draw_minimap(t_var *var)
 {
 	ft_draw_nodes(var);
 	ft_draw_player(var);
+	ft_draw_cone(var);
 	return (0);
 }

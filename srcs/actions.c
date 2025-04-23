@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 21:35:18 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/23 10:45:31 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ int	ft_check_wall(double x, double y, t_map *map)
 		|| ft_is_wall(x + 0.25, y - 0.25, map) == 1
 		|| ft_is_wall(x - 0.25, y - 0.25, map) == 1
 	)
+		return (1);
+	return (0);
+}
+
+int	ft_strict_check_wall(double x, double y, t_map *map)
+{
+	if (ft_is_wall(x, y, map) == 1)
 		return (1);
 	return (0);
 }

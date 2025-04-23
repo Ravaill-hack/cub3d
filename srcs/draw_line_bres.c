@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_bres.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:45:26 by julien            #+#    #+#             */
-/*   Updated: 2025/04/22 22:18:55 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/23 11:56:04 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_set_bres_sx_sy(t_bresenham *bres, t_line line)
 		bres->sy = -1;
 }
 
-void	ft_update_bres(t_bresenham *bres, t_pixel *pixel)
+void	ft_update_bres(t_bresenham *bres, t_pix *pixel)
 {
 	if (bres->e2 > -bres->dy)
 	{
@@ -38,15 +38,34 @@ void	ft_update_bres(t_bresenham *bres, t_pixel *pixel)
 	}
 }
 
-void	ft_mlx_pixel_put(t_var *var,
-	t_pixel pixel, unsigned int color)
+void	ft_draw_horizontal(t_var *var, t_line line, int col, t_img *img)
 {
-	char	*dst;
+	int	x_min;
+	int	x_max;
 
-	dst = var->mini_map.data_addr
-		+ (pixel.y * var->mini_map.line_len
-			+ pixel.x * (var->mini_map.bit_per_pix / 8));
-	*(unsigned int *)dst = color;
+	x_min = ft_min(line.pixel_1.x, line.pixel_2.x);
+	x_max = ft_max(line.pixel_1.x, line.pixel_2.x);
+	ft_putstr_fd("horizontal\n", 1);
+	while(x_min <= x_max)
+	{
+		ft_draw_point(var, x_min, line.pixel_1.y, col, img);
+		x_min++;
+	}
+}
+
+void	ft_draw_vertical(t_var *var, t_line line, int col, t_img *img)
+{
+	int	y_min;
+	int	y_max;
+
+	y_min = ft_min(line.pixel_1.y, line.pixel_2.y);
+	y_max = ft_max(line.pixel_1.y, line.pixel_2.y);
+	ft_putstr_fd("vertical\n", 1);
+	while(y_min <= y_max)
+	{
+		ft_draw_point(var, line.pixel_1.x, y_min, col, img);
+		y_min++;
+	}
 }
 
 void	ft_draw_line_bres(t_var *var, t_line line)
@@ -55,16 +74,23 @@ void	ft_draw_line_bres(t_var *var, t_line line)
 
 	bres.dx = ft_abs(line.pixel_2.x - line.pixel_1.x);
 	bres.dy = ft_abs(line.pixel_2.y - line.pixel_1.y);
-	ft_set_bres_sx_sy(&bres, line);
-	bres.err = bres.dx - bres.dy;
-	while (!(line.pixel_1.x == line.pixel_2.x
-			&& line.pixel_1.y == line.pixel_2.y))
+	if (bres.dx <= 1)
+		ft_draw_vertical(var, line, 0xFFFFFF, &var->mini_map);
+	else if (bres.dy <= 1)
+		ft_draw_horizontal(var, line, 0xFFFFFF, &var->mini_map);
+	else
 	{
-		ft_mlx_pixel_put(var, line.pixel_1, 0xFFFFFF);
-		bres.e2 = bres.err * 2;
-		ft_update_bres(&bres, &line.pixel_1);
+		ft_set_bres_sx_sy(&bres, line);
+		bres.err = bres.dx - bres.dy;
+		while (!(line.pixel_1.x == line.pixel_2.x
+				&& line.pixel_1.y == line.pixel_2.y))
+		{
+			ft_draw_point(var, line.pixel_1.x, line.pixel_1.y, 0xFFFFFF, &(var->mini_map));
+			bres.e2 = bres.err * 2;
+			ft_update_bres(&bres, &line.pixel_1);
+		}
+		ft_draw_point(var, line.pixel_1.x, line.pixel_1.y, 0xFFFFFF, &(var->mini_map));
 	}
-	ft_mlx_pixel_put(var, line.pixel_1, line.pixel_2.color);
 }
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:11:30 by julien            #+#    #+#             */
-/*   Updated: 2025/04/22 21:06:12 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/23 11:04:07 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ int	ft_repeat_key_events(t_var *var)
 	}
 	if (var->need_redraw)
 	{
-		printf("pos x = %f, pos_y = %f, or_x = %f, or_y = %f\n",
-			var->play.pos_x, var->play.pos_y, var->play.or_x, var->play.or_y);
-		printf("angle = %d\n", var->play.angle);
-		printf("or_x = %f\n", var->play.or_x);
-		printf("or_y = %f\n", var->play.or_y);
+		usleep(1000);
+		// printf("pos x = %f, pos_y = %f, or_x = %f, or_y = %f\n",
+		// 	var->play.pos_x, var->play.pos_y, var->play.or_x, var->play.or_y);
+		// printf("angle = %d\n", var->play.angle);
+		// printf("or_x = %f\n", var->play.or_x);
+		// printf("or_y = %f\n", var->play.or_y);
 		ft_update_image(var, &(var->mini_map));
 		var->need_redraw = 0;
 	}
