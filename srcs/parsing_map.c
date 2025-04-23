@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/22 18:27:15 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/23 15:46:52 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_process_map_char(t_var *var, char c, int x, int y)
 	{
 		if ((c == 'N' || c == 'S' || c == 'W' || c == 'E')
 			&& var->map->player == 1)
-			return (ft_free_strs_until(&(var->map->tab), y),
+			return (var->map->tab = ft_free_strs((var->map->tab)),
 				ft_err_null(ERR_MAP_PLAYERS));
 		if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		{
@@ -28,6 +28,8 @@ void	*ft_process_map_char(t_var *var, char c, int x, int y)
 			ft_find_orientation(var);
 			var->play.pos_x = x;
 			var->play.pos_y = y;
+			var->map->tab[y][x] = '0';
+			return((void *)var);
 		}
 		var->map->tab[y][x] = c;
 	}
