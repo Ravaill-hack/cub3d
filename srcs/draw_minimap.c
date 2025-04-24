@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/24 12:32:15 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:36:00 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,6 @@ t_pix	ft_find_end(t_var *var, double or_x, double or_y, int angle)
 	point.y = (int)round(y);
 	return (point);
 }
-
-// t_pix	ft_find_end(t_var *var, double or_x, double or_y)
-// {
-// 	t_pix	point;
-// 	double	x;
-// 	double	y;
-
-// 	x = var->play.pos_x;
-// 	y = var->play.pos_y;
-// 	while (!ft_strict_check_wall(x , y, var->map))
-// 	{
-// 		x += or_x;
-// 		y += or_y;	
-// 	}
-// 	point.x = (int)round(x * var->zoom_mnm);
-// 	point.y = (int)round(y * var->zoom_mnm);
-// 	return (point);
-// }
 
 t_pix	ft_draw_vector(t_var *var, double or_x, double or_y, int angle)
 {
