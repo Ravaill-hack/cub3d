@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:02 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 14:03:58 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:15:05 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	ft_free_all(t_var *var)
 {
 	ft_free_map(var);
 	ft_free_txtr(var);
+	if (var->screen.img_ptr)
+		mlx_destroy_image(var->mlx_ptr, var->screen.img_ptr);
 	if (var->mini_map.img_ptr)
 		mlx_destroy_image(var->mlx_ptr, var->mini_map.img_ptr);
 	ft_free_win(var);

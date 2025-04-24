@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 14:04:52 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 10:58:47 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_init_var(t_var *var, char *title)
 	var->plane.y = 0;
 	var->plane.h_wall = 10;
 	ft_init_txtr_var(&var->txtr);
-	var->zoom_mnm = 100;
+	var->zoom_mnm = 30;
 	var->step = 0.2;
 	var->input.key_w = 0;
 	var->input.key_a = 0;
@@ -82,5 +82,6 @@ int	ft_init_var(t_var *var, char *title)
 	var->input.key_d = 0;
 	var->need_redraw = 0;
 	var->mini_map.img_ptr = NULL;
+	var->screen.img_ptr = NULL;
 	return (1);
 }

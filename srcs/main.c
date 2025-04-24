@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 13:46:28 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:19:21 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,49 @@ int	ft_build_screen(t_var *var)
 	return (0);
 }
 
+int	ft_put_image_to_window(t_var *var, t_img *img)
+{
+	mlx_put_image_to_window(var->mlx_ptr, var->win.win_ptr,
+		img->img_ptr, img->off_x, img->off_y);
+	return (0);
+}
+
+int	ft_init_game_screen(t_var *var)
+{
+	ft_init_img(var, &var->screen);
+	var->screen.off_x = 0;
+	var->screen.off_y = 0;
+	// test
+	ft_draw_disc(var, 400, 200, 0x00FF00, &(var->screen));
+	ft_draw_disc(var, 400, 300, 0xFFFF00, &(var->screen));
+	ft_draw_disc(var, 400, 400, 0xFF0000, &(var->screen));
+	ft_draw_disc(var, 300, 400, 0xFF00FF, &(var->screen));
+	ft_draw_disc(var, 200, 400, 0x0000FF, &(var->screen));
+	// test
+	ft_put_image_to_window(var, &(var->screen));
+	return (0);
+}
+
+int	ft_init_mini_map(t_var *var)
+{
+	ft_init_img(var, &(var->mini_map));
+	var->mini_map.off_x = var->win.width - (var->map->size_x + 2) * var->zoom_mnm;
+	var->mini_map.off_y = var->win.height - (var->map->size_y + 2) * var->zoom_mnm;
+	ft_draw_minimap(var);
+	ft_put_image_to_window(var, &(var->mini_map));
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_var	var;
-	int		img_x;
-	int		img_y;
 
 	if (argc != 2)
 		return (ft_err("Error\nOne argument is expected\n"));
 	if (!(ft_init_var(&var, argv[1]) && ft_parse(&var) && ft_init_window(&var)))
 		return (ft_free_all(&var));
-	ft_init_img(&var, &(var.mini_map));
-	ft_draw_minimap(&var);
-	img_x = var.win.width - (var.map->size_x + 2) * var.zoom_mnm;
-	img_y = var.win.height - (var.map->size_y + 2) * var.zoom_mnm;
-	mlx_put_image_to_window(var.mlx_ptr, var.win.win_ptr,
-		var.mini_map.img_ptr, img_x, img_y);
+	ft_init_game_screen(&var);
+	ft_init_mini_map(&var);
 	//ft_print_parsed_data(&var);
 	mlx_hook(var.win.win_ptr, KeyPress, KeyPressMask,
 		ft_handle_keypress, (void *)(&var));

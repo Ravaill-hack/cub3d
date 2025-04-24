@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:34:53 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 14:20:10 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/24 10:28:58 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 int	ft_err(char *str)
 {
+	ssize_t	ret;
+
 	while (*str)
-		write (2, str++, 1);
+		ret = write (2, str++, 1);
+	(void)ret;
 	return (0);
 }
 
 void	*ft_err_null(char *str)
 {
+	ssize_t	ret;
+
 	while (*str)
-		write (2, str++, 1);
+		ret = write (2, str++, 1);
+	(void)ret;
 	return (NULL);
 }
