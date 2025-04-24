@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 13:33:19 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:14:29 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ typedef	struct s_ray
 typedef struct s_colors
 {
 	int				col_int;
+	int				r;
+	int				v;
+	int				b;
 	int				i;
 }	t_colors;
 
@@ -190,6 +193,7 @@ typedef struct s_var
 	int				zoom_mnm;
 	double			step;
 	int				h_horizon;
+	//char			*background_save; pour ne pas avoir a recalculer le fond a chaque fois
 	t_win			win;
 	t_textures		txtr;
 	t_map			*map;
