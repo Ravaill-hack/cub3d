@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 11:45:19 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:23:05 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,31 @@ int	ft_put_image_to_window(t_var *var, t_img *img)
 	return (1);
 }
 
-int	ft_calculate_ray(t_var *var, t_ray *ray)
+int	ft_draw_background(t_var *var, t_img *img)
 {
-	
-}
+	int	x;
+	int	y;
 
-int	ft_calculate_game_screen(t_var *var)
-{
-	t_ray	ray;
-	int		angle_max;
-	int		step;
-
-	angle_max = var->play.angle + var->plane.fov_deg;
-	ray.angle = var->play.angle - var->plane.fov_deg;
-	step = 1;
-	while (ray.angle <= angle_max)
+	y = 0;
+	while (y < var->h_horizon)
 	{
-		if (!ft_calculate_ray(var, &ray) || !ft_draw_ray(var, ray))
-			return (ft_err("Error\nRay calculation failed\n"));
-		ray.angle += step;
+		x = 0;
+		while (x <= var->win.width)
+		{
+			ft_draw_point(var, x, y, var->txtr.ce_col, img);
+			x++;
+		}
+		y++;
+	}
+	while (y <= var->win.height)
+	{
+		x = 0;
+		while (x <= var->win.width)
+		{
+			ft_draw_point(var, x, y, var->txtr.fl_col, img);
+			x++;			
+		}
+		y++;
 	}
 	return (1);
 }
@@ -71,7 +77,10 @@ int	ft_init_game_screen(t_var *var)
 	// ft_draw_disc(var, 300, 400, 0xFF00FF, &(var->screen));
 	// ft_draw_disc(var, 200, 400, 0x0000FF, &(var->screen));
 	// test
-	ft_calculate_game_screen(var);
+	/*
+	ft_calculate_first_game_screen(var);
+	*/
+	ft_draw_background(var, &(var->screen));
 	ft_put_image_to_window(var, &(var->screen));
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 14:08:20 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:33:40 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	ft_check_wall(double x, double y, t_map *map)
 
 int	ft_strict_check_wall(double x, double y, t_map *map, int angle)
 {
-	if (ft_intercept_wall(x, y, map, angle) == 1)
+	if (ft_intercept_wall(x, y, map, angle) == 1
+		|| ft_intercept_unseen_wall(x, y, map, angle) == 1)
 		return (1);
 	return (0);
 }

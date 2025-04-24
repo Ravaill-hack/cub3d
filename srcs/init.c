@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 10:58:47 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:51:20 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	ft_init_var(t_var *var, char *title)
 	mlx_get_screen_size(var->mlx_ptr, &(var->win.width), &(var->win.height));
 	var->win.height *= 0.9;
 	var->win.width *= 0.9;
+	var->h_horizon = 0.4 * var->win.height;
 	var->win.path = ft_special_strdup(title);
 	if (!var->win.path)
 		return (ft_err(ERR_INIT_PATH));
@@ -81,7 +82,7 @@ int	ft_init_var(t_var *var, char *title)
 	var->input.key_s = 0;
 	var->input.key_d = 0;
 	var->need_redraw = 0;
-	var->mini_map.img_ptr = NULL;
 	var->screen.img_ptr = NULL;
+	var->mini_map.img_ptr = NULL;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/24 11:47:24 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:32:15 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_pix	ft_find_end(t_var *var, double or_x, double or_y, int angle)
 // 	return (point);
 // }
 
-void	ft_draw_vector(t_var *var, double or_x, double or_y, int angle)
+t_pix	ft_draw_vector(t_var *var, double or_x, double or_y, int angle)
 {
 	t_pix	play;
 	t_pix	end_v;
@@ -113,21 +113,45 @@ void	ft_draw_vector(t_var *var, double or_x, double or_y, int angle)
 	line.pixel_1 = play;
 	line.pixel_2 = end_v;
 	ft_draw_line_bres(var, line);
+	return (end_v);
 }
+// fonctions suivantes a integrer dans un fichier raycasting
+// int	ft_calculate_ray(t_var *var, t_ray *ray, int angle)
+// {
+// 	t_pix	play;
+
+// 	play.x = var->play.pos_x;
+// 	play.y = var->play.pos_y;
+// 	ray->angle = angle;
+// 	ray->target_dist = ft_distance(play, ray->target_node);
+// 	return (1);
+// }
+
+// int	ft_draw_ray(t_var *var, t_ray ray)
+// {
+	
+// }
+// fonctions precedentes a integrer dans un fichier raycasting
 
 void	ft_draw_cone(t_var *var)
 {
-	int	angle_start;
-	int	angle_end;
+	int		angle_start;
+	int		angle_end;
+	t_ray	ray;
 
 	angle_start = ((int)(var->play.angle + 360) - 40) % 360;
 	angle_end = ((int)(var->play.angle) + 40) % 360;
 	while (angle_start != angle_end)
 	{
-		//inserer ici le calcul + dessin de chaque rayon sur le game screen
-	 	ft_draw_vector(var, cos(ft_deg_to_rad(angle_start)), sin(ft_deg_to_rad(angle_start)), angle_start);
-	 	angle_start = (angle_start + 1) % 360;
+		// Dessin dans la minimap
+	 	ray.target_node = ft_draw_vector(var, cos(ft_deg_to_rad(angle_start)),
+				sin(ft_deg_to_rad(angle_start)), angle_start);
+	 	// Dessin dans le game screen
+		// if (!ft_calculate_ray(var, &ray, angle_start) || !ft_draw_ray(var, ray))
+		// 	return (ft_err("Error\nRay calculation failed\n"));
+		angle_start = (angle_start + 1) % 360;
 	}
+	(void)ray;
 }
 
 int	ft_draw_minimap(t_var *var)

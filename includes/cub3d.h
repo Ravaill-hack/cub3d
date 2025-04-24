@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 11:30:43 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:33:19 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ typedef struct s_var
 	int				status; //a supprimer
 	int				zoom_mnm;
 	double			step;
+	int				h_horizon;
 	t_win			win;
 	t_textures		txtr;
 	t_map			*map;
@@ -308,11 +309,13 @@ char		*ft_special_strdup(char *str);
 Utils (utils2.c)
 */
 int			ft_is_wall(int x, int y, t_map *map);
+int			ft_is_unseen_wall(int x, int y, t_map *map);
 double		ft_deg_to_rad(int angle_deg);
 int			ft_min(int x1, int x2);
 int			ft_max(int x1, int x2);
 double		ft_distance(t_pix p1, t_pix p2);
 int			ft_intercept_wall(int x, int y, t_map *map, int angle);
+int			ft_intercept_unseen_wall(int x, int y, t_map *map, int angle);
 /*
 Debug (debug.c)
 */
