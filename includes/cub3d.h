@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 10:47:07 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:30:43 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,14 @@ typedef struct s_pix
  	int				z;
  	unsigned int	col;
 }	t_pix;
+
+typedef	struct s_ray
+{
+	t_pix			target_node;
+	double			target_dist;
+	int				ray_width;
+	int				angle;
+}	t_ray;
 
 typedef struct s_colors
 {
@@ -153,34 +161,26 @@ typedef struct s_win
 
 typedef struct s_input
 {
-	int	key_w;
-	int	key_a;
-	int	key_s;
-	int	key_d;
+	int				key_w;
+	int				key_a;
+	int				key_s;
+	int				key_d;
 }	t_input;
-
-// typedef struct s_pixel
-// {
-// 	int				x;
-// 	int				y;
-// 	int				z;
-// 	unsigned int	color;
-// }	t_pixel;
 
 typedef struct s_line
 {
-	t_pix	pixel_1;
-	t_pix	pixel_2;
+	t_pix			pixel_1;
+	t_pix			pixel_2;
 }		t_line;
 
 typedef struct s_bresenham
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
+	int				dx;
+	int				dy;
+	int				sx;
+	int				sy;
+	int				err;
+	int				e2;
 }	t_bresenham;
 
 typedef struct s_var

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/23 13:53:44 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:47:24 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	ft_draw_cone(t_var *var)
 	angle_end = ((int)(var->play.angle) + 40) % 360;
 	while (angle_start != angle_end)
 	{
+		//inserer ici le calcul + dessin de chaque rayon sur le game screen
 	 	ft_draw_vector(var, cos(ft_deg_to_rad(angle_start)), sin(ft_deg_to_rad(angle_start)), angle_start);
 	 	angle_start = (angle_start + 1) % 360;
 	}

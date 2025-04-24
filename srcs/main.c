@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 11:19:21 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:45:19 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,44 @@ int	ft_x_camera(t_var *var, int *ray_x, int *ray_y, int x)
 	cam_x = (2 * (double)x / (double)var->win.width - 1.0);
 	*ray_x = var->play.or_x + var->plane.x * cam_x;
 	*ray_y = var->play.or_y + var->plane.y * cam_x;
-	return (0);
+	return (1);
 }
 
 int	ft_set_plane(t_var *var)
 {
 	var->plane.x = -var->play.or_y * var->plane.len;
 	var->plane.y = var->play.or_x * var->plane.len;
-	return (0);
-}
-
-int	ft_build_screen(t_var *var)
-{
-	(void)var;
-	return (0);
+	return (1);
 }
 
 int	ft_put_image_to_window(t_var *var, t_img *img)
 {
 	mlx_put_image_to_window(var->mlx_ptr, var->win.win_ptr,
 		img->img_ptr, img->off_x, img->off_y);
-	return (0);
+	return (1);
+}
+
+int	ft_calculate_ray(t_var *var, t_ray *ray)
+{
+	
+}
+
+int	ft_calculate_game_screen(t_var *var)
+{
+	t_ray	ray;
+	int		angle_max;
+	int		step;
+
+	angle_max = var->play.angle + var->plane.fov_deg;
+	ray.angle = var->play.angle - var->plane.fov_deg;
+	step = 1;
+	while (ray.angle <= angle_max)
+	{
+		if (!ft_calculate_ray(var, &ray) || !ft_draw_ray(var, ray))
+			return (ft_err("Error\nRay calculation failed\n"));
+		ray.angle += step;
+	}
+	return (1);
 }
 
 int	ft_init_game_screen(t_var *var)
@@ -48,14 +65,15 @@ int	ft_init_game_screen(t_var *var)
 	var->screen.off_x = 0;
 	var->screen.off_y = 0;
 	// test
-	ft_draw_disc(var, 400, 200, 0x00FF00, &(var->screen));
-	ft_draw_disc(var, 400, 300, 0xFFFF00, &(var->screen));
-	ft_draw_disc(var, 400, 400, 0xFF0000, &(var->screen));
-	ft_draw_disc(var, 300, 400, 0xFF00FF, &(var->screen));
-	ft_draw_disc(var, 200, 400, 0x0000FF, &(var->screen));
+	// ft_draw_disc(var, 400, 200, 0x00FF00, &(var->screen));
+	// ft_draw_disc(var, 400, 300, 0xFFFF00, &(var->screen));
+	// ft_draw_disc(var, 400, 400, 0xFF0000, &(var->screen));
+	// ft_draw_disc(var, 300, 400, 0xFF00FF, &(var->screen));
+	// ft_draw_disc(var, 200, 400, 0x0000FF, &(var->screen));
 	// test
+	ft_calculate_game_screen(var);
 	ft_put_image_to_window(var, &(var->screen));
-	return (0);
+	return (1);
 }
 
 int	ft_init_mini_map(t_var *var)
@@ -65,7 +83,7 @@ int	ft_init_mini_map(t_var *var)
 	var->mini_map.off_y = var->win.height - (var->map->size_y + 2) * var->zoom_mnm;
 	ft_draw_minimap(var);
 	ft_put_image_to_window(var, &(var->mini_map));
-	return (0);
+	return (1);
 }
 
 int	main(int argc, char **argv)
