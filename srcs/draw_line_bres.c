@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:45:26 by julien            #+#    #+#             */
-/*   Updated: 2025/04/23 14:09:18 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:13:13 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ void	ft_draw_vertical(t_var *var, t_line line, int col, t_img *img)
 	}
 }
 
-void	ft_draw_line_bres(t_var *var, t_line line)
+void	ft_draw_line_bres(t_var *var, t_line line, t_img *img)
 {
 	t_bresenham				bres;
 
 	bres.dx = ft_abs(line.pixel_2.x - line.pixel_1.x);
 	bres.dy = ft_abs(line.pixel_2.y - line.pixel_1.y);
 	if (bres.dx <= 1)
-		ft_draw_vertical(var, line, 0xFFFFFF, &var->mini_map);
+		ft_draw_vertical(var, line, 0xFFFFFF, img);
 	else if (bres.dy <= 1)
-		ft_draw_horizontal(var, line, 0xFFFFFF, &var->mini_map);
+		ft_draw_horizontal(var, line, 0xFFFFFF, img);
 	else
 	{
 		ft_set_bres_sx_sy(&bres, line);
@@ -83,11 +83,11 @@ void	ft_draw_line_bres(t_var *var, t_line line)
 		while (!(line.pixel_1.x == line.pixel_2.x
 				&& line.pixel_1.y == line.pixel_2.y))
 		{
-			ft_draw_point(var, line.pixel_1.x, line.pixel_1.y, 0xFFFFFF, &(var->mini_map));
+			ft_draw_point(var, line.pixel_1.x, line.pixel_1.y, 0xFFFFFF, img);
 			bres.e2 = bres.err * 2;
 			ft_update_bres(&bres, &line.pixel_1);
 		}
-		ft_draw_point(var, line.pixel_1.x, line.pixel_1.y, 0xFFFFFF, &(var->mini_map));
+		ft_draw_point(var, line.pixel_1.x, line.pixel_1.y, 0xFFFFFF, img);
 	}
 }
 

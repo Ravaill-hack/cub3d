@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 14:14:29 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:13:32 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef	struct s_ray
 {
 	t_pix			target_node;
 	double			target_dist;
+	int				target_height;
 	int				ray_width;
 	int				angle;
 }	t_ray;
@@ -192,7 +193,8 @@ typedef struct s_var
 	int				status; //a supprimer
 	int				zoom_mnm;
 	double			step;
-	int				h_horizon;
+	double			ratio_horizon; // compris entre 0 et 1
+	double			dist_to_plane;
 	//char			*background_save; pour ne pas avoir a recalculer le fond a chaque fois
 	t_win			win;
 	t_textures		txtr;
@@ -293,7 +295,7 @@ Actions (actions.c)
 int			ft_close_n_free(void *v);
 int			ft_rotate(t_var *var, int keyc);
 int			ft_check_wall(double x, double y, t_map *map);
-int			ft_strict_check_wall(double x, double y, t_map *map, int angle);
+int			ft_strict_check_wall(double x, double y, t_map *map);
 int			ft_move(t_var *var, int keyc);
 /*
 Free (free.c)
@@ -314,12 +316,12 @@ Utils (utils2.c)
 */
 int			ft_is_wall(int x, int y, t_map *map);
 int			ft_is_unseen_wall(int x, int y, t_map *map);
-double		ft_deg_to_rad(int angle_deg);
+double		ft_deg_to_rad(double angle_deg);
 int			ft_min(int x1, int x2);
 int			ft_max(int x1, int x2);
 double		ft_distance(t_pix p1, t_pix p2);
-int			ft_intercept_wall(int x, int y, t_map *map, int angle);
-int			ft_intercept_unseen_wall(int x, int y, t_map *map, int angle);
+int			ft_intercept_wall(int x, int y, t_map *map);
+int			ft_intercept_unseen_wall(int x, int y, t_map *map);
 /*
 Debug (debug.c)
 */
@@ -331,6 +333,6 @@ void		ft_set_bres_sx_sy(t_bresenham *bres, t_line line);
 void		ft_update_bres(t_bresenham *bres, t_pix *pixel);
 // void		ft_mlx_pixel_put(t_var *var,
 // 				t_pix pixel, unsigned int color);
-void		ft_draw_line_bres(t_var *var, t_line line);
+void		ft_draw_line_bres(t_var *var, t_line line, t_img *img);
 
 #endif

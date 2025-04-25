@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 13:23:05 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:57:49 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_x_camera(t_var *var, int *ray_x, int *ray_y, int x)
-{
-	double	cam_x;
+// int	ft_x_camera(t_var *var, int *ray_x, int *ray_y, int x)
+// {
+// 	double	cam_x;
 
-	cam_x = (2 * (double)x / (double)var->win.width - 1.0);
-	*ray_x = var->play.or_x + var->plane.x * cam_x;
-	*ray_y = var->play.or_y + var->plane.y * cam_x;
-	return (1);
-}
+// 	cam_x = (2 * (double)x / (double)var->win.width - 1.0);
+// 	*ray_x = var->play.or_x + var->plane.x * cam_x;
+// 	*ray_y = var->play.or_y + var->plane.y * cam_x;
+// 	return (1);
+// }
 
-int	ft_set_plane(t_var *var)
-{
-	var->plane.x = -var->play.or_y * var->plane.len;
-	var->plane.y = var->play.or_x * var->plane.len;
-	return (1);
-}
+// int	ft_set_plane(t_var *var)
+// {
+// 	var->plane.x = -var->play.or_y * var->plane.len;
+// 	var->plane.y = var->play.or_x * var->plane.len;
+// 	return (1);
+// }
 
 int	ft_put_image_to_window(t_var *var, t_img *img)
 {
@@ -40,9 +40,11 @@ int	ft_draw_background(t_var *var, t_img *img)
 {
 	int	x;
 	int	y;
+	int	h;
 
 	y = 0;
-	while (y < var->h_horizon)
+	h = (int)round((1.0 - var->ratio_horizon) * var->win.height);
+	while (y < h)
 	{
 		x = 0;
 		while (x <= var->win.width)

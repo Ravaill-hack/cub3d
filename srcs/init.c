@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 12:51:20 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:58:41 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,14 @@ int	ft_init_var(t_var *var, char *title)
 	mlx_get_screen_size(var->mlx_ptr, &(var->win.width), &(var->win.height));
 	var->win.height *= 0.9;
 	var->win.width *= 0.9;
-	var->h_horizon = 0.4 * var->win.height;
+	var->ratio_horizon = 0.4;
 	var->win.path = ft_special_strdup(title);
 	if (!var->win.path)
 		return (ft_err(ERR_INIT_PATH));
 	var->plane.fov_deg = 80;
 	var->plane.fov_rad = var->plane.fov_deg * 2.0 * M_PI / 360.0;
 	var->plane.len = tan(var->plane.fov_rad / 2.0);
+	var->dist_to_plane = (double)(var->win.width / 2) / tan(var->plane.fov_rad / 2);
 	var->plane.x = 0;
 	var->plane.y = 0;
 	var->plane.h_wall = 10;
