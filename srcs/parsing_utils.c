@@ -6,21 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:12:51 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/16 09:47:52 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:18:44 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-char	*ft_go_to_map_first_line(int fd, char *tmp)
-{
-	tmp = get_next_line(fd);
-	while (tmp && ft_first_char(tmp) != '1')
-		tmp = ft_free_line_go_to_next_line(fd, tmp);
-	if (!tmp)
-		return (NULL);
-	return (tmp);
-}
 
 int	ft_map_size_x(t_var *var)
 {
@@ -81,4 +71,37 @@ int	ft_is_valid_map_size(t_var *var)
 		return (0);
 	}
 	return (1);
+}
+
+int	ft_find_angle(char c, t_var *var)
+{
+	if (c == 'E')
+		var->play.angle = 0;
+	else if (c == 'N')
+		var->play.angle = 90;
+	else if (c == 'W')
+		var->play.angle = 180;
+	else if (c == 'S')
+		var->play.angle = 270;
+	return (0);
+}
+
+char	*ft_extract_title(char *path)
+{
+	int		i1;
+	int		i2;
+
+	i1 = 0;
+	i2 = 0;
+	while (path[i1])
+	{
+		if (path[i1] == '/')
+			i2 = i1;
+		i1++;
+	}
+	if (i1 < 4 || strcmp(&path[i1 - 4], ".cub") != 0)
+		return (ft_err_null(ERR_MAP_FILE));
+	if (path[i2 + 1] && path[i2] == '/')
+		return (ft_strdup(&path[i2 + 1]));
+	return (ft_strdup(path));
 }

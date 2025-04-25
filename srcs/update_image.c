@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:31:57 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 11:40:26 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:07:08 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ int	ft_update_image(t_var *var)
 	{
 		mlx_destroy_image(var->mlx_ptr, var->mini_map.img_ptr);
 		mlx_destroy_image(var->mlx_ptr, var->screen.img_ptr);
-		ft_init_img(var, &(var->screen));
-		ft_draw_background(var, &(var->screen));
+		ft_init_background(var);
 		ft_init_img(var, &(var->mini_map));
-		ft_draw_minimap(var);
+		ft_build_image(var);
 		ft_put_image_to_window(var, &(var->screen));
 		ft_put_image_to_window(var, &(var->mini_map));
 	}

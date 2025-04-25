@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 11:44:35 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:24:36 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define KEY_A 		97
 # define KEY_S 		115
 # define KEY_D		100
+# define KEY_RGT	65363
+# define KEY_LFT	65361
 # define KEY_ESC	65307
 
 /*
@@ -149,7 +151,6 @@ typedef struct s_map
 	int				size_x;
 	int				size_y;
 	char			*title;
-	// t_pix		*tab1; a supprimer
 	char			**tab;
 	int				player;
 }	t_map;
@@ -165,10 +166,12 @@ typedef struct s_win
 
 typedef struct s_input
 {
-	int				key_w;
-	int				key_a;
-	int				key_s;
-	int				key_d;
+	int				key_w;  //forward
+	int				key_a;	//step aside left
+	int				key_s;	//backward
+	int				key_d;	//step aside right
+	int				key_lft;//left rotation
+	int				key_rgt;//right rotation
 }	t_input;
 
 typedef struct s_line
@@ -217,7 +220,10 @@ int			ft_init_var(t_var *var, char *title);
 /*
 Img init (init_img.c)
 */
+int			ft_draw_background(t_var *var, t_img *img);
 t_img		*ft_init_img(t_var *var, t_img *img);
+int			ft_init_background(t_var *var);
+int			ft_init_screen(t_var *var);
 /*
 Error (error.c)
 */
@@ -269,12 +275,19 @@ void		ft_init_points(t_pix *p0, t_pix *p1, t_pix *p2, t_pix *p3,
 void		ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col);
 int			ft_draw_background(t_var *var, t_img *img);
 /*
-Gameplay (draw_gameplay.c)
+Minimap (minimap.c)
 */
 int			ft_is_close_to_player(t_var *var, int x, int y);
-void		ft_draw_nodes(t_var *var);
 void		ft_draw_player(t_var *var);
-int			ft_draw_minimap(t_var *var);
+void		ft_draw_nodes(t_var *var);
+/*
+Minimap utils (minimap_utils.c)
+*/
+
+/*
+Gameplay (draw_gameplay.c)
+*/
+int			ft_build_image(t_var *var);
 /*
 Angle and rotation (find_angle_and_rotation.c)
 */
@@ -335,8 +348,9 @@ void		ft_draw_horizontal(t_var *var, t_line line, int col, t_img *img);
 void		ft_draw_vertical(t_var *var, t_line line, int col, t_img *img);
 void		ft_set_bres_sx_sy(t_bresenham *bres, t_line line);
 void		ft_update_bres(t_bresenham *bres, t_pix *pixel);
-// void		ft_mlx_pixel_put(t_var *var,
-// 				t_pix pixel, unsigned int color);
 void		ft_draw_line_bres(t_var *var, t_line line, t_img *img);
+t_pix		ft_draw_vector(t_var *var, double angle);
+t_pix		ft_find_end(t_var *var, double or_x, double or_y);
+void		ft_draw_nodes(t_var *var);
 
 #endif

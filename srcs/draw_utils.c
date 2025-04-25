@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing.c                                          :+:      :+:    :+:   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:45:08 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 10:25:48 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:27:17 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_draw_line_map(t_var *var, t_img *img, t_pix p1, t_pix p2, int col)
 		}
 	}
 	else
-		printf("Error while drawinng minimap\n");
+		printf("Error\nUnable to draw minimap boundaries\n");
 }
 
 void	ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img)

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 10:58:41 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:03:07 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	ft_init_var(t_var *var, char *title)
 	var->input.key_a = 0;
 	var->input.key_s = 0;
 	var->input.key_d = 0;
+	var->input.key_lft = 0;
+	var->input.key_rgt = 0;
 	var->need_redraw = 0;
 	var->screen.img_ptr = NULL;
 	var->mini_map.img_ptr = NULL;

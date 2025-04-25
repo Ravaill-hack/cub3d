@@ -21,27 +21,30 @@ INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR) -I$(MINILIB_DIR)
 LIBRARIES = -L$(LIBFT_DIR) -lft -L$(MINILIB_DIR) -lmlx -lXext -lX11 -lm
 
 SRCS_FILES = \
-	free.c \
-	init.c \
-	init_img.c \
-	main.c \
-	utils.c \
-	utils_2.c \
+	actions.c \
+	algebre_utils.c \
+	debug.c \
+	draw_line_bres.c \
+	draw_utils.c \
+	draw_utils_2.c \
 	error.c \
-	parsing.c \
+	free.c \
+	geometry_utils.c \
+	handle_keys.c \
+	init_img.c \
+	init.c \
+	main.c \
+	map_checker.c \
+	minimap_utils.c \
 	parsing_colors.c \
 	parsing_map.c \
-	parsing_utils.c \
 	parsing_textures.c \
-	map_checker.c \
-	actions.c \
+	parsing_utils.c \
+	parsing.c \
+	raycasting.c \
 	update_image.c \
-	drawing.c \
-	debug.c \
-	find_angle_and_rotation.c \
-	draw_gameplay.c \
-	handle_keys.c \
-	draw_line_bres.c \
+	utils_2.c \
+	utils.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 

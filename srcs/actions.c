@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 10:53:05 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:12:33 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	ft_close_n_free(void *v)
 
 int	ft_rotate(t_var *var, int keyc)
 {
-	if (keyc == KEY_A)
+	if (keyc == KEY_LFT)
 		var->play.angle = (var->play.angle + 355) % 360;
-	else if (keyc == KEY_D)
+	else if (keyc == KEY_RGT)
 		var->play.angle = (var->play.angle + 5) % 360;
 	else
 		return (1);
@@ -34,45 +34,27 @@ int	ft_rotate(t_var *var, int keyc)
 	return (0);
 }
 
-int	ft_check_wall(double x, double y, t_map *map)
-{
-	if (ft_is_wall(x, y, map) == 1
-		|| ft_is_wall(x + 0.25, y, map) == 1
-		|| ft_is_wall(x - 0.25, y, map) == 1
-		|| ft_is_wall(x, y + 0.25, map) == 1
-		|| ft_is_wall(x, y - 0.25, map) == 1
-		|| ft_is_wall(x + 0.25, y + 0.25, map) == 1
-		|| ft_is_wall(x - 0.25, y + 0.25, map) == 1
-		|| ft_is_wall(x + 0.25, y - 0.25, map) == 1
-		|| ft_is_wall(x - 0.25, y - 0.25, map) == 1
-	)
-		return (1);
-	return (0);
-}
-
-int	ft_strict_check_wall(double x, double y, t_map *map)
-{
-	if (ft_intercept_wall(x, y, map) == 1
-		|| ft_intercept_unseen_wall(x, y, map) == 1)
-		return (1);
-	return (0);
-}
-
 int	ft_move(t_var *var, int keyc)
 {
 	double	new_pos_x;
 	double	new_pos_y;
-	double	step;
+	double	step_frwrd;
+	double	step_aside;
 
-	step = 0;
+	step_frwrd = 0;
+	step_aside = 0;
 	if (keyc == KEY_W)
-		step = var->step;
+		step_frwrd = var->step;
 	else if (keyc == KEY_S)
-		step = -var->step;
+		step_frwrd = -var->step;
+	else if (keyc == KEY_A)
+		step_aside = var->step;
+	else if (keyc == KEY_D)
+		step_aside = -var->step;
 	else
 		return (1);
-	new_pos_x = var->play.pos_x + var->play.or_x * step;
-	new_pos_y = var->play.pos_y + var->play.or_y * step;
+	new_pos_x = var->play.pos_x + var->play.or_x * step_frwrd + var->play.or_y * step_aside;
+	new_pos_y = var->play.pos_y + var->play.or_y * step_frwrd - var->play.or_x * step_aside;
 	if (ft_check_wall(new_pos_x, var->play.pos_y, var->map) == 0)
 	{
 		var->play.pos_x = new_pos_x;

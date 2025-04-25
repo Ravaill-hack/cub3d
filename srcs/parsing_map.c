@@ -6,11 +6,21 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 15:46:52 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:18:11 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char	*ft_go_to_map_first_line(int fd, char *tmp)
+{
+	tmp = get_next_line(fd);
+	while (tmp && ft_first_char(tmp) != '1')
+		tmp = ft_free_line_go_to_next_line(fd, tmp);
+	if (!tmp)
+		return (NULL);
+	return (tmp);
+}
 
 void	*ft_process_map_char(t_var *var, char c, int x, int y)
 {
