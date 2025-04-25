@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:11:30 by julien            #+#    #+#             */
-/*   Updated: 2025/04/23 13:03:14 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 09:27:38 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int	ft_handle_keyrelease(int keycode, t_var *var)
 
 int	ft_repeat_key_events(t_var *var)
 {
+	int	deceleration;
+
+	deceleration = 4;
 	if (var->input.key_w)
 		ft_move(var, KEY_W);
 
@@ -59,7 +62,7 @@ int	ft_repeat_key_events(t_var *var)
 	}
 	if (var->need_redraw)
 	{
-		usleep(1000);
+		usleep(deceleration * 10000);
 		// printf("pos x = %f, pos_y = %f, or_x = %f, or_y = %f\n",
 		// 	var->play.pos_x, var->play.pos_y, var->play.or_x, var->play.or_y);
 		// printf("angle = %d\n", var->play.angle);
