@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 10:57:49 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:39:24 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@
 // 	var->plane.y = var->play.or_x * var->plane.len;
 // 	return (1);
 // }
-
-int	ft_put_image_to_window(t_var *var, t_img *img)
-{
-	mlx_put_image_to_window(var->mlx_ptr, var->win.win_ptr,
-		img->img_ptr, img->off_x, img->off_y);
-	return (1);
-}
 
 int	ft_draw_background(t_var *var, t_img *img)
 {

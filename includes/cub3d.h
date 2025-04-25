@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 11:13:32 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:44:35 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,8 +267,9 @@ void		ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img);
 void		ft_init_points(t_pix *p0, t_pix *p1, t_pix *p2, t_pix *p3,
 				t_var *var, int x, int y);
 void		ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col);
+int			ft_draw_background(t_var *var, t_img *img);
 /*
-Mni map (draw_mini_map.c)
+Gameplay (draw_gameplay.c)
 */
 int			ft_is_close_to_player(t_var *var, int x, int y);
 void		ft_draw_nodes(t_var *var);
@@ -282,7 +283,8 @@ int			ft_find_orientation(t_var *var);
 /*
 Update image (update_image.c)
 */
-int			ft_update_image(t_var *var, t_img *img);
+int			ft_update_image(t_var *var);
+int			ft_put_image_to_window(t_var *var, t_img *img);
 /*
 Handle keys (handle_keys.c)
 */
@@ -329,6 +331,8 @@ int			ft_print_parsed_data(t_var *var);
 /*
 Drawing lines (draw_line_bres.c)
 */
+void		ft_draw_horizontal(t_var *var, t_line line, int col, t_img *img);
+void		ft_draw_vertical(t_var *var, t_line line, int col, t_img *img);
 void		ft_set_bres_sx_sy(t_bresenham *bres, t_line line);
 void		ft_update_bres(t_bresenham *bres, t_pix *pixel);
 // void		ft_mlx_pixel_put(t_var *var,

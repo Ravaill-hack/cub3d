@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:11:30 by julien            #+#    #+#             */
-/*   Updated: 2025/04/25 11:17:31 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:39:57 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ int	ft_repeat_key_events(t_var *var)
 		// printf("angle = %d\n", var->play.angle);
 		// printf("or_x = %f\n", var->play.or_x);
 		// printf("or_y = %f\n", var->play.or_y);
-		ft_update_image(var, &(var->mini_map));
-		ft_update_image(var, &(var->screen));
+		ft_update_image(var);
 		var->need_redraw = 0;
 	}
 	return (0);

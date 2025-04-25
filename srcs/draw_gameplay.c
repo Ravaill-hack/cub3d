@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_minimap.c                                     :+:      :+:    :+:   */
+/*   draw_gameplay.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/25 11:15:21 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:49:07 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,13 +133,13 @@ int	ft_draw_ray(t_var *var, t_ray ray, int x)
 	bot.y = top.y + ray.target_height;
 	bot.x = x;
 	column.pixel_1 = top;
-	column.pixel_2 = top;
-	ft_draw_line_bres(var, column, &(var->screen));
+	column.pixel_2 = bot;
+	ft_draw_vertical(var, column, 0xFFFFFF, &(var->screen));
 	return (1);
 }
 // fonctions precedentes a integrer dans un fichier raycasting
 
-int	ft_draw_cone(t_var *var)
+int	ft_draw_screen(t_var *var)
 {
 	double	angle_start;
 	double	angle_end;
@@ -151,13 +151,12 @@ int	ft_draw_cone(t_var *var)
 	angle_end = (double)(((int)(var->play.angle) + (var->plane.fov_deg / 2)) % 360);
 	step_angle = (double)var->plane.fov_deg / (double)var->win.width;
 	i = 0;
-	printf("nb rayons = %d\n", var->win.width);
 	while (i < var->win.width)
 	{
 		// Dessin dans la minimap
 	 	ray.target_node = ft_draw_vector(var, angle_start);
 	 	// Dessin dans le game screen
-		printf("Pour i = %d, ", i);
+		// printf("Pour i = %d, ", i);
 		if (!ft_calculate_ray(var, &ray, angle_start) || !ft_draw_ray(var, ray, i))
 		 	return (ft_err("Error\nRay calculation failed\n"));
 		angle_start = (angle_start + step_angle);
@@ -172,6 +171,6 @@ int	ft_draw_minimap(t_var *var)
 {
 	ft_draw_nodes(var);
 	ft_draw_player(var);
-	ft_draw_cone(var);
+	ft_draw_screen(var);
 	return (0);
 }

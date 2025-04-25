@@ -39,7 +39,7 @@ SRCS_FILES = \
 	drawing.c \
 	debug.c \
 	find_angle_and_rotation.c \
-	draw_minimap.c \
+	draw_gameplay.c \
 	handle_keys.c \
 	draw_line_bres.c \
 
