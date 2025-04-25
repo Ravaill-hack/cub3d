@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/25 15:35:49 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:52:34 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ int	ft_draw_ray(t_var *var, t_ray ray, int x)
 
 	top.y = (1.0 - var->ratio_horizon) * (var->win.height - ray.target_height);
 	top.x = x;
+	top.col = 0xFFFFFF;
 	bot.y = top.y + ray.target_height;
 	bot.x = x;
 	column.pixel_1 = top;
 	column.pixel_2 = bot;
-	ft_draw_vertical(var, column, 0xFFFFFF, &(var->screen));
+	top.col = ft_darker_pix(top.col, ray.target_dist);
+	ft_draw_vertical(var, column, top.col, &(var->screen));
 	return (1);
 }
 

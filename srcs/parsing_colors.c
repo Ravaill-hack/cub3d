@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_colors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:09:02 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/24 14:25:01 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:02:23 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,28 @@ void	*ft_parse_colors(t_var *var, int fd, char *line)
 		i++;
 	}
 	return ((void *)var);
+}
+
+int	ft_darker_pix(int col, int dist)
+{
+	t_colors	color;
+	int			reduc;
+
+	reduc = dist / 4.0;
+	color.r = (col & 0xFF0000) >> 16;
+	color.v = (col & 0x00FF00) >> 8;
+	color.b = (col & 0x0000FF);
+	if (color.r - reduc >= 0)
+		color.r -= reduc;
+	else
+		color.r = 0;
+	if (color.v - reduc >= 0)
+		color.v -= reduc;
+	else
+		color.v = 0;
+	if (color.b - reduc >= 0)
+		color.b -= reduc;
+	else
+		color.b = 0;
+	return ((color.r << 16) | (color.v << 8) | color.b);
 }
