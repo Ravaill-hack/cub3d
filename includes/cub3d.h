@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 14:24:36 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:30:16 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef	struct s_ray
 	double			target_dist;
 	int				target_height;
 	int				ray_width;
-	int				angle;
+	double			angle;
 }	t_ray;
 
 typedef struct s_colors
@@ -349,8 +349,8 @@ void		ft_draw_vertical(t_var *var, t_line line, int col, t_img *img);
 void		ft_set_bres_sx_sy(t_bresenham *bres, t_line line);
 void		ft_update_bres(t_bresenham *bres, t_pix *pixel);
 void		ft_draw_line_bres(t_var *var, t_line line, t_img *img);
-t_pix		ft_draw_vector(t_var *var, double angle);
-t_pix		ft_find_end(t_var *var, double or_x, double or_y);
+t_pix		ft_draw_vector(t_var *var, double angle, t_ray *ray);
+t_pix		ft_find_end(t_var *var, double or_x, double or_y, double *dist);
 void		ft_draw_nodes(t_var *var);
 
 #endif

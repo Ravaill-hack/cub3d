@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 13:03:07 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:34:20 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_init_var(t_var *var, char *title)
 	var->plane.y = 0;
 	var->plane.h_wall = 10;
 	ft_init_txtr_var(&var->txtr);
-	var->zoom_mnm = 30;
+	var->zoom_mnm = 70;
 	var->step = 0.2;
 	var->input.key_w = 0;
 	var->input.key_a = 0;

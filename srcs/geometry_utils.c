@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:25:59 by julien            #+#    #+#             */
-/*   Updated: 2025/04/25 14:22:37 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:56:09 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,42 @@ double	ft_distance(t_pix p1, t_pix p2)
 	return (dist);
 }
 
+double	ft_distance_double(double x1, double y1, double x2, double y2)
+{
+	double	dist;
+	double	delta_x;
+	double	delta_y;
+
+	delta_x = (x2 - x1);
+	delta_y = (y2 - y1);
+	dist = sqrtf(delta_y * delta_y + delta_x * delta_x);
+	return (dist);
+}
+
 double	ft_deg_to_rad(double angle_deg)
 {
 	return (angle_deg * M_PI / 180.0);
 }
 
-t_pix	ft_find_end(t_var *var, double or_x, double or_y)
+t_pix	ft_find_end(t_var *var, double or_x, double or_y, double *dist)
 {
-	t_pix	point;
+	t_pix	end;
 	double	x;
 	double	y;
+	double	x_start;
+	double	y_start;
 
-	x = var->play.pos_x * var->zoom_mnm;
-	y = var->play.pos_y * var->zoom_mnm;
+	x_start = var->play.pos_x * var->zoom_mnm;
+	y_start = var->play.pos_y * var->zoom_mnm;
+	x = x_start;
+	y = y_start;
 	while (!ft_strict_check_wall(x / var->zoom_mnm, y / var->zoom_mnm, var->map))
 	{
 		x += or_x;
 		y += or_y;	
 	}
-	point.x = (int)round(x);
-	point.y = (int)round(y);
-	return (point);
+	(*dist) = ft_distance_double(x_start, y_start, x, y);
+	end.x = (int)round(x);
+	end.y = (int)round(y);
+	return (end);
 }
