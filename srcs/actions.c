@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 14:12:33 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:19:15 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ int	ft_move(t_var *var, int keyc)
 		return (1);
 	new_pos_x = var->play.pos_x + var->play.or_x * step_frwrd + var->play.or_y * step_aside;
 	new_pos_y = var->play.pos_y + var->play.or_y * step_frwrd - var->play.or_x * step_aside;
-	if (ft_check_wall(new_pos_x, var->play.pos_y, var->map) == 0)
+	if (ft_check_wall(new_pos_x * var->zoom_mnm, var->play.pos_y * var->zoom_mnm, var->map, var->zoom_mnm) == 0)
 	{
 		var->play.pos_x = new_pos_x;
 		var->need_redraw = 1;
 	}
-	if (ft_check_wall(var->play.pos_x, new_pos_y, var->map) == 0)
+	if (ft_check_wall(var->play.pos_x * var->zoom_mnm, new_pos_y * var->zoom_mnm, var->map, var->zoom_mnm) == 0)
 	{
 		var->play.pos_y = new_pos_y;
 		var->need_redraw = 1;

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:25:59 by julien            #+#    #+#             */
-/*   Updated: 2025/04/25 14:56:09 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:01:37 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_pix	ft_find_end(t_var *var, double or_x, double or_y, double *dist)
 	y_start = var->play.pos_y * var->zoom_mnm;
 	x = x_start;
 	y = y_start;
-	while (!ft_strict_check_wall(x / var->zoom_mnm, y / var->zoom_mnm, var->map))
+	while (!ft_check_wall(x, y, var->map, var->zoom_mnm))
 	{
 		x += or_x;
 		y += or_y;	
@@ -70,3 +70,26 @@ t_pix	ft_find_end(t_var *var, double or_x, double or_y, double *dist)
 	end.y = (int)round(y);
 	return (end);
 }
+
+// t_pix	ft_find_end(t_var *var, double or_x, double or_y, double *dist)
+// {
+// 	t_pix	end;
+// 	double	x;
+// 	double	y;
+// 	double	x_start;
+// 	double	y_start;
+
+// 	x_start = var->play.pos_x * var->zoom_mnm;
+// 	y_start = var->play.pos_y * var->zoom_mnm;
+// 	x = x_start;
+// 	y = y_start;
+// 	while (!ft_strict_check_wall(x / var->zoom_mnm, y / var->zoom_mnm, var->map))
+// 	{
+// 		x += or_x;
+// 		y += or_y;	
+// 	}
+// 	(*dist) = ft_distance_double(x_start, y_start, x, y);
+// 	end.x = (int)round(x);
+// 	end.y = (int)round(y);
+// 	return (end);
+// }

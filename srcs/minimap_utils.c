@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:42:18 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 14:30:23 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:15:29 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,33 @@ int	ft_is_close_to_player(t_var *var, int x, int y)
 	return (0);
 }
 
-int	ft_check_wall(double x, double y, t_map *map)
+int	ft_is_zoom_wall(double x, double y, t_map *map, int zoom, char c)
 {
-	if (ft_is_wall(x, y, map) == 1
-		|| ft_is_wall(x + 0.25, y, map) == 1
-		|| ft_is_wall(x - 0.25, y, map) == 1
-		|| ft_is_wall(x, y + 0.25, map) == 1
-		|| ft_is_wall(x, y - 0.25, map) == 1
-		|| ft_is_wall(x + 0.25, y + 0.25, map) == 1
-		|| ft_is_wall(x - 0.25, y + 0.25, map) == 1
-		|| ft_is_wall(x + 0.25, y - 0.25, map) == 1
-		|| ft_is_wall(x - 0.25, y - 0.25, map) == 1
-	)
+	int	x_n;
+	int	y_n;
+
+	x_n = floor(x / (double)zoom);
+	y_n = floor(y / (double)zoom);
+	x = (int)x;
+	y = (int)y;
+	if (y < 0 || x < 0 || ((x < map->size_x * zoom) && y < (map->size_y * zoom) && map->tab[y_n][x_n] == c))
 		return (1);
 	return (0);
 }
 
-int	ft_strict_check_wall(double x, double y, t_map *map)
+int	ft_check_wall(double x, double y, t_map *map, int zoom)
 {
-	if (ft_intercept_wall(x, y, map) == 1
-		|| ft_intercept_unseen_wall(x, y, map) == 1)
+	if (ft_is_zoom_wall(x, y, map, zoom, '1') == 1
+			|| ft_is_zoom_wall(x, y, map, zoom, ' ') == 1
+		// || ft_is_zoom_wall(x + 0.25 * zoom, y, map, zoom) == 1
+		// || ft_is_zoom_wall(x - 0.25 * zoom, y, map, zoom) == 1
+		// || ft_is_zoom_wall(x, y + 0.25 * zoom, map, zoom) == 1
+		// || ft_is_zoom_wall(x, y - 0.25 * zoom, map, zoom) == 1
+		// || ft_is_zoom_wall(x + 0.25 * zoom, y + 0.25 * zoom, map, zoom) == 1
+		// || ft_is_zoom_wall(x - 0.25 * zoom, y + 0.25 * zoom, map, zoom) == 1
+		// || ft_is_zoom_wall(x + 0.25 * zoom, y - 0.25 * zoom, map, zoom) == 1
+		// || ft_is_zoom_wall(x - 0.25 * zoom, y - 0.25 * zoom, map, zoom) == 1
+	)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:11:30 by julien            #+#    #+#             */
-/*   Updated: 2025/04/25 12:56:39 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:19:59 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_repeat_key_events(t_var *var)
 	}
 	if (var->need_redraw)
 	{
-		usleep(deceleration * 10000);
+		// usleep(deceleration * 10000);
 		ft_update_image(var);
 		var->need_redraw = 0;
 	}

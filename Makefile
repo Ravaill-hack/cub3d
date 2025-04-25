@@ -27,6 +27,7 @@ SRCS_FILES = \
 	draw_line_bres.c \
 	draw_utils.c \
 	draw_utils_2.c \
+	draw_xpm.c \
 	error.c \
 	free.c \
 	geometry_utils.c \

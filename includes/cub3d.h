@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 15:51:47 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:01:50 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,7 +309,7 @@ Actions (actions.c)
 */
 int			ft_close_n_free(void *v);
 int			ft_rotate(t_var *var, int keyc);
-int			ft_check_wall(double x, double y, t_map *map);
+int			ft_check_wall(double x, double y, t_map *map, int zoom);
 int			ft_strict_check_wall(double x, double y, t_map *map);
 int			ft_move(t_var *var, int keyc);
 /*
