@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:25:59 by julien            #+#    #+#             */
-/*   Updated: 2025/04/28 14:35:25 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:55:47 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,50 +48,6 @@ double	ft_deg_to_rad(double angle_deg)
 	return (angle_deg * M_PI / 180.0);
 }
 
-int	ft_suppress_flaws(t_ray *ray, t_var *var)
-{
-	int	x;
-	int	y;
-
-	x = ray->target_node.x;
-	y = ray->target_node.y;
-	if (ray->wall < 6)
-		return (1);
-	else
-	{
-		printf("on rentre dedans\n");
-		if (ray->wall == 6)
-		{
-			if (ft_is_wall(x, y + 1, var->map) != 0 || ft_is_unseen_wall(x, y + 1, var->map) != 0)
-				ray->wall = 4;
-			else
-				ray->wall = 5;
-		}
-		else if (ray->wall == 7)
-		{
-			if (ft_is_wall(x - 1, y, var->map) != 0 || ft_is_unseen_wall(x - 1, y, var->map) != 0)
-				ray->wall = 5;
-			else
-				ray->wall = 2;
-		}
-		else if (ray->wall == 8)
-		{
-			if (ft_is_wall(x, y - 1, var->map) != 0 || ft_is_unseen_wall(x, y - 1, var->map) != 0)
-				ray->wall = 2;
-			else
-				ray->wall = 3;
-		}
-		else if (ray->wall == 9)
-		{
-			if (ft_is_wall(x + 1, y, var->map) != 0 || ft_is_unseen_wall(x + 1, y, var->map) != 0)
-				ray->wall = 3;
-			else
-				ray->wall = 4;
-		}
-	}
-	return (1);
-}
-
 int	ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray)
 {
 	double	x;
@@ -122,9 +78,6 @@ int	ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray)
 	ray->target_dist = ft_distance_double(x_start, y_start, x, y);
 	ray->target_node.x = (int)round(x);
 	ray->target_node.y = (int)round(y);
-	x += (or_x / 10.0);
-	y += (or_y / 10.0);	
-	//ft_suppress_flaws(ray, var);
 	return (1);
 }
 

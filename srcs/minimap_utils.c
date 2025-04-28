@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:42:18 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 14:23:29 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:52:14 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,52 +46,22 @@ int	ft_is_zoom_wall(double x, double y, t_map *map, int zoom, char c)
 	delta_x = round_x - (double)x_n - 0.5;
 	delta_y = round_y - (double)y_n - 0.5;
 	// printf("delta x = %f, delta y = %f\n", delta_x, delta_y);
-	if (round_y < 0 || round_x < 0 || (round_x < map->size_x * zoom && round_y < map->size_y * zoom && map->tab[y_n][x_n] == c))
+	if (!(round_y >= 0 && round_x >= 0 && round_x < map->size_x * zoom && round_y < map->size_y * zoom))
+	 	return (0);
+	if (map->tab[y_n][x_n] == c)
 	{
 		if (c == ' ')
 			return (1);
 		else if (c == '1')
 		{
-			if (delta_x >= 0 && delta_x > fabs(delta_y))
-			{
-				// printf("East\n");
+			if (delta_x >= 0 && delta_x >= fabs(delta_y))
 				return (4);
-			}
-			else if (delta_x <= 0 && -delta_x > fabs(delta_y))
-			{
-				// printf("West\n");
+			else if (delta_x <= 0 && -delta_x >= fabs(delta_y))
 				return (2);
-			}
-			else if (delta_y >= 0 && delta_y > fabs(delta_x))
-			{
-				// printf("North\n");
+			else if (delta_y >= 0 && delta_y >= fabs(delta_x))
 				return (3);
-			}
-			else if (delta_y <= 0 && -delta_y > fabs(delta_x))
-			{
-				// printf("South\n");
+			else if (delta_y <= 0 && -delta_y >= fabs(delta_x))
 				return (5);
-			}
-			else if (delta_x >= 0 && delta_y >= 0)
-			{
-				// printf("Rgt bot\n");
-				return (6);
-			}
-			else if (delta_x <= 0 && delta_y >= 0)
-			{
-				// printf("Lft bot\n");
-				return (7);
-			}
-			else if (delta_x <= 0 && delta_y <= 0)
-			{
-				// printf("Lft up\n");
-				return (8);
-			}
-			else if (delta_x >= 0 && delta_y <= 0)
-			{
-				// printf("Rgt up\n");
-				return (9);
-			}
 			else
 				return (1);
 		}
