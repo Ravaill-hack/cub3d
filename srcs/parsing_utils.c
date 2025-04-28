@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:12:51 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 14:18:44 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:22:21 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// h
 
 #include "cub3d.h"
 

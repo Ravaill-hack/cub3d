@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 17:01:50 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:27:15 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,11 +232,12 @@ void		*ft_err_null(char *str);
 /*
 Parsing (parsing.c)
 */
-char		*ft_extract_title(char *path);
+void		ft_go_to_end_fd(int fd);
 void		*ft_parse(t_var *var);
 /*
 Map parsing (parsing_map.c)
 */
+char		*ft_go_to_map_first_line(int fd, char *tmp);
 void		*ft_process_map_char(t_var *var, char c, int x, int y);
 void		*ft_append_map_line(t_var *var, char *ln, int y);
 void		*ft_allocate_map_tab(t_var *va);
@@ -246,6 +247,7 @@ Color parsing (parsing_colors.c)
 */
 int			ft_convert_color(char *str);
 void		*ft_parse_colors(t_var *var, int fd, char *line);
+int			ft_darker_pix(int col, int dist);
 /*
 Parsing textures (parsing_textures.c)
 */
@@ -256,16 +258,24 @@ void		*ft_parse_textures(t_var *var, int fd, char *line, int i);
 /*
 Parsing utils (parsing_utils.c)
 */
-char		*ft_go_to_map_first_line(int fd, char *tmp);
 int			ft_map_size_x(t_var *var);
 int			ft_map_size_y(t_var *var);
 int			ft_is_valid_map_size(t_var *var);
+int			ft_find_angle(char c, t_var *var);
+char		*ft_extract_title(char *path);
 /*
 Map checker (map_checker.c)
 */
+int			ft_nb_char(char **tab, char c);
+int			ft_check_if_exists(t_map *map, char **tab, int x, int y);
 int			ft_is_valid_map(t_map *map, t_var *var);
 /*
-Drawing (drawing.c)
+Drawing (draw_xpm.c)
+*/
+
+
+/*
+Drawing (draw_utils.c)
 */
 void		ft_draw_point(t_var *var, int x, int y, int col, t_img *img);
 void		ft_draw_line_map(t_var *var, t_img *img, t_pix p1, t_pix p2, int col);
@@ -273,6 +283,31 @@ void		ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img);
 void		ft_init_points(t_pix *p0, t_pix *p1, t_pix *p2, t_pix *p3,
 				t_var *var, int x, int y);
 void		ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col);
+/*
+Drawing (draw_utils_2.c)
+*/
+void		ft_draw_nodes(t_var *var);
+/*
+Drawing lines (draw_line_bres.c)
+*/
+void		ft_set_bres_sx_sy(t_bresenham *bres, t_line line);
+void		ft_update_bres(t_bresenham *bres, t_pix *pixel);
+void		ft_draw_horizontal(t_var *var, t_line line, int col, t_img *img);
+void		ft_draw_vertical(t_var *var, t_line line, int col, t_img *img);
+void		ft_draw_line_bres(t_var *var, t_line line, t_img *img);
+
+
+t_pix		ft_draw_vector(t_var *var, double angle, t_ray *ray);
+t_pix		ft_find_end(t_var *var, double or_x, double or_y, double *dist);
+
+
+
+
+
+/*
+Drawing (drawing.c)
+*/
+
 int			ft_draw_background(t_var *var, t_img *img);
 /*
 Minimap (minimap.c)
@@ -341,17 +376,6 @@ int			ft_intercept_unseen_wall(int x, int y, t_map *map);
 Debug (debug.c)
 */
 int			ft_print_parsed_data(t_var *var);
-/*
-Drawing lines (draw_line_bres.c)
-*/
-void		ft_draw_horizontal(t_var *var, t_line line, int col, t_img *img);
-void		ft_draw_vertical(t_var *var, t_line line, int col, t_img *img);
-void		ft_set_bres_sx_sy(t_bresenham *bres, t_line line);
-void		ft_update_bres(t_bresenham *bres, t_pix *pixel);
-void		ft_draw_line_bres(t_var *var, t_line line, t_img *img);
-t_pix		ft_draw_vector(t_var *var, double angle, t_ray *ray);
-t_pix		ft_find_end(t_var *var, double or_x, double or_y, double *dist);
-void		ft_draw_nodes(t_var *var);
-int			ft_darker_pix(int col, int dist);
+
 
 #endif

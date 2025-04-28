@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 14:34:20 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:18:12 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// h
 
 #include "cub3d.h"
 

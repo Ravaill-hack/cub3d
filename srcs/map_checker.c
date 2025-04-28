@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:04:57 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/23 15:42:18 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:23:06 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// h
 
 #include "cub3d.h"
 

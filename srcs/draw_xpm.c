@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_xpm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:22:29 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 16:34:51 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:24:57 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// h
 
 #include "cub3d.h"
 

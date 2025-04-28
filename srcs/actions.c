@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 17:19:15 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:17:31 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@ int	ft_rotate(t_var *var, int keyc)
 	return (0);
 }
 
+void	ft_check_wall_collision(t_var *var, double new_pos_x, double new_pos_y)
+{
+	if (ft_check_wall(new_pos_x * var->zoom_mnm,
+			var->play.pos_y * var->zoom_mnm, var->map, var->zoom_mnm) == 0)
+	{
+		var->play.pos_x = new_pos_x;
+		var->need_redraw = 1;
+	}
+	if (ft_check_wall(var->play.pos_x * var->zoom_mnm,
+			new_pos_y * var->zoom_mnm, var->map, var->zoom_mnm) == 0)
+	{
+		var->play.pos_y = new_pos_y;
+		var->need_redraw = 1;
+	}
+}
+
 int	ft_move(t_var *var, int keyc)
 {
 	double	new_pos_x;
@@ -53,17 +69,10 @@ int	ft_move(t_var *var, int keyc)
 		step_aside = -var->step;
 	else
 		return (1);
-	new_pos_x = var->play.pos_x + var->play.or_x * step_frwrd + var->play.or_y * step_aside;
-	new_pos_y = var->play.pos_y + var->play.or_y * step_frwrd - var->play.or_x * step_aside;
-	if (ft_check_wall(new_pos_x * var->zoom_mnm, var->play.pos_y * var->zoom_mnm, var->map, var->zoom_mnm) == 0)
-	{
-		var->play.pos_x = new_pos_x;
-		var->need_redraw = 1;
-	}
-	if (ft_check_wall(var->play.pos_x * var->zoom_mnm, new_pos_y * var->zoom_mnm, var->map, var->zoom_mnm) == 0)
-	{
-		var->play.pos_y = new_pos_y;
-		var->need_redraw = 1;
-	}
+	new_pos_x = var->play.pos_x + var->play.or_x * step_frwrd
+		+ var->play.or_y * step_aside;
+	new_pos_y = var->play.pos_y + var->play.or_y * step_frwrd
+		- var->play.or_x * step_aside;
+	ft_check_wall_collision(var, new_pos_x, new_pos_y);
 	return (0);
 }

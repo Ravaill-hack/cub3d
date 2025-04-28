@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:22:56 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 14:45:35 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:25:59 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// h
 
 #include "cub3d.h"
 
