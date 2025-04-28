@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:11:30 by julien            #+#    #+#             */
-/*   Updated: 2025/04/25 17:19:59 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:33:29 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,24 @@ int	ft_handle_keyrelease(int keycode, t_var *var)
 	return (0);
 }
 
+void	ft_handle_key_move(t_var *var, t_input input)
+{
+	if (input.key_w)
+		ft_move(var, KEY_W);
+	else if (input.key_s)
+		ft_move(var, KEY_S);
+	else if (input.key_a)
+		ft_move(var, KEY_A);
+	else if (input.key_d)
+		ft_move(var, KEY_D);
+}
+
 int	ft_repeat_key_events(t_var *var)
 {
 	int	deceleration;
 
 	deceleration = 1;
-	if (var->input.key_w)
-		ft_move(var, KEY_W);
-	else if (var->input.key_s)
-		ft_move(var, KEY_S);
-	else if (var->input.key_a)
-		ft_move(var, KEY_A);
-	else if (var->input.key_d)
-		ft_move(var, KEY_D);
+	ft_handle_key_move(var, var->input);
 	if (var->input.key_lft)
 	{
 		ft_rotate(var, KEY_LFT);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:42:18 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 15:52:14 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:30:31 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ int	ft_is_zoom_wall(double x, double y, t_map *map, int zoom, char c)
 	delta_x = round_x - (double)x_n - 0.5;
 	delta_y = round_y - (double)y_n - 0.5;
 	// printf("delta x = %f, delta y = %f\n", delta_x, delta_y);
-	if (!(round_y >= 0 && round_x >= 0 && round_x < map->size_x * zoom && round_y < map->size_y * zoom))
-	 	return (0);
+	if (!(round_y >= 0 && round_x >= 0
+			&& round_x < map->size_x * zoom && round_y < map->size_y * zoom))
+		return (0);
 	if (map->tab[y_n][x_n] == c)
 	{
 		if (c == ' ')
@@ -56,11 +57,11 @@ int	ft_is_zoom_wall(double x, double y, t_map *map, int zoom, char c)
 		{
 			if (delta_x >= 0 && delta_x >= fabs(delta_y))
 				return (4);
-			else if (delta_x <= 0 && -delta_x >= fabs(delta_y))
+			else if (delta_x <= 0 && (-delta_x) >= fabs(delta_y))
 				return (2);
 			else if (delta_y >= 0 && delta_y >= fabs(delta_x))
 				return (3);
-			else if (delta_y <= 0 && -delta_y >= fabs(delta_x))
+			else if (delta_y <= 0 && (-delta_y) >= fabs(delta_x))
 				return (5);
 			else
 				return (1);

@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_xpm.c                                         :+:      :+:    :+:   */
+/*   build_image.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 16:22:29 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 21:25:45 by julien           ###   ########.fr       */
+/*   Created: 2025/04/28 21:41:58 by julien            #+#    #+#             */
+/*   Updated: 2025/04/28 21:42:07 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// int	ft_draw_xpm_column(t_var *var, t_img *img, t_ray *ray, int i)
-// {
-
-// 	return (1);
-// }
+int	ft_build_image(t_var *var)
+{
+	ft_draw_nodes(var);
+	ft_draw_player(var);
+	ft_draw_screen(var);
+	return (0);
+}

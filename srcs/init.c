@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 09:18:12 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:19:53 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// h
 
 #include "cub3d.h"
 
@@ -57,6 +55,16 @@ void	ft_init_txtr_var(t_textures *txtr)
 	txtr->ce_col = 0;
 }
 
+void	ft_init_inputs(t_input *input)
+{
+	input->key_w = 0;
+	input->key_a = 0;
+	input->key_s = 0;
+	input->key_d = 0;
+	input->key_lft = 0;
+	input->key_rgt = 0;
+}
+
 int	ft_init_var(t_var *var, char *title)
 {
 	var->mlx_ptr = mlx_init();
@@ -70,22 +78,13 @@ int	ft_init_var(t_var *var, char *title)
 	var->win.path = ft_special_strdup(title);
 	if (!var->win.path)
 		return (ft_err(ERR_INIT_PATH));
-	var->plane.fov_deg = 80;
-	var->plane.fov_rad = var->plane.fov_deg * 2.0 * M_PI / 360.0;
-	var->plane.len = tan(var->plane.fov_rad / 2.0);
-	var->dist_to_plane = (double)(var->win.width / 2) / tan(var->plane.fov_rad / 2);
-	var->plane.x = 0;
-	var->plane.y = 0;
-	var->plane.h_wall = 10;
+	ft_init_plane();
+	var->dist_to_plane = (double)(var->win.width / 2)
+		/ tan(var->plane.fov_rad / 2);
 	ft_init_txtr_var(&var->txtr);
+	ft_init_inputs(&var->input);
 	var->zoom_mnm = 70;
 	var->step = 0.2;
-	var->input.key_w = 0;
-	var->input.key_a = 0;
-	var->input.key_s = 0;
-	var->input.key_d = 0;
-	var->input.key_lft = 0;
-	var->input.key_rgt = 0;
 	var->need_redraw = 0;
 	var->screen.img_ptr = NULL;
 	var->mini_map.img_ptr = NULL;

@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:04:57 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 09:23:06 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:46:05 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// h
 
 #include "cub3d.h"
 
@@ -42,14 +40,14 @@ int	ft_check_if_exists(t_map *map, char **tab, int x, int y)
 	if (x < 0 || y < 0 || x >= map->size_x || y >= map->size_y || !tab[x][y]
 		|| (tab[x][y] != '0' && tab[x][y] != '1'))
 		return (0);
-	return(1);
+	return (1);
 }
 
 int	ft_is_valid_map(t_map *map, t_var *var)
 {
-	char **tab;
-	int	i;
-	int j;
+	char	**tab;
+	int		i;
+	int		j;
 
 	i = 0;
 	(void)var;
@@ -65,7 +63,7 @@ int	ft_is_valid_map(t_map *map, t_var *var)
 					|| !ft_check_if_exists(map, tab, i + 1, j)
 					|| !ft_check_if_exists(map, tab, i - 1, j)
 					|| !ft_check_if_exists(map, tab, i, j - 1))
-					return (ft_putstr_fd("Error\nA wall is open on the boundaries\n", 2), 0);
+					return (ft_err_null(ERR_MAP_OPEN));
 			}
 			j++;
 		}

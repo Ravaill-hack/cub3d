@@ -23,15 +23,17 @@ LIBRARIES = -L$(LIBFT_DIR) -lft -L$(MINILIB_DIR) -lmlx -lXext -lX11 -lm
 SRCS_FILES = \
 	actions.c \
 	algebre_utils.c \
+	build_image.c \
 	debug.c \
 	draw_line_bres.c \
-	draw_utils.c \
 	draw_utils_2.c \
+	draw_utils.c \
 	draw_xpm.c \
 	error.c \
 	free.c \
 	geometry_utils.c \
 	handle_keys.c \
+	init_2.c \
 	init_img.c \
 	init.c \
 	main.c \

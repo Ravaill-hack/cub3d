@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/28 16:47:08 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:49:36 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ int	ft_calculate_ray(t_var *var, t_ray *ray, double angle)
 
 	h_wall = 64.0;
 	ray->angle = fmod(angle - (double)var->play.angle, 360.0);
-	dist_correction = cos(ft_deg_to_rad(ray->angle)); 
+	dist_correction = cos(ft_deg_to_rad(ray->angle));
 	ray->target_height = (int)round(((h_wall / ray->target_dist)
-			* var->dist_to_plane) / dist_correction);
+				* var->dist_to_plane) / dist_correction);
 	return (1);
 }
-
 
 int	ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line)
 {
@@ -40,7 +39,8 @@ int	ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line)
 	{
 		printf("on est a l'Est\n");
 		txt = &(var->txtr.ea_img);
-		x_txt = ((var->map->size_y - ray->target_node.y) * var->zoom_mnm) % txt->width;
+		x_txt = ((var->map->size_y - ray->target_node.y)
+				* var->zoom_mnm) % txt->width;
 	}
 	else if (ray->wall == 2) // West
 	{
@@ -53,7 +53,8 @@ int	ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line)
 	{
 		printf("on est au Sud\n");
 		txt = &(var->txtr.so_img);
-		x_txt = ((var->map->size_x - ray->target_node.x) * var->zoom_mnm) % txt->width;
+		x_txt = ((var->map->size_x - ray->target_node.x)
+				* var->zoom_mnm) % txt->width;
 	}
 	else if (ray->wall == 3) // North
 	{
@@ -69,8 +70,10 @@ int	ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line)
 	while (y_txt <= txt->height)
 	{
 		printf("y_txt = %d, x_txt = %d\n", y_txt, x_txt);
-		printf("data addr = %p, txt_line_len = %d, txt_bpp %d\n", txt->data_addr, txt->line_len, txt->bit_per_pix);
-		col = *((int *)(txt->data_addr + y_txt * txt->line_len + (x_txt * txt->bit_per_pix / 8)));
+		printf("data addr = %p, txt_line_len = %d, txt_bpp %d\n",
+			txt->data_addr, txt->line_len, txt->bit_per_pix);
+		col = *((int *)(txt->data_addr + y_txt * txt->line_len
+					+ (x_txt * txt->bit_per_pix / 8)));
 		ft_draw_point(var, line.pixel_1.x, i_y, col, img);
 		i_y++;
 		y_txt = i_y * v_step;
@@ -130,8 +133,9 @@ int	ft_draw_screen(t_var *var)
 	double	step_angle;
 	int		i;
 	t_ray	ray;
-	
-	angle_start = (double)(fmod(var->play.angle - (var->plane.fov_deg / 2), 360.0));
+
+	angle_start = (double)(fmod(var->play.angle
+				- (var->plane.fov_deg / 2), 360.0));
 	step_angle = (double)var->plane.fov_deg / (double)var->win.width;
 	i = 0;
 	while (i < var->win.width)
@@ -139,17 +143,9 @@ int	ft_draw_screen(t_var *var)
 		if (!ft_draw_vector(var, angle_start, &ray)
 			|| !ft_calculate_ray(var, &ray, angle_start)
 			|| !ft_draw_ray(var, ray, i))
-		 	return (ft_err("Error\nRay calculation failed\n"));
+			return (ft_err("Error\nRay calculation failed\n"));
 		angle_start = fmod(angle_start + step_angle, 360.0);
 		i++;
 	}
-	return(1);
-}
-
-int	ft_build_image(t_var *var)
-{
-	ft_draw_nodes(var);
-	ft_draw_player(var);
-	ft_draw_screen(var);
-	return (0);
+	return (1);
 }

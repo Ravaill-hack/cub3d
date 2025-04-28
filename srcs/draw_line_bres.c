@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_bres.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:45:26 by julien            #+#    #+#             */
-/*   Updated: 2025/04/28 09:27:30 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:26:45 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_draw_horizontal(t_var *var, t_line line, int col, t_img *img)
 
 	x_min = ft_min(line.pixel_1.x, line.pixel_2.x);
 	x_max = ft_max(line.pixel_1.x, line.pixel_2.x);
-	while(x_min <= x_max)
+	while (x_min <= x_max)
 	{
 		ft_draw_point(var, x_min, line.pixel_1.y, col, img);
 		x_min++;
@@ -59,7 +59,7 @@ void	ft_draw_vertical(t_var *var, t_line line, int col, t_img *img)
 
 	y_min = ft_min(line.pixel_1.y, line.pixel_2.y);
 	y_max = ft_max(line.pixel_1.y, line.pixel_2.y);
-	while(y_min <= y_max)
+	while (y_min <= y_max)
 	{
 		ft_draw_point(var, line.pixel_1.x, y_min, col, img);
 		y_min++;

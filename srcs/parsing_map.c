@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 09:19:54 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:23:23 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// h
 
 #include "cub3d.h"
 
@@ -41,7 +39,7 @@ void	*ft_process_map_char(t_var *var, char c, int x, int y)
 			var->play.pos_x = x;
 			var->play.pos_y = y;
 			var->map->tab[y][x] = '0';
-			return((void *)var);
+			return ((void *)var);
 		}
 		var->map->tab[y][x] = c;
 	}

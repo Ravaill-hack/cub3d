@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:25:59 by julien            #+#    #+#             */
-/*   Updated: 2025/04/28 15:55:47 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:49:58 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray)
 	{
 		tmp = ray->wall;
 		x -= (or_x / 20.0);
-		y -= (or_y / 20.0);	
+		y -= (or_y / 20.0);
 		ray->wall = ft_check_wall(x, y, var->map, var->zoom_mnm);
 	}
 	ray->wall = tmp;
@@ -93,7 +93,8 @@ int	ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray)
 // 	y_start = var->play.pos_y * var->zoom_mnm;
 // 	x = x_start;
 // 	y = y_start;
-// 	while (!ft_strict_check_wall(x / var->zoom_mnm, y / var->zoom_mnm, var->map))
+// 	while (!ft_strict_check_wall(x / var->zoom_mnm,
+//	y / var->zoom_mnm, var->map))
 // 	{
 // 		x += or_x;
 // 		y += or_y;	

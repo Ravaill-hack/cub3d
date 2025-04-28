@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 13:36:14 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:47:20 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ Texture errors
 # define ERR_TEXTR_WE_MISSING "Error\nWest texture is missing\n"
 # define ERR_TEXTR_EA_MISSING "Error\nEast texture is missing\n"
 # define ERR_TEXTR_SYNTAX "Error\nInvalid texture syntax\n"
-
 /*
 Color errors
 */
@@ -73,16 +72,17 @@ Map errors
 # define ERR_MAP_SIZE "Error\nInvalid map size\n"
 # define ERR_MAP_PLAYERS "Error\nThere must be only one player\n"
 # define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
+# define ERR_MAP_OPEN "Error\nA wall is open on the boundaries\n"
 
 typedef struct s_pix
 {
- 	int				x;
- 	int				y;
- 	int				z;
- 	unsigned int	col;
+	int				x;
+	int				y;
+	int				z;
+	unsigned int	col;
 }	t_pix;
 
-typedef	struct s_ray
+typedef struct s_ray
 {
 	t_pix			target_node;
 	int				wall;
@@ -167,7 +167,7 @@ typedef struct s_win
 
 typedef struct s_input
 {
-	int				key_w;  //forward
+	int				key_w;	//forward
 	int				key_a;	//step aside left
 	int				key_s;	//backward
 	int				key_d;	//step aside right
@@ -199,7 +199,8 @@ typedef struct s_var
 	double			step;
 	double			ratio_horizon; // compris entre 0 et 1
 	double			dist_to_plane;
-	//char			*background_save; pour ne pas avoir a recalculer le fond a chaque fois
+	//char			*background_save;
+	// pour ne pas avoir a recalculer le fond a chaque fois
 	t_win			win;
 	t_textures		txtr;
 	t_map			*map;
@@ -217,7 +218,12 @@ Initialization (init.c)
 t_textures	*ft_init_txtr(t_var *var);
 int			ft_init_window(t_var *var);
 void		ft_init_txtr_var(t_textures *txtr);
+void		ft_init_inputs(t_input *input);
 int			ft_init_var(t_var *var, char *title);
+/*
+Initialization (init_2.c)
+*/
+void		ft_init_plane(t_plane *plane);
 /*
 Img init (init_img.c)
 */
@@ -279,7 +285,8 @@ Drawing (draw_xpm.c)
 Drawing (draw_utils.c)
 */
 void		ft_draw_point(t_var *var, int x, int y, int col, t_img *img);
-void		ft_draw_line_map(t_var *var, t_img *img, t_pix p1, t_pix p2, int col);
+void		ft_draw_line_map(t_var *var, t_img *img,
+				t_pix p1, t_pix p2, int col);
 void		ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img);
 void		ft_init_points(t_pix *p0, t_pix *p1, t_pix *p2, t_pix *p3,
 				t_var *var, int x, int y);
@@ -296,22 +303,8 @@ void		ft_update_bres(t_bresenham *bres, t_pix *pixel);
 void		ft_draw_horizontal(t_var *var, t_line line, int col, t_img *img);
 void		ft_draw_vertical(t_var *var, t_line line, int col, t_img *img);
 void		ft_draw_line_bres(t_var *var, t_line line, t_img *img);
-
-
-int			ft_draw_vector(t_var *var, double angle, t_ray *ray);
-int			ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray);
-
-
-
-
-
 /*
-Drawing (drawing.c)
-*/
-
-int			ft_draw_background(t_var *var, t_img *img);
-/*
-Minimap (minimap.c)
+Minimap (minimap_utils.c)
 */
 int			ft_is_close_to_player(t_var *var, int x, int y);
 void		ft_draw_player(t_var *var);
@@ -319,34 +312,30 @@ void		ft_draw_nodes(t_var *var);
 /*
 Minimap utils (minimap_utils.c)
 */
-
-/*
-Gameplay (draw_gameplay.c)
-*/
-int			ft_build_image(t_var *var);
-/*
-Angle and rotation (find_angle_and_rotation.c)
-*/
-int			ft_find_angle(char c, t_var *var);
-int			ft_find_orientation(t_var *var);
+int			ft_is_close_to_player(t_var *var, int x, int y);
+int			ft_is_zoom_wall(double x, double y, t_map *map,
+				int zoom, char c);
+int			ft_check_wall(double x, double y, t_map *map, int zoom);
+void		ft_draw_player(t_var *var);
 /*
 Update image (update_image.c)
 */
-int			ft_update_image(t_var *var);
 int			ft_put_image_to_window(t_var *var, t_img *img);
+int			ft_update_image(t_var *var);
 /*
 Handle keys (handle_keys.c)
 */
 int			ft_handle_keypress(int keycode, t_var *var);
 int			ft_handle_keyrelease(int keycode, t_var *var);
+void		ft_handle_key_move(t_var *var, t_input input);
 int			ft_repeat_key_events(t_var *var);
 /*
 Actions (actions.c)
 */
 int			ft_close_n_free(void *v);
 int			ft_rotate(t_var *var, int keyc);
-int			ft_check_wall(double x, double y, t_map *map, int zoom);
-int			ft_strict_check_wall(double x, double y, t_map *map);
+void		ft_check_wall_collision(t_var *var,
+				double new_pos_x, double new_pos_y);
 int			ft_move(t_var *var, int keyc);
 /*
 Free (free.c)
@@ -365,18 +354,39 @@ char		*ft_special_strdup(char *str);
 /*
 Utils (utils2.c)
 */
-int			ft_is_wall(int x, int y, t_map *map);
-int			ft_is_unseen_wall(int x, int y, t_map *map);
-double		ft_deg_to_rad(double angle_deg);
-int			ft_min(int x1, int x2);
-int			ft_max(int x1, int x2);
-double		ft_distance(t_pix p1, t_pix p2);
 int			ft_intercept_wall(int x, int y, t_map *map);
 int			ft_intercept_unseen_wall(int x, int y, t_map *map);
+int			ft_is_wall(int x, int y, t_map *map);
+int			ft_is_unseen_wall(int x, int y, t_map *map);
+int			ft_strict_check_wall(double x, double y, t_map *map);
+/*
+Algebre utils (algebre_utils.c)
+*/
+int			ft_min(int x1, int x2);
+int			ft_max(int x1, int x2);
+/*
+Geometry utils (geometry_utils.c)
+*/
+int			ft_find_orientation(t_var *var);
+double		ft_distance(t_pix p1, t_pix p2);
+double		ft_distance_double(double x1, double y1, double x2, double y2);
+double		ft_deg_to_rad(double angle_deg);
+int			ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray);
+/*
+Raycasting (raycasting.c)
+*/
+int			ft_calculate_ray(t_var *var, t_ray *ray, double angle);
+int			ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line);
+int			ft_draw_ray(t_var *var, t_ray ray, int x);
+int			ft_draw_vector(t_var *var, double angle, t_ray *ray);
+int			ft_draw_screen(t_var *var);
+/*
+Build image (build_image.c)
+*/
+int			ft_build_image(t_var *var);
 /*
 Debug (debug.c)
 */
 int			ft_print_parsed_data(t_var *var);
-
 
 #endif

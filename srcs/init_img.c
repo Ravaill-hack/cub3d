@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:44:20 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 09:18:31 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:22:25 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// h
 
 #include "cub3d.h"
 
@@ -63,8 +61,10 @@ int	ft_init_screen(t_var *var)
 {
 	ft_init_background(var);
 	ft_init_img(var, &(var->mini_map));
-	var->mini_map.off_x = var->win.width - (var->map->size_x + 2) * var->zoom_mnm;
-	var->mini_map.off_y = var->win.height - (var->map->size_y + 2) * var->zoom_mnm;
+	var->mini_map.off_x = var->win.width - (var->map->size_x + 2)
+		* var->zoom_mnm;
+	var->mini_map.off_y = var->win.height - (var->map->size_y + 2)
+		* var->zoom_mnm;
 	ft_build_image(var);
 	ft_put_image_to_window(var, &(var->screen));
 	ft_put_image_to_window(var, &(var->mini_map));
