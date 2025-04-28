@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:25:59 by julien            #+#    #+#             */
-/*   Updated: 2025/04/25 17:01:37 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:24:02 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ double	ft_distance_double(double x1, double y1, double x2, double y2)
 
 	delta_x = (x2 - x1);
 	delta_y = (y2 - y1);
-	dist = sqrtf(delta_y * delta_y + delta_x * delta_x);
+	dist = sqrt(delta_y * delta_y + delta_x * delta_x);
 	return (dist);
 }
 
@@ -64,6 +64,11 @@ t_pix	ft_find_end(t_var *var, double or_x, double or_y, double *dist)
 	{
 		x += or_x;
 		y += or_y;	
+	}
+	while (ft_check_wall(x, y, var->map, var->zoom_mnm))
+	{
+		x -= (or_x / 10.0);
+		y -= (or_y / 10.0);	
 	}
 	(*dist) = ft_distance_double(x_start, y_start, x, y);
 	end.x = (int)round(x);
