@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 10:30:49 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 13:36:14 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,8 +298,8 @@ void		ft_draw_vertical(t_var *var, t_line line, int col, t_img *img);
 void		ft_draw_line_bres(t_var *var, t_line line, t_img *img);
 
 
-t_pix		ft_draw_vector(t_var *var, double angle, t_ray *ray);
-t_pix		ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray);
+int			ft_draw_vector(t_var *var, double angle, t_ray *ray);
+int			ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray);
 
 
 

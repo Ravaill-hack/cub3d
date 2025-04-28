@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/28 10:32:56 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 14:17:26 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,16 @@ int	ft_draw_ray(t_var *var, t_ray ray, int x)
 
 	top.y = (1.0 - var->ratio_horizon) * (var->win.height - ray.target_height);
 	top.x = x;
-	top.col = 0xFFFFFF;
+	if (ray.wall == 1)
+		top.col = 0xFF0000;
+	else if (ray.wall == 2)
+		top.col = 0xFFFF00;
+	else if (ray.wall == 3)
+		top.col = 0x00FF00; //ici
+	else if (ray.wall == 4)
+		top.col = 0x00FFFF; //ici
+	else if (ray.wall == 5)
+		top.col = 0x0000FF;
 	bot.y = top.y + ray.target_height;
 	bot.x = x;
 	column.pixel_1 = top;
@@ -44,10 +53,9 @@ int	ft_draw_ray(t_var *var, t_ray ray, int x)
 	return (1);
 }
 
-t_pix	ft_draw_vector(t_var *var, double angle, t_ray *ray)
+int	ft_draw_vector(t_var *var, double angle, t_ray *ray)
 {
 	t_pix	play;
-	t_pix	end_v;
 	t_line	line;
 	double	or_x;
 	double	or_y;
@@ -56,11 +64,11 @@ t_pix	ft_draw_vector(t_var *var, double angle, t_ray *ray)
 	or_y = sin(ft_deg_to_rad(angle));
 	play.x = var->play.pos_x * var->zoom_mnm;
 	play.y = var->play.pos_y * var->zoom_mnm;
-	end_v = ft_find_end(var, or_x, or_y, ray);
+	ft_find_end(var, or_x, or_y, ray);
 	line.pixel_1 = play;
-	line.pixel_2 = end_v;
+	line.pixel_2 = ray->target_node;
 	ft_draw_line_bres(var, line, &(var->mini_map));
-	return (end_v);
+	return (1);
 }
 
 int	ft_draw_screen(t_var *var)
@@ -75,8 +83,9 @@ int	ft_draw_screen(t_var *var)
 	i = 0;
 	while (i < var->win.width)
 	{
-	 	ray.target_node = ft_draw_vector(var, angle_start, &ray);
-		if (!ft_calculate_ray(var, &ray, angle_start) || !ft_draw_ray(var, ray, i))
+		if (!ft_draw_vector(var, angle_start, &ray)
+			|| !ft_calculate_ray(var, &ray, angle_start)
+			|| !ft_draw_ray(var, ray, i))
 		 	return (ft_err("Error\nRay calculation failed\n"));
 		angle_start = fmod(angle_start + step_angle, 360.0);
 		i++;
