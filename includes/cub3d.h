@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 09:27:15 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:30:49 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_pix
 typedef	struct s_ray
 {
 	t_pix			target_node;
+	int				wall;
 	double			target_dist;
 	int				target_height;
 	int				ray_width;
@@ -298,7 +299,7 @@ void		ft_draw_line_bres(t_var *var, t_line line, t_img *img);
 
 
 t_pix		ft_draw_vector(t_var *var, double angle, t_ray *ray);
-t_pix		ft_find_end(t_var *var, double or_x, double or_y, double *dist);
+t_pix		ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray);
 
 
 

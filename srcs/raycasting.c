@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/28 10:27:45 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:32:56 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_pix	ft_draw_vector(t_var *var, double angle, t_ray *ray)
 	or_y = sin(ft_deg_to_rad(angle));
 	play.x = var->play.pos_x * var->zoom_mnm;
 	play.y = var->play.pos_y * var->zoom_mnm;
-	end_v = ft_find_end(var, or_x, or_y, &(ray->target_dist));
+	end_v = ft_find_end(var, or_x, or_y, ray);
 	line.pixel_1 = play;
 	line.pixel_2 = end_v;
 	ft_draw_line_bres(var, line, &(var->mini_map));
