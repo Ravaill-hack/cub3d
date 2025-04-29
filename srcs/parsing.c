@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:13:04 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 14:01:33 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 21:15:32 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ void	*ft_parse(t_var *var)
 {
 	char	*line;
 	int		fd;
-	int		i;
 
-	i = 0;
 	line = NULL;
 	var->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!var->map)
