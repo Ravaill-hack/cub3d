@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_bres.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:45:26 by julien            #+#    #+#             */
-/*   Updated: 2025/04/28 21:26:45 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:45:49 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,3 @@ void	ft_draw_line_bres(t_var *var, t_line line, t_img *img)
 		ft_draw_point(var, line.pixel_1.x, line.pixel_1.y, 0xFFFFFF, img);
 	}
 }
-
-/*
-int	ft_line_is_in_screen(t_var *var, t_pixel *pixel_1, t_pixel *pixel_2)
-{
-	if ((pixel_1->x < 0 && pixel_2->x < 0)
-		|| (pixel_1->x >= var->mini_map.width
-			&& pixel_2->x >= var->mini_map.width)
-		|| (pixel_1->y < 0 && pixel_2->y < 0)
-		|| (pixel_1->y >= var->mini_map.height
-			&& pixel_2->y >= var->mini_map.height))
-		return (0);
-	return (1);
-}
-*/

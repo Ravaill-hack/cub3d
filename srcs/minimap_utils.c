@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:42:18 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 21:30:31 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:25:27 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_is_close_to_player(t_var *var, int x, int y)
 	t_pix	player;
 	t_pix	point;
 
-	player.x = var->play.pos_x * var->zoom_mnm;
-	player.y = var->play.pos_y * var->zoom_mnm;
+	player.x = var->play.pos_x * var->zoom;
+	player.y = var->play.pos_y * var->zoom;
 	point.x = x;
 	point.y = y;
 	if (ft_distance(player, point) <= var->step)
@@ -26,12 +26,28 @@ int	ft_is_close_to_player(t_var *var, int x, int y)
 	return (0);
 }
 
+int	ft_wall_type(double delta_x, double delta_y, char c)
+{
+	if (c == ' ')
+		return (1);
+	else if (c == '1')
+	{
+		if (delta_x >= 0 && delta_x >= fabs(delta_y))
+			return (4);
+		else if (delta_x <= 0 && (-delta_x) >= fabs(delta_y))
+			return (2);
+		else if (delta_y >= 0 && delta_y >= fabs(delta_x))
+			return (3);
+		else if (delta_y <= 0 && (-delta_y) >= fabs(delta_x))
+			return (5);
+		else
+			return (1);
+	}
+	return(0);
+}
+
 int	ft_is_zoom_wall(double x, double y, t_map *map, int zoom, char c)
 {
-	// 2 = W
-	// 3 = N
-	// 4 = E
-	// 5 = S
 	int		x_n;
 	int		y_n;
 	double	round_x;
@@ -45,27 +61,12 @@ int	ft_is_zoom_wall(double x, double y, t_map *map, int zoom, char c)
 	y_n = floor(round_y);
 	delta_x = round_x - (double)x_n - 0.5;
 	delta_y = round_y - (double)y_n - 0.5;
-	// printf("delta x = %f, delta y = %f\n", delta_x, delta_y);
 	if (!(round_y >= 0 && round_x >= 0
 			&& round_x < map->size_x * zoom && round_y < map->size_y * zoom))
 		return (0);
 	if (map->tab[y_n][x_n] == c)
 	{
-		if (c == ' ')
-			return (1);
-		else if (c == '1')
-		{
-			if (delta_x >= 0 && delta_x >= fabs(delta_y))
-				return (4);
-			else if (delta_x <= 0 && (-delta_x) >= fabs(delta_y))
-				return (2);
-			else if (delta_y >= 0 && delta_y >= fabs(delta_x))
-				return (3);
-			else if (delta_y <= 0 && (-delta_y) >= fabs(delta_x))
-				return (5);
-			else
-				return (1);
-		}
+		return (ft_wall_type(delta_x, delta_y, c));
 	}
 	return (0);
 }
@@ -90,10 +91,10 @@ void	ft_draw_player(t_var *var)
 	int		y;
 
 	y = 0;
-	while (y <= var->map->size_y * var->zoom_mnm)
+	while (y <= var->map->size_y * var->zoom)
 	{
 		x = 0;
-		while (x <= var->map->size_x * var->zoom_mnm)
+		while (x <= var->map->size_x * var->zoom)
 		{
 			if (ft_is_close_to_player(var, x, y) == 1)
 				ft_draw_disc(var, x + 0.5, y + 0.5, 0xFF0000, &var->mini_map);

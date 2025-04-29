@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/29 09:52:58 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:27:51 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,67 +25,6 @@ int	ft_calculate_ray(t_var *var, t_ray *ray, double angle)
 	return (1);
 }
 
-int	ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line)
-{
-	int		x_txt;
-	t_img	*txt;
-	double	v_step;
-	int		y_txt;
-	int		col;
-	int		i_y;
-
-	txt = NULL;
-	if (ray->wall == 4) // East
-	{
-		// printf("on est a l'Est\n");
-		txt = &(var->txtr.ea_img);
-		x_txt = ((var->map->size_y - ray->target_node.y)
-				* var->zoom_mnm) % txt->width;
-	}
-	else if (ray->wall == 2) // West
-	{
-		// printf("on est a l'Ouest\n");
-		txt = &(var->txtr.we_img);
-		// printf("txt width = %d \n", txt->width);
-		x_txt = (ray->target_node.y * var->zoom_mnm) % txt->width;
-	}
-	else if (ray->wall == 5) // South
-	{
-		// printf("on est au Sud\n");
-		txt = &(var->txtr.so_img);
-		x_txt = ((var->map->size_x - ray->target_node.x)
-				* var->zoom_mnm) % txt->width;
-	}
-	else if (ray->wall == 3) // North
-	{
-		// printf("on est au Nord\n");
-		txt = &(var->txtr.no_img);
-		x_txt = (ray->target_node.x * var->zoom_mnm) % txt->width;
-	}
-	else
-		return (0);
-	y_txt = 0;
-	i_y = 0;
-	v_step = (double)txt->height / (double)ray->target_height;
-	// printf("p1_x = %d, p2_x = %d, p1_y = %d, p2_y = %d\n", line.pixel_1.x, line.pixel_2.x, line.pixel_1.y, line.pixel_2.y);
-	while (i_y < ray->target_height)
-	{
-	// 	printf("txt height = %d\n", txt->height);
-	// 	printf("y_txt = %d, x_txt = %d\n", y_txt, x_txt);
-	// 	printf("v_step = %f\n", v_step);
-	// 	printf("data addr = %p, txt_line_len = %d, txt_bpp %d\n",
-	//		txt->data_addr, txt->line_len, txt->bit_per_pix);
-		col = *((int *)(txt->data_addr + (y_txt * txt->line_len)
-					+ (x_txt * txt->bit_per_pix / 8)));
-		ft_draw_point(var, line.pixel_1.x, line.pixel_1.y + i_y, col, img);
-		// printf("i = %d\n", i_y);
-		i_y++;
-		y_txt = i_y * v_step;
-	}
-	(void)img;
-	return (1);
-}
-
 int	ft_draw_ray(t_var *var, t_ray ray, int x)
 {
 	t_pix	top;
@@ -99,18 +38,16 @@ int	ft_draw_ray(t_var *var, t_ray ray, int x)
 	else if (ray.wall == 2)
 		top.col = 0xFFFF00;
 	else if (ray.wall == 3)
-		top.col = 0x00FF00; //ici
+		top.col = 0x00FF00;
 	else if (ray.wall == 4)
-		top.col = 0x00FFFF; //ici
+		top.col = 0x00FFFF;
 	else if (ray.wall == 5)
 		top.col = 0x0000FF;
 	bot.y = top.y + ray.target_height;
 	bot.x = x;
 	column.pixel_1 = top;
 	column.pixel_2 = bot;
-	top.col = ft_darker_pix(top.col, ray.target_dist);
 	ft_draw_column(var, &ray, &(var->screen), column);
-	//ft_draw_vertical(var, column, top.col, &(var->screen));
 	return (1);
 }
 
@@ -123,11 +60,11 @@ int	ft_draw_vector(t_var *var, double angle, t_ray *ray)
 
 	or_x = cos(ft_deg_to_rad(angle));
 	or_y = sin(ft_deg_to_rad(angle));
-	play.x = var->play.pos_x * var->zoom_mnm;
-	play.y = var->play.pos_y * var->zoom_mnm;
+	play.x = var->play.pos_x * var->zoom;
+	play.y = var->play.pos_y * var->zoom;
 	ft_find_end(var, or_x, or_y, ray);
 	line.pixel_1 = play;
-	line.pixel_2 = ray->target_node;
+	line.pixel_2 = ray->t_node;
 	ft_draw_line_bres(var, line, &(var->mini_map));
 	return (1);
 }

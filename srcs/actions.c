@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:50:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 21:36:53 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:20:32 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ int	ft_rotate(t_var *var, int keyc)
 
 void	ft_check_wall_collision(t_var *var, double new_pos_x, double new_pos_y)
 {
-	if (ft_check_wall(new_pos_x * var->zoom_mnm,
-			var->play.pos_y * var->zoom_mnm, var->map, var->zoom_mnm) == 0)
+	if (ft_check_wall(new_pos_x * var->zoom,
+			var->play.pos_y * var->zoom, var->map, var->zoom) == 0)
 	{
 		var->play.pos_x = new_pos_x;
 		var->need_redraw = 1;
 	}
-	if (ft_check_wall(var->play.pos_x * var->zoom_mnm,
-			new_pos_y * var->zoom_mnm, var->map, var->zoom_mnm) == 0)
+	if (ft_check_wall(var->play.pos_x * var->zoom,
+			new_pos_y * var->zoom, var->map, var->zoom) == 0)
 	{
 		var->play.pos_y = new_pos_y;
 		var->need_redraw = 1;
@@ -74,5 +74,13 @@ int	ft_move(t_var *var, int keyc)
 	new_pos_y = var->play.pos_y + var->play.or_y * step_frwrd
 		- var->play.or_x * step_aside;
 	ft_check_wall_collision(var, new_pos_x, new_pos_y);
+	return (0);
+}
+
+int	ft_build_image(t_var *var)
+{
+	ft_draw_nodes(var);
+	ft_draw_player(var);
+	ft_draw_screen(var);
 	return (0);
 }

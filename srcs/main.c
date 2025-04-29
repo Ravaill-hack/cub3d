@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:36 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/25 14:29:55 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:21:27 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 	if (!(ft_init_var(&var, argv[1]) && ft_parse(&var) && ft_init_window(&var)))
 		return (ft_free_all(&var));
 	ft_init_screen(&var);
-	//ft_print_parsed_data(&var);
 	mlx_hook(var.win.win_ptr, KeyPress, KeyPressMask,
 		ft_handle_keypress, (void *)(&var));
 	mlx_hook(var.win.win_ptr, KeyRelease, KeyReleaseMask,

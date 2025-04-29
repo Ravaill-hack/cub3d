@@ -6,45 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 09:28:10 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:10:59 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_textures	*ft_init_txtr(t_var *var)
-{
-	var->txtr.so_img.img_ptr = mlx_xpm_file_to_image(var->mlx_ptr,
-			var->txtr.so_img.path, &(var->txtr.so_img.width),
-			&(var->txtr.so_img.height));
-	var->txtr.so_img.data_addr = mlx_get_data_addr(var->txtr.so_img.img_ptr,
-			&(var->txtr.so_img.bit_per_pix), &(var->txtr.so_img.line_len),
-			&(var->txtr.so_img.endian));
-	var->txtr.no_img.img_ptr = mlx_xpm_file_to_image(var->mlx_ptr,
-			var->txtr.no_img.path, &(var->txtr.no_img.width),
-			&(var->txtr.no_img.height));
-	var->txtr.no_img.data_addr = mlx_get_data_addr(var->txtr.no_img.img_ptr,
-			&(var->txtr.no_img.bit_per_pix), &(var->txtr.no_img.line_len),
-			&(var->txtr.no_img.endian));
-	var->txtr.we_img.img_ptr = mlx_xpm_file_to_image(var->mlx_ptr,
-			var->txtr.we_img.path, &(var->txtr.we_img.width),
-			&(var->txtr.we_img.height));
-	var->txtr.we_img.data_addr = mlx_get_data_addr(var->txtr.we_img.img_ptr,
-			&(var->txtr.we_img.bit_per_pix), &(var->txtr.we_img.line_len),
-			&(var->txtr.we_img.endian));
-	var->txtr.ea_img.img_ptr = mlx_xpm_file_to_image(var->mlx_ptr,
-			var->txtr.ea_img.path, &(var->txtr.ea_img.width),
-			&(var->txtr.ea_img.height));
-	var->txtr.ea_img.data_addr = mlx_get_data_addr(var->txtr.ea_img.img_ptr,
-			&(var->txtr.ea_img.bit_per_pix), &(var->txtr.ea_img.line_len),
-			&(var->txtr.ea_img.endian));
-	if (!var->txtr.so_img.img_ptr || !var->txtr.no_img.img_ptr
-		|| !var->txtr.we_img.img_ptr || !var->txtr.ea_img.img_ptr
-		|| !var->txtr.so_img.data_addr || !var->txtr.no_img.data_addr
-		|| !var->txtr.we_img.data_addr || !var->txtr.ea_img.data_addr)
-		return (ft_err_null(ERR_TEXTR_PATH));
-	return (&var->txtr);
-}
 
 int	ft_init_window(t_var *var)
 {
@@ -53,20 +19,6 @@ int	ft_init_window(t_var *var)
 	if (!var->win.win_ptr)
 		return (ft_err(ERR_INIT_WINPTR));
 	return (1);
-}
-
-void	ft_init_txtr_var(t_textures *txtr)
-{
-	txtr->no_img.img_ptr = NULL;
-	txtr->so_img.img_ptr = NULL;
-	txtr->we_img.img_ptr = NULL;
-	txtr->ea_img.img_ptr = NULL;
-	txtr->no_img.path = NULL;
-	txtr->so_img.path = NULL;
-	txtr->we_img.path = NULL;
-	txtr->ea_img.path = NULL;
-	txtr->fl_col = 0;
-	txtr->ce_col = 0;
 }
 
 void	ft_init_inputs(t_input *input)
@@ -97,10 +49,20 @@ int	ft_init_var(t_var *var, char *title)
 		/ tan(var->plane.fov_rad / 2);
 	ft_init_txtr_var(&var->txtr);
 	ft_init_inputs(&var->input);
-	var->zoom_mnm = 70;
+	var->zoom = 70;
 	var->step = 0.2;
 	var->need_redraw = 0;
 	var->screen.img_ptr = NULL;
 	var->mini_map.img_ptr = NULL;
 	return (1);
+}
+
+void	ft_init_plane(t_plane *plane)
+{
+	plane->fov_deg = 80;
+	plane->fov_rad = plane->fov_deg * 2.0 * M_PI / 360.0;
+	plane->len = tan(plane->fov_rad / 2.0);
+	plane->x = 0;
+	plane->y = 0;
+	plane->h_wall = 10;
 }

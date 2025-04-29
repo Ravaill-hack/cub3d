@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 09:20:56 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:44:33 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@ Map errors
 # define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
 # define ERR_MAP_BOUND "Error\nA wall is open on the boundaries\n"
 
+typedef struct s_end
+{
+	double		x;
+	double		y;
+	double		x_st;
+	double		y_st;
+	int			tmp;
+}	t_end;
+
 typedef struct s_pix
 {
 	int				x;
@@ -84,7 +93,7 @@ typedef struct s_pix
 
 typedef struct s_ray
 {
-	t_pix			target_node;
+	t_pix			t_node;
 	int				wall;
 	double			target_dist;
 	int				target_height;
@@ -135,6 +144,16 @@ typedef struct s_img
 	int				off_x;
 	int				off_y;
 }	t_img;
+
+typedef struct s_xpm_draw
+{
+	int				x_txt;
+	t_img			*txt;
+	double			v_step;
+	int				y_txt;
+	int				col;
+	int				i_y;
+}	t_xpm_draw;
 
 typedef struct s_textures
 {
@@ -195,7 +214,7 @@ typedef struct s_var
 {
 	void			*mlx_ptr;
 	int				status; //a supprimer
-	int				zoom_mnm;
+	int				zoom;
 	double			step;
 	double			ratio_horizon; // compris entre 0 et 1
 	double			dist_to_plane;
@@ -215,15 +234,16 @@ typedef struct s_var
 /*
 Initialization (init.c)
 */
-t_textures	*ft_init_txtr(t_var *var);
+void		ft_init_plane(t_plane *plane);
 int			ft_init_window(t_var *var);
-void		ft_init_txtr_var(t_textures *txtr);
 void		ft_init_inputs(t_input *input);
 int			ft_init_var(t_var *var, char *title);
 /*
-Initialization (init_2.c)
+Textures initialization (init_textures.c)
 */
-void		ft_init_plane(t_plane *plane);
+int			ft_init_one_txt(t_var *var, t_img *img);
+t_textures	*ft_init_txtr(t_var *var);
+void		ft_init_txtr_var(t_textures *txtr);
 /*
 Img init (init_img.c)
 */
@@ -277,10 +297,11 @@ int			ft_nb_char(char **tab, char c);
 int			ft_check_if_exists(t_map *map, char **tab, int x, int y);
 int			ft_is_valid_map(t_map *map, t_var *var);
 /*
-Drawing (draw_xpm.c)
+Textures drawing (draw_textures.c)
 */
-
-
+int			ft_error_texture(int wall);
+int			ft_find_texture(t_var *var, t_ray *ray, int *x, t_img **txt);
+int			ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line);
 /*
 Drawing (draw_utils.c)
 */
@@ -317,6 +338,7 @@ int			ft_is_zoom_wall(double x, double y, t_map *map,
 				int zoom, char c);
 int			ft_check_wall(double x, double y, t_map *map, int zoom);
 void		ft_draw_player(t_var *var);
+int			ft_wall_type(double delta_x, double delta_y, char c);
 /*
 Update image (update_image.c)
 */
@@ -337,6 +359,7 @@ int			ft_rotate(t_var *var, int keyc);
 void		ft_check_wall_collision(t_var *var,
 				double new_pos_x, double new_pos_y);
 int			ft_move(t_var *var, int keyc);
+int			ft_build_image(t_var *var);
 /*
 Free (free.c)
 */
@@ -376,17 +399,8 @@ int			ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray);
 Raycasting (raycasting.c)
 */
 int			ft_calculate_ray(t_var *var, t_ray *ray, double angle);
-int			ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line);
 int			ft_draw_ray(t_var *var, t_ray ray, int x);
 int			ft_draw_vector(t_var *var, double angle, t_ray *ray);
 int			ft_draw_screen(t_var *var);
-/*
-Build image (build_image.c)
-*/
-int			ft_build_image(t_var *var);
-/*
-Debug (debug.c)
-*/
-int			ft_print_parsed_data(t_var *var);
 
 #endif
