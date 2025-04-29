@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:31:22 by julien            #+#    #+#             */
-/*   Updated: 2025/04/28 21:49:36 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/29 09:52:58 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,47 +37,52 @@ int	ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line)
 	txt = NULL;
 	if (ray->wall == 4) // East
 	{
-		printf("on est a l'Est\n");
+		// printf("on est a l'Est\n");
 		txt = &(var->txtr.ea_img);
 		x_txt = ((var->map->size_y - ray->target_node.y)
 				* var->zoom_mnm) % txt->width;
 	}
 	else if (ray->wall == 2) // West
 	{
-		printf("on est a l'Ouest\n");
+		// printf("on est a l'Ouest\n");
 		txt = &(var->txtr.we_img);
-		printf("txt width = %d \n", txt->width);
+		// printf("txt width = %d \n", txt->width);
 		x_txt = (ray->target_node.y * var->zoom_mnm) % txt->width;
 	}
 	else if (ray->wall == 5) // South
 	{
-		printf("on est au Sud\n");
+		// printf("on est au Sud\n");
 		txt = &(var->txtr.so_img);
 		x_txt = ((var->map->size_x - ray->target_node.x)
 				* var->zoom_mnm) % txt->width;
 	}
 	else if (ray->wall == 3) // North
 	{
-		printf("on est au Nord\n");
+		// printf("on est au Nord\n");
 		txt = &(var->txtr.no_img);
 		x_txt = (ray->target_node.x * var->zoom_mnm) % txt->width;
 	}
 	else
 		return (0);
 	y_txt = 0;
-	i_y = line.pixel_1.y;
-	v_step = txt->height / ray->target_height;
-	while (y_txt <= txt->height)
+	i_y = 0;
+	v_step = (double)txt->height / (double)ray->target_height;
+	// printf("p1_x = %d, p2_x = %d, p1_y = %d, p2_y = %d\n", line.pixel_1.x, line.pixel_2.x, line.pixel_1.y, line.pixel_2.y);
+	while (i_y < ray->target_height)
 	{
-		printf("y_txt = %d, x_txt = %d\n", y_txt, x_txt);
-		printf("data addr = %p, txt_line_len = %d, txt_bpp %d\n",
-			txt->data_addr, txt->line_len, txt->bit_per_pix);
-		col = *((int *)(txt->data_addr + y_txt * txt->line_len
+	// 	printf("txt height = %d\n", txt->height);
+	// 	printf("y_txt = %d, x_txt = %d\n", y_txt, x_txt);
+	// 	printf("v_step = %f\n", v_step);
+	// 	printf("data addr = %p, txt_line_len = %d, txt_bpp %d\n",
+	//		txt->data_addr, txt->line_len, txt->bit_per_pix);
+		col = *((int *)(txt->data_addr + (y_txt * txt->line_len)
 					+ (x_txt * txt->bit_per_pix / 8)));
-		ft_draw_point(var, line.pixel_1.x, i_y, col, img);
+		ft_draw_point(var, line.pixel_1.x, line.pixel_1.y + i_y, col, img);
+		// printf("i = %d\n", i_y);
 		i_y++;
 		y_txt = i_y * v_step;
 	}
+	(void)img;
 	return (1);
 }
 

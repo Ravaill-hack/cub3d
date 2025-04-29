@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 21:19:53 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/29 09:28:10 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,31 @@ t_textures	*ft_init_txtr(t_var *var)
 	var->txtr.so_img.img_ptr = mlx_xpm_file_to_image(var->mlx_ptr,
 			var->txtr.so_img.path, &(var->txtr.so_img.width),
 			&(var->txtr.so_img.height));
+	var->txtr.so_img.data_addr = mlx_get_data_addr(var->txtr.so_img.img_ptr,
+			&(var->txtr.so_img.bit_per_pix), &(var->txtr.so_img.line_len),
+			&(var->txtr.so_img.endian));
 	var->txtr.no_img.img_ptr = mlx_xpm_file_to_image(var->mlx_ptr,
 			var->txtr.no_img.path, &(var->txtr.no_img.width),
 			&(var->txtr.no_img.height));
+	var->txtr.no_img.data_addr = mlx_get_data_addr(var->txtr.no_img.img_ptr,
+			&(var->txtr.no_img.bit_per_pix), &(var->txtr.no_img.line_len),
+			&(var->txtr.no_img.endian));
 	var->txtr.we_img.img_ptr = mlx_xpm_file_to_image(var->mlx_ptr,
 			var->txtr.we_img.path, &(var->txtr.we_img.width),
 			&(var->txtr.we_img.height));
+	var->txtr.we_img.data_addr = mlx_get_data_addr(var->txtr.we_img.img_ptr,
+			&(var->txtr.we_img.bit_per_pix), &(var->txtr.we_img.line_len),
+			&(var->txtr.we_img.endian));
 	var->txtr.ea_img.img_ptr = mlx_xpm_file_to_image(var->mlx_ptr,
 			var->txtr.ea_img.path, &(var->txtr.ea_img.width),
 			&(var->txtr.ea_img.height));
+	var->txtr.ea_img.data_addr = mlx_get_data_addr(var->txtr.ea_img.img_ptr,
+			&(var->txtr.ea_img.bit_per_pix), &(var->txtr.ea_img.line_len),
+			&(var->txtr.ea_img.endian));
 	if (!var->txtr.so_img.img_ptr || !var->txtr.no_img.img_ptr
-		|| !var->txtr.we_img.img_ptr || !var->txtr.ea_img.img_ptr)
+		|| !var->txtr.we_img.img_ptr || !var->txtr.ea_img.img_ptr
+		|| !var->txtr.so_img.data_addr || !var->txtr.no_img.data_addr
+		|| !var->txtr.we_img.data_addr || !var->txtr.ea_img.data_addr)
 		return (ft_err_null(ERR_TEXTR_PATH));
 	return (&var->txtr);
 }
@@ -78,7 +92,7 @@ int	ft_init_var(t_var *var, char *title)
 	var->win.path = ft_special_strdup(title);
 	if (!var->win.path)
 		return (ft_err(ERR_INIT_PATH));
-	ft_init_plane();
+	ft_init_plane(&(var->plane));
 	var->dist_to_plane = (double)(var->win.width / 2)
 		/ tan(var->plane.fov_rad / 2);
 	ft_init_txtr_var(&var->txtr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:04:57 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 21:46:05 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/29 09:22:27 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_is_valid_map(t_map *map, t_var *var)
 					|| !ft_check_if_exists(map, tab, i + 1, j)
 					|| !ft_check_if_exists(map, tab, i - 1, j)
 					|| !ft_check_if_exists(map, tab, i, j - 1))
-					return (ft_err_null(ERR_MAP_OPEN));
+					return (ft_err(ERR_MAP_BOUND));
 			}
 			j++;
 		}
