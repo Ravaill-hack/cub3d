@@ -1,0 +1,19 @@
+F 150,150,150
+C 150,110,150
+
+NO ./includes/textures/metro.xpm
+SO ./includes/textures/metro.xpm
+WE ./includes/textures/metro.xpm
+EA ./includes/textures/metro.xpm
+
+ 11111111
+1000000001
+1000010001
+100N000001
+1000010001
+1000010001
+ 1000000011
+ 1111110011
+     1001
+     1001
+     1111

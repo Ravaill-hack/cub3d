@@ -1,0 +1,19 @@
+C 255,255,255
+F 236,187,175
+
+NO ./includes/textures/pinktile.xpm
+SO ./includes/textures/pinkconcrete.xpm
+WE ./includes/textures/pinkterrazzo.xpm
+EA ./includes/textures/vertictile.xpm
+
+ 11111111
+1000000001
+1000010001
+100N000001
+1000010001
+1000010001
+ 1000000011
+ 1111110011
+     1001
+     1001
+     1111
