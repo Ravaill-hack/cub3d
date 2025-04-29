@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:55:31 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 11:10:59 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:06:30 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	ft_init_var(t_var *var, char *title)
 		return (ft_err(ERR_INIT_MLXPTR));
 	var->win.win_ptr = NULL;
 	mlx_get_screen_size(var->mlx_ptr, &(var->win.width), &(var->win.height));
-	var->win.height *= 0.9;
-	var->win.width *= 0.9;
+	var->win.height *= 0.7;
+	var->win.width *= 0.7;
 	var->ratio_horizon = 0.4;
 	var->win.path = ft_special_strdup(title);
 	if (!var->win.path)
@@ -49,7 +49,7 @@ int	ft_init_var(t_var *var, char *title)
 		/ tan(var->plane.fov_rad / 2);
 	ft_init_txtr_var(&var->txtr);
 	ft_init_inputs(&var->input);
-	var->zoom = 70;
+	var->zoom = 40;
 	var->step = 0.2;
 	var->need_redraw = 0;
 	var->screen.img_ptr = NULL;

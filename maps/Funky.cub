@@ -1,0 +1,19 @@
+F 94,102,81
+C 255,255,255
+
+NO ./includes/textures/redstripes.xpm
+SO ./includes/textures/deauville.xpm
+WE ./includes/textures/grid.xpm
+EA ./includes/textures/fifties.xpm
+
+ 11111111
+1000000001
+1000010001
+100N000001
+1000010001
+1000010001
+ 1000000011
+ 1111110011
+     1001
+     1001
+     1111

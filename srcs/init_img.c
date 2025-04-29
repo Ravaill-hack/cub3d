@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:44:20 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 14:56:14 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:18:50 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_draw_background(t_var *var, t_img *img)
 		p.x = 0;
 		while (p.x <= var->win.width)
 		{
-			ft_draw_point(var, p, ft_darker_pix(var->txtr.ce_col, p.y / 2), img);
+			ft_draw_point(var, p, ft_darker_pix(var->txtr.ce_col, p.y), img);
 			p.x++;
 		}
 		p.y++;
@@ -33,7 +33,7 @@ int	ft_draw_background(t_var *var, t_img *img)
 		p.x = 0;
 		while (p.x <= var->win.width)
 		{
-			ft_draw_point(var, p, ft_darker_pix(var->txtr.fl_col, (var->win.height - p.y) / 2), img);
+			ft_draw_point(var, p, ft_darker_pix(var->txtr.fl_col, var->win.height - p.y), img);
 			p.x++;
 		}
 		p.y++;
