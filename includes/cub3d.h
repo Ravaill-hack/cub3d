@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 13:19:24 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:01:07 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,15 +287,14 @@ void		*ft_parse_map(t_var *var, int fd, char *line);
 Color parsing (parsing_colors.c)
 */
 int			ft_convert_color(char *str);
-void		*ft_parse_colors(t_var *var, int fd, char *line);
+void		*ft_parse_colors(t_var *var, char *line, int *i);
 int			ft_darker_pix(int col, int dist);
 /*
 Parsing textures (parsing_textures.c)
 */
 int			ft_is_xpm(char *str);
 int			ft_valid_txtr(t_var *var);
-int			ft_check_txtr(t_var *var);
-void		*ft_parse_textures(t_var *var, int fd, char *line, int i);
+void		*ft_parse_textures(t_var *var, char *line, int *i);
 /*
 Parsing utils (parsing_utils.c)
 */

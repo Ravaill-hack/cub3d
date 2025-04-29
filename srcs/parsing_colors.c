@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_colors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:09:02 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 21:24:12 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/29 13:44:36 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,21 @@ int	ft_convert_color(char *str)
 	return ((col.r << 16) | (col.v << 8) | col.b);
 }
 
-void	*ft_parse_colors(t_var *var, int fd, char *line)
+void	*ft_parse_colors(t_var *var, char *line, int *i)
 {
-	int	i;
-
-	i = 0;
-	line = ft_free_line_go_to_next_line(fd, line);
-	if (!line)
-		return (ft_err_null(ERR_COLORS_MISSING_DATA));
-	while (i < 2)
+	if (line[0] == 'F' && line[1] == ' ')
 	{
-		if (line[0] == 'F' && line[1] == ' ')
-			var->txtr.fl_col = ft_convert_color(&line[2]);
-		else if (line[0] == 'C' && line[1] == ' ')
-			var->txtr.ce_col = ft_convert_color(&line[2]);
-		else
-			return (ft_err_null(ERR_COLORS_SYNTAX));
-		if (var->txtr.fl_col == -1 || var->txtr.ce_col == -1)
+		var->txtr.fl_col = ft_convert_color(&line[2]);
+		if (var->txtr.fl_col == -1)
 			return (NULL);
-		if (i + 1 == 2)
-		{
-			free(line);
-			break ;
-		}
-		line = ft_free_line_go_to_next_line(fd, line);
-		i++;
 	}
+	else if (line[0] == 'C' && line[1] == ' ')
+	{
+		var->txtr.ce_col = ft_convert_color(&line[2]);
+		if (var->txtr.ce_col == -1)
+			return (NULL);
+	}
+	(*i) ++;
 	return ((void *)var);
 }
 
