@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:09:02 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 13:44:36 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:26:26 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*ft_parse_colors(t_var *var, char *line, int *i)
 		if (var->txtr.ce_col == -1)
 			return (NULL);
 	}
-	(*i) ++;
+	(*i)++;
 	return ((void *)var);
 }
 

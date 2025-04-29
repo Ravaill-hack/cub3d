@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:46:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 13:56:40 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:26:11 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ void	*ft_parse_textures(t_var *var, char *line, int *i)
 		if (!var->txtr.ea_img.path)
 			return (ft_err_null(ERR_TEXTR_EA_MISSING));
 	}
-	(*i)++;
-	return((void *)var);
+	return ((*i)++, (void *)var);
 }

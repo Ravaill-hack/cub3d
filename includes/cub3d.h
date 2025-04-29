@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 14:01:07 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:33:16 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,10 +261,11 @@ void		ft_init_txtr_var(t_textures *txtr);
 /*
 Img init (init_img.c)
 */
-int			ft_draw_background(t_var *var, t_img *img);
 t_img		*ft_init_img(t_var *var, t_img *img);
 int			ft_init_background(t_var *var);
 int			ft_init_screen(t_var *var);
+int			ft_draw_floor(t_var *var, t_img *img, t_pix *p);
+int			ft_draw_ceiling(t_var *var, t_img *img, t_pix *p);
 /*
 Error (error.c)
 */
@@ -328,6 +329,7 @@ Drawing (draw_utils_2.c)
 */
 void		ft_draw_nodes(t_var *var);
 t_line		ft_build_line(t_pix p1, t_pix p2);
+int			ft_draw_background(t_var *var, t_img *img);
 /*
 Drawing lines (draw_line_bres.c)
 */

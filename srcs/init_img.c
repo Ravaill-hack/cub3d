@@ -6,37 +6,39 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:44:20 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 15:18:50 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:33:49 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_draw_background(t_var *var, t_img *img)
+int	ft_draw_floor(t_var *var, t_img *img, t_pix *p)
 {
-	t_pix	p;
-
-	p.y = 0;
-	p.z = (int)round((1.0 - var->ratio_horizon) * var->win.height);
-	while (p.y < p.z)
+	while (p->y <= var->win.height)
 	{
-		p.x = 0;
-		while (p.x <= var->win.width)
+		p->x = 0;
+		while (p->x <= var->win.width)
 		{
-			ft_draw_point(var, p, ft_darker_pix(var->txtr.ce_col, p.y), img);
-			p.x++;
+			ft_draw_point(var, *p, ft_darker_pix(var->txtr.fl_col,
+					var->win.height - p->y), img);
+			(p->x)++;
 		}
-		p.y++;
+		(p->y)++;
 	}
-	while (p.y <= var->win.height)
+	return (1);
+}
+
+int	ft_draw_ceiling(t_var *var, t_img *img, t_pix *p)
+{
+	while (p->y < p->z)
 	{
-		p.x = 0;
-		while (p.x <= var->win.width)
+		p->x = 0;
+		while (p->x <= var->win.width)
 		{
-			ft_draw_point(var, p, ft_darker_pix(var->txtr.fl_col, var->win.height - p.y), img);
-			p.x++;
+			ft_draw_point(var, *p, ft_darker_pix(var->txtr.ce_col, p->y), img);
+			(p->x)++;
 		}
-		p.y++;
+		(p->y)++;
 	}
 	return (1);
 }
