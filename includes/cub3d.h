@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 11:44:33 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:58:37 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ Map errors
 # define ERR_MAP_PLAYERS "Error\nThere must be only one player\n"
 # define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
 # define ERR_MAP_BOUND "Error\nA wall is open on the boundaries\n"
+
+typedef struct s_double_points
+{
+	double	x;
+	double	y;
+}	t_double_points;
 
 typedef struct s_end
 {
@@ -305,7 +311,7 @@ int			ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line);
 /*
 Drawing (draw_utils.c)
 */
-void		ft_draw_point(t_var *var, int x, int y, int col, t_img *img);
+void		ft_draw_point(t_var *var, t_pix point, int col, t_img *img);
 void		ft_draw_line_map(t_var *var, t_img *img,
 				t_pix p1, t_pix p2, int col);
 void		ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img);
@@ -334,8 +340,7 @@ void		ft_draw_nodes(t_var *var);
 Minimap utils (minimap_utils.c)
 */
 int			ft_is_close_to_player(t_var *var, int x, int y);
-int			ft_is_zoom_wall(double x, double y, t_map *map,
-				int zoom, char c);
+int			ft_is_zoom_wall(t_double_points p, t_map *map, int zoom, char c);
 int			ft_check_wall(double x, double y, t_map *map, int zoom);
 void		ft_draw_player(t_var *var);
 int			ft_wall_type(double delta_x, double delta_y, char c);

@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 21:19:41 by julien            #+#    #+#             */
-/*   Updated: 2025/04/29 10:50:09 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:34:06 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	ft_init_txtr_var(t_textures *txtr)
 {
@@ -30,13 +29,13 @@ void	ft_init_txtr_var(t_textures *txtr)
 int	ft_init_one_txt(t_var *var, t_img *img)
 {
 	img->img_ptr = mlx_xpm_file_to_image(var->mlx_ptr, img->path, &img->width,
-		&img->height);
+			&img->height);
 	if (!img->img_ptr)
-		return(ft_err(ERR_TEXTR_PATH));
+		return (ft_err(ERR_TEXTR_PATH));
 	img->data_addr = mlx_get_data_addr(img->img_ptr, &(img->bit_per_pix),
-		&(img->line_len), &(img->endian));
+			&(img->line_len), &(img->endian));
 	if (!img->data_addr)
-		return(ft_err(ERR_TEXTR_PATH));
+		return (ft_err(ERR_TEXTR_PATH));
 	return (1);
 }
 

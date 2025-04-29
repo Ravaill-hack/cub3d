@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:44:20 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 11:10:54 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:39:01 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 int	ft_draw_background(t_var *var, t_img *img)
 {
-	int	x;
-	int	y;
-	int	h;
+	t_pix	p;
 
-	y = 0;
-	h = (int)round((1.0 - var->ratio_horizon) * var->win.height);
-	while (y < h)
+	p.y = 0;
+	p.z = (int)round((1.0 - var->ratio_horizon) * var->win.height);
+	while (p.y < p.z)
 	{
-		x = 0;
-		while (x <= var->win.width)
-			ft_draw_point(var, x++, y, var->txtr.ce_col, img);
-		y++;
+		p.x = 0;
+		while (p.x <= var->win.width)
+		{
+			ft_draw_point(var, p, var->txtr.ce_col, img);
+			p.x++;
+		}
+		p.y++;
 	}
-	while (y <= var->win.height)
+	while (p.y <= var->win.height)
 	{
-		x = 0;
-		while (x <= var->win.width)
-			ft_draw_point(var, x++, y, var->txtr.fl_col, img);
-		y++;
+		p.x = 0;
+		while (p.x <= var->win.width)
+		{
+			ft_draw_point(var, p, var->txtr.fl_col, img);
+			p.x++;
+		}
+		p.y++;
 	}
 	return (1);
 }

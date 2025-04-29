@@ -6,54 +6,44 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:45:08 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 11:10:42 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:58:31 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_draw_point(t_var *var, int x, int y, int col, t_img *img)
+void	ft_draw_point(t_var *var, t_pix p, int col, t_img *img)
 {
 	char	*ptr;
 
-	if (x < 0 || x >= var->win.width || y < 0 || y >= var->win.height)
+	if (p.x < 0 || p.x >= var->win.width || p.y < 0 || p.y >= var->win.height)
 		return ;
-	ptr = img->data_addr + (y * img->line_len) + x * (img->bit_per_pix / 8);
+	ptr = img->data_addr + (p.y * img->line_len) + p.x * (img->bit_per_pix / 8);
 	*(int *)ptr = col;
 }
 
 void	ft_draw_line_map(t_var *var, t_img *img, t_pix p1, t_pix p2, int col)
 {
+	t_line	line;
 	int		x;
 	int		y;
 
 	x = p1.x;
 	y = p1.y;
+	line.pixel_1 = p1;
+	line.pixel_2 = p2;
 	if (x == p2.x)
-	{
-		while (y != p2.y)
-		{
-			ft_draw_point(var, x, y, col, img);
-			y++;
-		}
-	}
+		ft_draw_vertical(var, line, col, img);
 	else if (y == p2.y)
-	{
-		while (x != p2.x)
-		{
-			ft_draw_point(var, x, y, col, img);
-			x++;
-		}
-	}
+		ft_draw_horizontal(var, line, col, img);
 	else
 		printf("Error\nUnable to draw minimap boundaries\n");
 }
 
 void	ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img)
 {
+	t_pix	p;
 	int		r;
-	int		x;
-	int		y;
 	int		angle;
 
 	r = var->zoom / 4;
@@ -62,9 +52,9 @@ void	ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img)
 		angle = 0;
 		while (angle <= 360)
 		{
-			x = x0 + cos(ft_deg_to_rad(angle)) * r;
-			y = y0 + sin(ft_deg_to_rad(angle)) * r;
-			ft_draw_point(var, x, y, col, img);
+			p.x = x0 + cos(ft_deg_to_rad(angle)) * r;
+			p.y = y0 + sin(ft_deg_to_rad(angle)) * r;
+			ft_draw_point(var, p, col, img);
 			angle ++;
 		}
 		r--;

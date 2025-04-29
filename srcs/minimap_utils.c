@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:42:18 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 11:25:27 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:33:05 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,41 +43,42 @@ int	ft_wall_type(double delta_x, double delta_y, char c)
 		else
 			return (1);
 	}
-	return(0);
+	return (0);
 }
 
-int	ft_is_zoom_wall(double x, double y, t_map *map, int zoom, char c)
+int	ft_is_zoom_wall(t_double_points p, t_map *map, int zoom, char c)
 {
-	int		x_n;
-	int		y_n;
-	double	round_x;
-	double	round_y;
-	double	delta_x;
-	double	delta_y;
+	int				x_n;
+	int				y_n;
+	t_double_points	round;
+	t_double_points	delta;
 
-	round_x = x / (double)zoom;
-	round_y = y / (double)zoom;
-	x_n = floor(round_x);
-	y_n = floor(round_y);
-	delta_x = round_x - (double)x_n - 0.5;
-	delta_y = round_y - (double)y_n - 0.5;
-	if (!(round_y >= 0 && round_x >= 0
-			&& round_x < map->size_x * zoom && round_y < map->size_y * zoom))
+	round.x = p.x / (double)zoom;
+	round.y = p.y / (double)zoom;
+	x_n = floor(round.x);
+	y_n = floor(round.y);
+	delta.x = round.x - (double)x_n - 0.5;
+	delta.y = round.y - (double)y_n - 0.5;
+	if (!(round.y >= 0 && round.x >= 0
+			&& round.x < map->size_x * zoom && round.y < map->size_y * zoom))
 		return (0);
 	if (map->tab[y_n][x_n] == c)
 	{
-		return (ft_wall_type(delta_x, delta_y, c));
+		return (ft_wall_type(delta.x, delta.y, c));
 	}
 	return (0);
 }
 
 int	ft_check_wall(double x, double y, t_map *map, int zoom)
 {
-	int	true_wall;
-	int	unseen_wall;
+	int				true_wall;
+	int				unseen_wall;
+	t_double_points	point;
 
-	true_wall = ft_is_zoom_wall(x, y, map, zoom, '1');
-	unseen_wall = ft_is_zoom_wall(x, y, map, zoom, ' ');
+	point.x = x;
+	point.y = y;
+	true_wall = ft_is_zoom_wall(point, map, zoom, '1');
+	unseen_wall = ft_is_zoom_wall(point, map, zoom, ' ');
 	if (true_wall != 0)
 		return (true_wall);
 	if (unseen_wall)

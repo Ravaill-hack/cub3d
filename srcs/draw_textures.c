@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:17:14 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 11:46:19 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:57:18 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ int	ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line)
 	xpm.x_txt = (xpm.x_txt + xpm.txt->width) % xpm.txt->width;
 	while (xpm.i_y < ray->target_height)
 	{
+		line.pixel_1.y ++;
 		xpm.col = *((int *)(xpm.txt->data_addr + (xpm.y_txt * xpm.txt->line_len)
 					+ (xpm.x_txt * xpm.txt->bit_per_pix / 8)));
 		xpm.col = ft_darker_pix(xpm.col, ray->target_dist);
-		ft_draw_point(var, line.pixel_1.x, line.pixel_1.y + xpm.i_y, xpm.col,
-			img);
+		ft_draw_point(var, line.pixel_1, xpm.col, img);
 		xpm.i_y++;
 		xpm.y_txt = xpm.i_y * xpm.v_step;
 	}

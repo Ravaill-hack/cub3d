@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:25:59 by julien            #+#    #+#             */
-/*   Updated: 2025/04/29 11:39:38 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:57:55 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	ft_find_end(t_var *var, double or_x, double or_y, t_ray *ray)
 	while (ray->wall != 0)
 	{
 		end.tmp = ray->wall;
-		end.x -= (or_x / 20.0);
-		end.y -= (or_y / 20.0);
+		end.x -= (or_x / 10.0);
+		end.y -= (or_y / 10.0);
 		ray->wall = ft_check_wall(end.x, end.y, var->map, var->zoom);
 	}
 	ray->wall = end.tmp;
