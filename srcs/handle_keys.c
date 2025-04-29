@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:11:30 by julien            #+#    #+#             */
-/*   Updated: 2025/04/28 21:33:29 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/29 13:20:22 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ void	ft_handle_key_move(t_var *var, t_input input)
 
 int	ft_repeat_key_events(t_var *var)
 {
-	int	deceleration;
-
-	deceleration = 1;
 	ft_handle_key_move(var, var->input);
 	if (var->input.key_lft)
 	{
@@ -78,7 +75,6 @@ int	ft_repeat_key_events(t_var *var)
 	}
 	if (var->need_redraw)
 	{
-		// usleep(deceleration * 10000);
 		ft_update_image(var);
 		var->need_redraw = 0;
 	}

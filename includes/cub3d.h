@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 12:58:37 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:19:24 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,14 @@ typedef struct s_pix
 	int				z;
 	unsigned int	col;
 }	t_pix;
+
+typedef struct s_angles
+{
+	t_pix			p0;
+	t_pix			p1;
+	t_pix			p2;
+	t_pix			p3;
+}	t_angles;
 
 typedef struct s_ray
 {
@@ -312,16 +320,15 @@ int			ft_draw_column(t_var *var, t_ray *ray, t_img *img, t_line line);
 Drawing (draw_utils.c)
 */
 void		ft_draw_point(t_var *var, t_pix point, int col, t_img *img);
-void		ft_draw_line_map(t_var *var, t_img *img,
-				t_pix p1, t_pix p2, int col);
-void		ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img);
-void		ft_init_points(t_pix *p0, t_pix *p1, t_pix *p2, t_pix *p3,
-				t_var *var, int x, int y);
-void		ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col);
+void		ft_draw_line_map(t_var *var, t_img *img, t_line line, int col);
+void		ft_draw_disc(t_var *var, t_pix p0, int col, t_img *img);
+void		ft_init_points(t_angles *a, t_var *var, int x, int y);
+void		ft_connect_nodes(t_var *var, t_img *img, t_pix n, int col);
 /*
 Drawing (draw_utils_2.c)
 */
 void		ft_draw_nodes(t_var *var);
+t_line		ft_build_line(t_pix p1, t_pix p2);
 /*
 Drawing lines (draw_line_bres.c)
 */

@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:45:08 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 12:58:31 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:19:07 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,22 @@ void	ft_draw_point(t_var *var, t_pix p, int col, t_img *img)
 	*(int *)ptr = col;
 }
 
-void	ft_draw_line_map(t_var *var, t_img *img, t_pix p1, t_pix p2, int col)
+void	ft_draw_line_map(t_var *var, t_img *img, t_line line, int col)
 {
-	t_line	line;
 	int		x;
 	int		y;
 
-	x = p1.x;
-	y = p1.y;
-	line.pixel_1 = p1;
-	line.pixel_2 = p2;
-	if (x == p2.x)
+	x = line.pixel_1.x;
+	y = line.pixel_1.y;
+	if (x == line.pixel_2.x)
 		ft_draw_vertical(var, line, col, img);
-	else if (y == p2.y)
+	else if (y == line.pixel_2.y)
 		ft_draw_horizontal(var, line, col, img);
 	else
 		printf("Error\nUnable to draw minimap boundaries\n");
 }
 
-void	ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img)
+void	ft_draw_disc(t_var *var, t_pix p0, int col, t_img *img)
 {
 	t_pix	p;
 	int		r;
@@ -52,8 +49,8 @@ void	ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img)
 		angle = 0;
 		while (angle <= 360)
 		{
-			p.x = x0 + cos(ft_deg_to_rad(angle)) * r;
-			p.y = y0 + sin(ft_deg_to_rad(angle)) * r;
+			p.x = p0.x + cos(ft_deg_to_rad(angle)) * r;
+			p.y = p0.y + sin(ft_deg_to_rad(angle)) * r;
 			ft_draw_point(var, p, col, img);
 			angle ++;
 		}
@@ -61,40 +58,36 @@ void	ft_draw_disc(t_var *var, int x0, int y0, int col, t_img *img)
 	}
 }
 
-void	ft_init_points(t_pix *p0, t_pix *p1, t_pix *p2, t_pix *p3,
-		t_var *var, int x, int y)
+void	ft_init_points(t_angles *a, t_var *var, int x, int y)
 {
-	p0->x = x * var->zoom;
-	p0->y = y * var->zoom;
-	p1->x = p0->x + var->zoom;
-	p1->y = p0->y;
-	p2->x = p0->x;
-	p2->y = p0->y + var->zoom;
-	p3->x = p0->x + var->zoom;
-	p3->y = p0->y + var->zoom;
+	a->p0.x = x * var->zoom;
+	a->p0.y = y * var->zoom;
+	a->p1.x = a->p0.x + var->zoom;
+	a->p1.y = a->p0.y;
+	a->p2.x = a->p0.x;
+	a->p2.y = a->p0.y + var->zoom;
+	a->p3.x = a->p0.x + var->zoom;
+	a->p3.y = a->p0.y + var->zoom;
 }
 
-void	ft_connect_nodes(t_var *var, t_img *img, int x, int y, int col)
+void	ft_connect_nodes(t_var *var, t_img *img, t_pix n, int col)
 {
-	t_pix	p0;
-	t_pix	p1;
-	t_pix	p2;
-	t_pix	p3;
+	t_angles	a;
 
-	ft_init_points(&p0, &p1, &p2, &p3, var, x, y);
-	if (ft_is_wall(x, y, var->map) == 1)
+	ft_init_points(&a, var, n.x, n.y);
+	if (ft_is_wall(n.x, n.y, var->map) == 1)
 	{
-		if (p1.x <= var->map->size_x * var->zoom)
+		if (a.p1.x <= var->map->size_x * var->zoom)
 		{
-			ft_draw_line_map(var, img, p0, p1, col);
-			if (p2.y <= var->map->size_y * var->zoom)
-				ft_draw_line_map(var, img, p2, p3, col);
+			ft_draw_line_map(var, img, ft_build_line(a.p0, a.p1), col);
+			if (a.p2.y <= var->map->size_y * var->zoom)
+				ft_draw_line_map(var, img, ft_build_line(a.p2, a.p3), col);
 		}
-		if (p2.y <= var->map->size_y * var->zoom)
+		if (a.p2.y <= var->map->size_y * var->zoom)
 		{
-			ft_draw_line_map(var, img, p0, p2, col);
-			if (p3.x <= var->map->size_x * var->zoom)
-				ft_draw_line_map(var, img, p1, p3, col);
+			ft_draw_line_map(var, img, ft_build_line(a.p0, a.p2), col);
+			if (a.p3.x <= var->map->size_x * var->zoom)
+				ft_draw_line_map(var, img, ft_build_line(a.p1, a.p3), col);
 		}
 	}
 }

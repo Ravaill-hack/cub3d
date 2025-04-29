@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 21:23:23 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/29 13:20:53 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,6 @@ void	*ft_parse_map(t_var *var, int fd, char *line)
 	}
 	free(line);
 	if (!ft_is_valid_map(var->map, var))
-		return (NULL); //renvoyer le message d'erreur dans t_map_is_valid
+		return (NULL);
 	return ((void *)var);
 }

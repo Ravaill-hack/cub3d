@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:42:18 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 12:33:05 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:16:28 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,24 @@ int	ft_check_wall(double x, double y, t_map *map, int zoom)
 
 void	ft_draw_player(t_var *var)
 {
-	int		x;
-	int		y;
+	t_pix	tmp;
 
-	y = 0;
-	while (y <= var->map->size_y * var->zoom)
+	tmp.y = 0;
+	while (tmp.y <= var->map->size_y * var->zoom)
 	{
-		x = 0;
-		while (x <= var->map->size_x * var->zoom)
+		tmp.x = 0;
+		while (tmp.x <= var->map->size_x * var->zoom)
 		{
-			if (ft_is_close_to_player(var, x, y) == 1)
-				ft_draw_disc(var, x + 0.5, y + 0.5, 0xFF0000, &var->mini_map);
-			x++;
+			if (ft_is_close_to_player(var, tmp.x, tmp.y) == 1)
+			{
+				tmp.x++;
+				tmp.y++;
+				ft_draw_disc(var, tmp, 0xFF0000, &var->mini_map);
+				tmp.x--;
+				tmp.y--;
+			}
+			tmp.x++;
 		}
-		y++;
+		tmp.y++;
 	}
 }
