@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/30 09:58:37 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:17:18 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ Map errors
 # define ERR_MAP_READ "Error\nError while reading map file\n"
 # define ERR_MAP_EXISTENCE "Error\nNo map in this file"
 # define ERR_MAP_SIZE "Error\nInvalid map size\n"
+# define ERR_MAP_NO_PLAY "Error\nNo player on the map\n"
 # define ERR_MAP_PLAYERS "Error\nThere must be only one player\n"
 # define ERR_MAP_SYNTAX "Error\nInvalid character in the map\n"
 # define ERR_MAP_BOUND "Error\nA wall is open on the boundaries\n"

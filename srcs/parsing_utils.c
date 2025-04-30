@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:12:51 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/28 21:24:48 by julien           ###   ########.fr       */
+/*   Updated: 2025/04/30 13:19:23 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ int	ft_find_angle(char c, t_var *var)
 	if (c == 'E')
 		var->play.angle = 0;
 	else if (c == 'N')
-		var->play.angle = 90;
+		var->play.angle = 270;
 	else if (c == 'W')
 		var->play.angle = 180;
 	else if (c == 'S')
-		var->play.angle = 270;
+		var->play.angle = 90;
 	return (0);
 }
 

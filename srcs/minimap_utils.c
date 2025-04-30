@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:42:18 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 13:16:28 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:23:38 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ int	ft_is_zoom_wall(t_double_points p, t_map *map, int zoom, char c)
 			&& round.x < map->size_x * zoom && round.y < map->size_y * zoom))
 		return (0);
 	if (map->tab[y_n][x_n] == c)
-	{
 		return (ft_wall_type(delta.x, delta.y, c));
-	}
 	return (0);
 }
 

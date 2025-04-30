@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:04:57 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/30 09:37:07 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:18:00 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,28 @@ int	ft_check_if_exists(t_map *map, char **tab, int i, int j)
 
 int	ft_is_valid_map(t_map *map, t_var *var)
 {
-	char	**tab;
 	int		i;
 	int		j;
 
 	i = 0;
-	(void)var;
-	tab = map->tab;
-	while (tab[i])
+	while (map->tab[i])
 	{
 		j = 0;
-		while (tab[i][j])
+		while (map->tab[i][j])
 		{
-			if (tab[i][j] == '0')
+			if (map->tab[i][j] == '0')
 			{
-				if (!ft_check_if_exists(map, tab, i, j + 1)
-					|| !ft_check_if_exists(map, tab, i + 1, j)
-					|| !ft_check_if_exists(map, tab, i - 1, j)
-					|| !ft_check_if_exists(map, tab, i, j - 1))
+				if (!ft_check_if_exists(map, map->tab, i, j + 1)
+					|| !ft_check_if_exists(map, map->tab, i + 1, j)
+					|| !ft_check_if_exists(map, map->tab, i - 1, j)
+					|| !ft_check_if_exists(map, map->tab, i, j - 1))
 					return (ft_err(ERR_MAP_BOUND));
 			}
 			j++;
 		}
 		i++;
 	}
+	if (var->map->player == 0)
+		return (ft_err(ERR_MAP_NO_PLAY));
 	return (1);
 }
