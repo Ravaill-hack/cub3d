@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 13:57:45 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 15:33:16 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/30 09:58:37 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ char		*ft_go_to_map_first_line(int fd, char *tmp);
 void		*ft_process_map_char(t_var *var, char c, int x, int y);
 void		*ft_append_map_line(t_var *var, char *ln, int y);
 void		*ft_allocate_map_tab(t_var *va);
-void		*ft_parse_map(t_var *var, int fd, char *line);
+void		*ft_parse_map(t_var *var, int fd, char **line);
 /*
 Color parsing (parsing_colors.c)
 */
@@ -307,7 +307,6 @@ char		*ft_extract_title(char *path);
 /*
 Map checker (map_checker.c)
 */
-int			ft_nb_char(char **tab, char c);
 int			ft_check_if_exists(t_map *map, char **tab, int x, int y);
 int			ft_is_valid_map(t_map *map, t_var *var);
 /*

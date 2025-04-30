@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:59:42 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 13:20:53 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:07:18 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	*ft_allocate_map_tab(t_var *va)
 	return ((void *)va);
 }
 
-void	*ft_parse_map(t_var *var, int fd, char *line)
+void	*ft_parse_map(t_var *var, int fd, char **line)
 {
 	void	*tmp;	
 	int		i;
@@ -111,18 +111,19 @@ void	*ft_parse_map(t_var *var, int fd, char *line)
 		return (NULL);
 	if (!ft_allocate_map_tab(var))
 		return (NULL);
-	line = ft_free_line_go_to_next_line(fd, line);
-	if (!line)
+	(*line) = ft_free_line_go_to_next_line(fd, *line);
+	if (!(*line))
 		return (ft_err_null(ERR_MAP_EXISTENCE));
-	while (line)
+	while (*line)
 	{
-		tmp = ft_append_map_line(var, line, i);
+		tmp = ft_append_map_line(var, (*line), i);
 		if (!tmp)
-			return (free(line), NULL);
-		line = ft_free_line_go_to_next_line(fd, line);
+			return (free(*line), *line = NULL, NULL);
+		(*line) = ft_free_line_go_to_next_line(fd, (*line));
 		i++;
 	}
-	free(line);
+	if (*line)
+		free(*line);
 	if (!ft_is_valid_map(var->map, var))
 		return (NULL);
 	return ((void *)var);

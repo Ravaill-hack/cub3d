@@ -1,10 +1,5 @@
-F 94,102,81
-C 123,141,153
-
 NO ./includes/textures/north.xpm
 SO ./includes/textures/south.xpm
-WE ./includes/textures/bricks.xpm
-EA ./includes/textures/leaf.xpm
 
  11111111
 1000000001
@@ -17,3 +12,10 @@ EA ./includes/textures/leaf.xpm
      1001
      1001
      1111
+
+WE ./includes/textures/west.xpm
+EA ./includes/textures/east.xpm
+
+F 94,102,81
+C 123,141,153
+
