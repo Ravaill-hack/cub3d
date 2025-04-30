@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:13:04 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/04/29 14:01:33 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:09:22 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,24 @@ int	ft_is_col(char *line)
 	return (0);
 }
 
-void	*ft_parse_first_lines(t_var *var, int fd, char *line)
+void	*ft_parse_first_lines(t_var *var, int fd, char **line)
 {
 	int	i;
 
 	i = 0;
 	while (i < 6)
 	{
-		line = ft_free_line_go_to_next_line(fd, line);
-		if (!line)
+		*line = ft_free_line_go_to_next_line(fd, (*line));
+		if (!(*line))
 			return (ft_err_null(ERR_FILE_EMPTY));
-		if (ft_is_text(line) == 1)
+		if (ft_is_text(*line) == 1)
 		{
-			if (!ft_parse_textures(var, line, &i))
+			if (!ft_parse_textures(var, *line, &i))
 				return (ft_go_to_end_fd(fd), NULL);
 		}
-		else if (ft_is_col(line) == 1)
+		else if (ft_is_col(*line) == 1)
 		{
-			if (!ft_parse_colors(var, line, &i))
+			if (!ft_parse_colors(var, *line, &i))
 				return (ft_go_to_end_fd(fd), NULL);
 		}
 		else
@@ -76,12 +76,12 @@ void	*ft_parse_first_lines(t_var *var, int fd, char *line)
 
 void	*ft_parse(t_var *var)
 {
-	char	*line;
+	char	*ln;
 	int		fd;
 	int		i;
 
 	i = 0;
-	line = NULL;
+	ln = NULL;
 	var->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!var->map)
 		return (ft_err_null(ERR_MAP_ALLOC));
@@ -92,8 +92,10 @@ void	*ft_parse(t_var *var)
 	fd = open(var->win.path, O_RDONLY);
 	if (fd == -1)
 		return (ft_err_null(ERR_MAP_OPEN));
-	if (!ft_parse_first_lines(var, fd, line) || !(ft_parse_map(var, fd, line)))
+	if (!ft_parse_first_lines(var, fd, &ln) || !(ft_parse_map(var, fd, &ln)))
 	{
+		if (ln)
+			free(ln);
 		ft_go_to_end_fd(fd);
 		return (NULL);
 	}
